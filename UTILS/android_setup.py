@@ -17,7 +17,7 @@ try:
     sys("pip install scapy")
 except:
     print ("[*] An error occured")
-
+print('\n\nExample: /path/to/directory/term.py & /path/to/bin\n\n')
 path_to_pro = input("[*]::'/path/to/term.py': ")
 path_to_bin = input("[*]::'/path/to/bin': ")
 

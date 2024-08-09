@@ -12,23 +12,21 @@ try:
     sys("apt-get install python3-requests")
     sys("apt-get install python3-psutil")
     sys("apt-get install python3-phonenumbers")
-    #sys("apt-get install python3-pycryptodome")
-    sys("cd UTILS/pycryptodome; python3 setup.py build ")
-    sys("cd UTILS/pycryptodome; python3 setup.py install")
-    #sys("apt-get install pyton3-tenable-io")
-    sys("cd UTILS/pyTenable; python3 setup.py build")
-    sys("cd UTILS/pyTenable; python3 setup.py install")
-    sys("apt-get install python3-pytenable")
+    sys("apt-get install python3-pycryptodome")
+    sys("cd UTILS/LIB*; ./pycryptodome.sh")
+    sys("cd UTILS/LIB*; ./pytenable.sh")
     sys("apt-get install python3-scapy")
 except:
     print ("[*] An error occured")
+
+print('\n\nExample: /my/directory/to/term.py & /my/directory/to/bin\n\n')
 
 path_to_pro = input("[*]::'/path/to/term.py': ")
 path_to_bin = input("[*]::'/path/to/bin': ")
 
 try:
     sys(f"chmod +x {path_to_pro}")
-    sys(f"ln -s {path_to_pro}/term.py {path_to_bin}/term")
+    sys(f"ln -s {path_to_pro} {path_to_bin}/term")
     print ("[*] IF NOT ERROR: Start Terminal By executing: 'term'")
 except:
     print ("[*] An Error Occured")

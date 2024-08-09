@@ -2,7 +2,8 @@
 
 Terminal like emulator with user daily activites....
 Run Setup for libary installations and binary setup...
-Program only for Linux OS & Android0
+Program only for Linux OS & Android
+
 Run:
 
 ```$ ./setup.sh ``` 
@@ -16,6 +17,7 @@ to build and configure tools
 3. configure it according to your ifconfig structure..
 4. Tested under Kali LInux Os
 5. Some tools requires superuser privileg (on feature 8, 9, 12)...
+6. For kali installation run setup.sh as root
 ```
 
 **Features:**
