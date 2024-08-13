@@ -10,6 +10,21 @@ Run:
 
 to build and configure tools
 
+**Program File Structure (Architecture)**
+```Terminal/
+├── LICENSE
+├── README.md
+├── setup.sh
+├── term
+├── term.py
+├── UTILS/
+│   ├── android_setup.py
+│   ├── kali_setup.py
+│   └── LIBRARY_SETUP/
+│       ├── pycryptodome.sh
+│       └── pytenable.sh
+```
+
 **Note:**
 ```
 1. due to different structure of ifconfig on Linux distros...
