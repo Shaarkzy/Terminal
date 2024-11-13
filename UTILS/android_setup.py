@@ -16,17 +16,13 @@ try:
     sys("pip install pytenable")
     sys("pip install scapy")
 except:
-    print ("[*] An error occured")
-print('\n\nExample: /path/to/directory/term.py & /path/to/bin\n\n')
-path_to_pro = input("[*]::'/path/to/term.py': ")
-path_to_bin = input("[*]::'/path/to/bin': ")
+    print ("\n[*] An error occured")
 
 try:
-    sys(f"chmod +x {path_to_pro}")
-    sys(f"ln -s {path_to_pro} {path_to_bin}/term")
-    print ("[*] IF NOT ERROR: Start Terminal By executing: 'term'")
+    sys(f"chmod +x term.py; ln -s $(pwd)/term.py /data/data/com.termux/files/usr/bin/term")
+    print ("\n[*] IF NOT ERROR: Start Terminal By executing: term")
 except:
-    print ("[*] An Error Occured")
+    print ("\n[*] An Error Occured")
 
 
 

@@ -25,6 +25,7 @@ try:
     logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
     from scapy.all import *
     from tenable.io import TenableIO
+    import netifaces as n
 
 except ModuleNotFoundError as err:
     print (f'shark: {err}')
@@ -83,7 +84,7 @@ class shark:
             d = F.YELLOW+'━'*int(num)
             print(f'{d}', end="\r", flush=True)
             tm.sleep(0.001)
-        print(" "*60)
+        sys("clear")
         data = f"""
                 {F.CYAN}♣WELCOME·TO·MR·SHARK·TERMINAL♠
                 {F.GREEN} For help and functions: {F.CYAN}@help
@@ -135,7 +136,7 @@ class shark:
 [13].To send file via wifi: {F.CYAN}@send -file{F.GREEN}
      To recieve file       : {F.CYAN}@recv -file <host> <port>{F.GREEN}
      Example: {F.BLUE}@recv @file 127.0.0.1 12345{F.GREEN}
-     NOTE   : {F.BLUE}Program cant send File with Permission..{F.GREEN}
+     NOTE   : {F.BLUE}Program can't send File with Permission..{F.GREEN}
             : {F.BLUE}Doesn't suppport telnet{F.GREEN}
 [14].To start remote shell via wifi::
      HOST   : {F.CYAN}@shell -host{F.GREEN}
@@ -152,13 +153,7 @@ class shark:
 [17].To scan vulnerability: {F.CYAN}@scan -v <target>{F.GREEN}
      Example: {F.BLUE}@scan -v 192.168.00.00{F.GREEN}
      NOTE   : {F.BLUE}GET YOUR CREDENTIAL (ACCESS , SECRET & API K              EY) FROM tenable.io website{F.GREEN}
-[18].To analyse connected network: {F.CYAN}@net -a <target>{F.GREEN}
-     Example: {F.BLUE}@net -a 192.168.00.00/00{F.GREEN}
-     NOTE   : {F.BLUE}Program requires root priviledge{F.GREEN}
-[19].To sniff packet: {F.CYAN}@sniff -p <interface>{F.GREEN}
-     Example: {F.BLUE}@sniff -p [eth0/wlan0]{F.GREEN}
-     NOTE   : {F.BLUE}Program requires root priviledge{F.GREEN}
-[20].To check weather: {F.CYAN}@check -w <city>{F.GREEN}
+[17].To check weather: {F.CYAN}@check -w <city>{F.GREEN}
      Example: {F.BLUE}@check -w London{F.GREEN}
      NOTE   : {F.BLUE}Get your api key from api.openweathermap.org{F.GREEN} 
 [00]. To exit program: {F.CYAN}@exit{F.GREEN}
@@ -258,42 +253,6 @@ MORE Functions COMING... '''
 
 
 
- 
-    #convertinh alphabet to binary
-    '''def Alpha_Bina(self): #7
-        alph = input(F.YELLOW+"[%]Enter Text: "+F.WHITE)
-        alph = alph.split(" ")
-        num = -1
-        try:
-            print (F.GREEN+"[*]OUTPUT"+F.BLUE)
-            while True:
-                num += 1
-                try:
-                    for data in bytearray(alph[num], "utf-8"):
-                        print (format(data, "b"), end = " ")
-                    print ("\n")
-                except:
-                    break
-        except:
-            print (F.RED+"[x]An error occured")
-
-
-
-
-     # converting binary to alphabet
-     def Bina_Alpha(self): #8
-        try:
-            splita = input(F.YELLOW+"[*]Enter Binary: "+F.WHITE)
-            splita = splita.split(" ")
-            print (F.GREEN+"[*]OUTPUT"+F.BLUE)
-            for data in splita:
-                data1 = int(data, 2)
-                charac = chr(data1)
-                print (charac, end = "")
-            print ("\n")
-        except:
-            print (F.RED+"[x]An error occured")'''
-
     def repair(self, file):
         if True:
             open_file = open(file, 'r')
@@ -311,6 +270,8 @@ MORE Functions COMING... '''
             print(F.CYAN+'[✓]File Repaired')
         else:
             pass
+
+
 
     def Alpha_Bina(self, file):
         
@@ -337,6 +298,7 @@ MORE Functions COMING... '''
                  print(f'{F.CYAN+"[✓]DATA SAVED TO"} {save_to}.bin')
                  new_file.close()
                  break
+
 
 
     def Bina_Alpha(self, file):
@@ -390,68 +352,45 @@ MORE Functions COMING... '''
                 print(F.RED+'[x]Invalid Binary File Format')
                     
             
-                        
-            
-            
+    def get_private_addr(self):
+        interfaces = n.interfaces()
+        for interface in interfaces:
+            try:
+                addresses = n.ifaddresses(interface)
+                if n.AF_INET in addresses:
+                    for addr in addresses[n.AF_INET]:
+                        ip = addr['addr']
+                        if ip.startswith('10.') or ip.startswith('172.') or ip.startswith('192.168.'):
+                            return ip
+            except ValueError:
+                continue
+        return "127.0.0.1"
 
-
-
+   
 
    # getting device network details
-    def get_device_ip(self): #9
-        #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        #sock.settimeout(2)
-        url = "https://github.com"
+    def get_device_ip(self):
         try:
-            #if sock.connect_ex(("google.com", 80)) == 0:
-            if r.get(url, timeout=1):
-                curl = sub.run(['curl', 'ifconfig.me'], capture_output=True, text=True)
-                curl = curl.stdout.strip()
-                if curl != "<HTML></HTML>":
-                    print(F.CYAN+"[*] PUBLIC IP: "+F.BLUE+str(curl))
-                else:
-                    print(F.CYAN+"[*] PUBLIC IP: "+F.BLUE+"inactive")
-         
-            else:
-                print(F.CYAN+"[*] PUBLIC IP: "+F.BLUE+"Cant connect to Server")
-        except:
-            print(F.CYAN+"[*] PUBLIC IP: "+F.BLUE+"Cant connect to Server")
-
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            print(F.CYAN+"[*] PRIVATE IP: "+F.BLUE+sub.getoutput('ifconfig | grep netmask').split(" ")[9])
-        except:
-            print(F.CYAN+"[*] PRIVATE IP: "+F.BLUE+"inactive")
-        try:
-            ip_wl = sub.getoutput('ifconfig | grep netmask').split(" ")[21]
-            check = re.search(r'(\d+\.){3}', ip_wl)
-            if check:
-                print (F.CYAN+"[*] IP:WLAN: "+F.BLUE+ip_wl)
-            else:
-                print(F.CYAN+"[*] IP:WLAN: "+F.BLUE+"inactive")
-        except:
-            print(F.CYAN+"[*] IP:WLAN: "+F.BLUE+"inactive")
-        try:
-            print(F.CYAN+"[*] IPV6:INET: "+F.BLUE+sub.getoutput('ifconfig | grep inet6').split(" ")[24])
-        except:
-            print(F.CYAN+"[*] IPV6:INET: "+F.BLUE+"inactive")
-        try:
-            print(F.CYAN+"[*] IPV6:WLAN: "+F.BLUE+sub.getoutput('ifconfig | grep inet').split(" ")[24])
-        except:
-            print(F.CYAN+"[*] IPV6:WLAN: "+F.BLUE+"false")
-        try:
-            print(F.CYAN+"[*] VPN TUNNEL: "+F.BLUE+sub.getoutput('ifconfig | grep destination').split(" ")[15])
-        except:
-            print(F.CYAN+"[*] VPN TUNNEL: "+F.BLUE+"inactive")
+            response = r.get('https://api.ipify.org?format=json', timeout=2)
+            ip_data = response.json()
+            print(F.CYAN+"[*]Interface: - Public Address -")
+            print(F.WHITE+"-- addr: ",ip_data['ip'])
+            print("—"*50)
+        except r.RequestException:
+            print(F.CYAN+"[*]Interface: - Public Address -")
+            print(F.WHITE+"-- addr: ", "network not reachable")
+            print("—"*50)
+        interfaces = n.interfaces()
+        for interface in interfaces:
+            print(f"{F.CYAN}[*]Interface: - {interface} - ")
+            addrs = n.ifaddresses(interface)
+            for addr_family, addr_list in addrs.items():
+                for addr in addr_list:
+                    print(f"{F.WHITE}–– addr:", addr.get('addr', 'N/A'))
+                    print("-- netmask:", addr.get('netmask', 'N/A'))
+                    print("-- broadcast:", addr.get('broadcast', 'N/A'))
+            print("—"*50)
         
-        hostname = socket.gethostname()
-        ip_address = socket.gethostbyname(hostname)
-        mac_address = ':'.join(['{:02x}'.format((uuid.getnode() >> elements) & 0xff) for elements in range(5, -1, -1)])
-        ip_network = ipaddress.IPv4Network(ip_address, strict=False)
-        net = ip_network.netmask
-        print(F.CYAN+"[*] MAC: "+F.BLUE+str(mac_address))
-        print(F.CYAN+"[*] SUBNET: "+F.BLUE+str(net))
-        sock.close()
 
 
 
@@ -500,23 +439,11 @@ MORE Functions COMING... '''
 
         tm.sleep(1)
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
-        try:
-            ip_wl = sub.getoutput('ifconfig | grep inet').split(" ")[51]
-        except:
-            pass
-        ip_in = sub.getoutput('ifconfig | grep inet').split(" ")[9]
-        try:
-            check = re.search(r'(\d+\.){3}', ip_wl)
-            if check:
-                ip = ip_wl
-            else:
-                ip = ip_in
-        except:
-            ip = ip_in
+        ip = self.get_private_addr()
         port = a3+a2+a1+a2+a3
         print (F.BLUE+"[✓]SERVER STARTED")
         tm.sleep(1)
-        print (F.GREEN+f"[*]IP: {ip}: [*]PORT: {port}")
+        print (F.GREEN+f"[*]IP: {ip} : [*]PORT: {port}")
     
         sock.bind(("0.0.0.0", int(port)))
         sock.listen(5)
@@ -549,6 +476,8 @@ MORE Functions COMING... '''
          sock.connect((ip, int(port)))
             
          print (F.BLUE+"[✓]CONNECTED TO SERVER")
+         print (F.CYAN+"[NOTE]: ONLY SUPPORT WLAN")
+         print(F.CYAN+"......: @bye to close chat")
          tm.sleep(1)
          while True:
              print(F.GREEN+"[*]WAITING FOR INCOMING MESSAGE")
@@ -759,16 +688,7 @@ MORE Functions COMING... '''
         port = a3+a2+a1+a2+a3
         sock.bind(('0.0.0.0', int(port)))
         print (F.BLUE+"[✓]SERVER STARTED")
-        try:
-            ipw = sub.getoutput('ifconfig | grep netmask').split(" ")[21]
-            check = re.search(r'(\d+\.){3}', ipw)
-            if check:
-                ip = ipw
-            else:
-                ip = sub.getoutput('ifconfig | grep netmask').split(" ")[9]
-
-        except:
-            ip = sub.getoutput('ifconfig | grep netmask').split(" ")[9]
+        ip = self.get_private_addr()
         print(F.GREEN+f'[*]IP: {ip} : PORT {port}'+F.CYAN)
 
         sock.listen(5)
@@ -846,24 +766,12 @@ MORE Functions COMING... '''
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         tm.sleep(1)
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
-        try:
-            ip_wl = sub.getoutput('ifconfig | grep inet').split(" ")[51]
-        except:
-            pass
-        ip_in = sub.getoutput('ifconfig | grep inet').split(" ")[9]
-        try:
-            check = re.search(r'(\d+\.){3}', ip_wl)
-            if check:
-                ip = ip_wl
-            else:
-                ip = ip_in
-        except:
-            ip = ip_in
+        ip = self.get_private_addr()
         port = a3+a2+a1+a2+a3
         print(F.CYAN+"[*]NOTE: input <exit> to close session")
         print (F.BLUE+"[✓]SHELL HOST STARTED")
         tm.sleep(1)
-        print (F.GREEN+f"[*]IP: {ip}: [*]PORT: {port}")
+        print (F.GREEN+f"[*]IP: {ip} : [*]PORT: {port}")
 
         sock.bind(("0.0.0.0", int(port)))
         sock.listen(5)
@@ -889,7 +797,7 @@ MORE Functions COMING... '''
     def shell_client(self, ip, port): #18
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((ip, int(port)))
-        print(F.BLUE+"[✓]CONNECTED TO HOST")
+        print(F.BLUE+"[✓]CONNECTED TO USER")
         tm.sleep(1)
         print(F.CYAN+"[*]SHELL ACTIVITY IN PROGRESS")
         
@@ -1021,35 +929,6 @@ MORE Functions COMING... '''
 
 
 
-    #scan a network
-    def net_scan(self, target): #22
-        
-        arp_request = ARP(pdst=target)
-
-        ether = Ether(dst='ff:ff:ff:ff:ff:ff')
-        packet = ether/arp_request
-
-        result = srp(packet, timeout=3, verbose=0)[0]
-        devices_list = []
-
-        for sent, received in result:
-                devices_list.append({'ip': received.psrc, 'mac': received.hwsrc})
-        return device_list
-
-            
-        data = device_list
-        for device in data:
-                print(f"{F.BLUE}IP: {F.GREEN}{device['ip']} || {F.BLUE}MAC: {F.GREEN}{device['mac']}")
-
-
-
-
-    #scan a packet
-    def packet_sniffer(self, interface): #23
-        packets = sniff(prn=lambda x: x.summary(), filter="tcp", iface=interface, store=0, count=10)
-        for packet in packets:
-            print(F.BLUE+packet.summary())
-
 
 
 
@@ -1086,55 +965,51 @@ if __name__ == '__main__':
         data = inpu()
         try:
             #data = inpu()
-            if "@help" in data: #1
+            if "@help" in data:
                 shark.help()
-            elif "@get -ip" in data: #2
+            elif "@get -ip" in data: 
                 shark.get_ip(data.split()[2])
-            elif "@port -scan" in data: #3
+            elif "@port -scan" in data:
                 shark.port_scan(data.split()[2])
-            elif "@port--s -scan" in data: #4
+            elif "@port--s -scan" in data: 
                 shark.port_scan_sin(data.split()[2], data.split()[3])
-            elif "@bina -a" in data: #5
+            elif "@bina -a" in data: 
                 shark.Bina_Alpha(data.split()[2])
-            elif "@alpha -b" in data: #6
+            elif "@alpha -b" in data: 
                 shark.Alpha_Bina(data.split()[2])
-            elif "@num -b" in data: #7
+            elif "@num -b" in data: 
                 shark.Num_Bina(data.split()[2], data.split()[3])
-            elif "@bina -n" in data: #8
+            elif "@bina -n" in data: 
                 shark.Bina_Num(data.split()[2], data.split()[3])
-            elif "@ip -details" in data: #9
+            elif "@ip -details" in data: 
                 shark.get_device_ip()
-            elif "@cpu" in data: #10
+            elif "@cpu" in data: 
                 shark.cpu_info()
-            elif "@open -server" in data: #11
+            elif "@open -server" in data: 
                 shark.open_server()
-            elif "@con -server" in data: #12
+            elif "@con -server" in data: 
                 shark.connect_server(data.split()[2], data.split()[3])
-            elif "@file" in data: #13
+            elif "@file" in data:
                 shark.file_sys(data.split()[1], data.split()[2])
-            elif "@send -w" in data: #14
+            elif "@send -w" in data:
                 shark.send_mess(data.split()[2])
-            elif "@send -file" in data: #15
+            elif "@send -file" in data: 
                 shark.send_file()
-            elif "@recv -file" in data: #16
+            elif "@recv -file" in data: 
                 shark.recv_file(data.split()[2], data.split()[3])
-            elif data == "@shell -host": #17
+            elif data == "@shell -host":
                 shark.shell_host()
-            elif "@shell -client" in data: #18
+            elif "@shell -client" in data: 
                 shark.shell_client(data.split()[2], data.split()[3])
-            elif "@crypt" in data: #19
+            elif "@crypt" in data: 
                 shark.crypt()
-            elif "@check -no" in data: #20
+            elif "@check -no" in data: 
                 shark.check_phone(data.split()[2])
-            elif "@scan -v" in data: #21
+            elif "@scan -v" in data: 
                 shark.scan_vul(data.split()[2])
-            elif "@net -a" in data: #22
-                shark.net_scan(data.split()[2])
-            elif "@sniff -p" in data: #23
-                shark.packet_sniffer(data.split()[2])
-            elif "@check -w" in data: #24
+            elif "@check -w" in data: 
                 shark.weather(data.split()[2])
-            elif "@exit" in data: #00
+            elif "@exit" in data: 
                 print (F.RED+"[✓]EXITING PROGRAM...")
                 tm.sleep(1)
                 break

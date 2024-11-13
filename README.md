@@ -41,12 +41,10 @@ to build and configure tools
 5. File Transfer Via Wifi
 6. Reverse Shell
 7. Weather Tools
-8. Network Analyzer
-9. Packet Sniffer
-10. Vulnerabilty Scanner
-11. Network Information
-12. Cpu Information (might work without root access on earlier Android versions)
-13. Mobile Number Osint(excluding personal information)
-14. Grab Website IP...
+8. Vulnerabilty Scanner
+9. Network Information
+10. Cpu Information (might work without root access on earlier Android versions)
+11. Mobile Number Osint(excluding personal information)
+12. Grab Website IP...
 ```
 **Good luck**
