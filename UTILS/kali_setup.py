@@ -12,6 +12,7 @@ try:
     sys("apt-get install python3-requests")
     sys("apt-get install python3-psutil")
     sys("apt-get install python3-phonenumbers")
+    sys("apt-get install python3-netifaces")
     sys("apt-get install python3-pycryptodome")
     sys("cd UTILS/LIB*; ./pycryptodome.sh")
     sys("cd UTILS/LIB*; ./pytenable.sh")
