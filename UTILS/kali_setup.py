@@ -10,7 +10,6 @@ try:
     sys("apt-get install python3-uuid")
     sys("apt-get install python3-ipaddress")
     sys("apt-get install python3-requests")
-    sys("apt-get install python3-netifaces")
     sys("apt-get install python3-psutil")
     sys("apt-get install python3-phonenumbers")
     sys("apt-get install python3-pycryptodome")

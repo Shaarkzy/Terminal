@@ -45,6 +45,7 @@ to build and configure tools
 9. Network Information
 10. Cpu Information (might work without root access on earlier Android versions)
 11. Mobile Number Osint(excluding personal information)
-12. Grab Website IP...
+12. Grab Website IP
+13. Gather information about an IP address.
 ```
 **Good luck**

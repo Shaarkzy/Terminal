@@ -152,10 +152,12 @@ class shark:
      NOTE   : {F.BLUE}Without country code: default is <+62>{F.GREEN}
 [17].To scan vulnerability: {F.CYAN}@scan -v <target>{F.GREEN}
      Example: {F.BLUE}@scan -v 192.168.00.00{F.GREEN}
-     NOTE   : {F.BLUE}GET YOUR CREDENTIAL (ACCESS , SECRET & API K              EY) FROM tenable.io website{F.GREEN}
+     NOTE   : {F.BLUE}GET YOUR CREDENTIAL (ACCESS , SECRET & API KEY) FROM tenable.io website{F.GREEN}
 [17].To check weather: {F.CYAN}@check -w <city>{F.GREEN}
      Example: {F.BLUE}@check -w London{F.GREEN}
-     NOTE   : {F.BLUE}Get your api key from api.openweathermap.org{F.GREEN} 
+     NOTE   : {F.BLUE}Get your api key from api.openweathermap.org{F.GREEN}
+[18].To gather info about an Ip address: {F.CYAN}@ip -scrp <0.0.0.0>{F.GREEN}
+     Example: {F.BLUE}ip -scrp 100.101.102.103{F.GREEN}
 [00]. To exit program: {F.CYAN}@exit{F.GREEN}
 
 MORE Functions COMING... '''
@@ -227,6 +229,17 @@ MORE Functions COMING... '''
             print (F.RED+"[x]An error occured, Internet Issue")
             sock.close()
 
+    def ip_osint(self, ip):
+        try:
+            res = r.get(f"https://ipinfo.io/{ip}", timeout=5)
+            fetch = res.json()
+            for i in fetch.keys():
+                if i != "readme":
+                    print(f"{F.CYAN}[*]{i}:-->{F.GREEN}{fetch[i]}")
+                else:
+                    continue
+        except:
+            print(F.RED+"[x]Error Connecting To Server")
 
 
 
@@ -981,7 +994,7 @@ if __name__ == '__main__':
                 shark.Num_Bina(data.split()[2], data.split()[3])
             elif "@bina -n" in data: 
                 shark.Bina_Num(data.split()[2], data.split()[3])
-            elif "@ip -details" in data: 
+            elif "@ip -details" in data:
                 shark.get_device_ip()
             elif "@cpu" in data: 
                 shark.cpu_info()
@@ -999,7 +1012,7 @@ if __name__ == '__main__':
                 shark.recv_file(data.split()[2], data.split()[3])
             elif data == "@shell -host":
                 shark.shell_host()
-            elif "@shell -client" in data: 
+            elif "@shell -client" in data:
                 shark.shell_client(data.split()[2], data.split()[3])
             elif "@crypt" in data: 
                 shark.crypt()
@@ -1009,9 +1022,11 @@ if __name__ == '__main__':
                 shark.scan_vul(data.split()[2])
             elif "@check -w" in data: 
                 shark.weather(data.split()[2])
+            elif "@ip -scrp" in data:
+                shark.ip_osint(data.split()[2])
             elif "@exit" in data: 
                 print (F.RED+"[✓]EXITING PROGRAM...")
-                tm.sleep(1)
+                tm.sleep(0.1)
                 break
             elif data.lstrip().startswith('cd') and "cd" != data.strip():
                 d_path = ' '.join(filter(None, data.split()))
