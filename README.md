@@ -15,7 +15,6 @@ to build and configure tools
 ├── LICENSE
 ├── README.md
 ├── setup.sh
-├── term
 ├── term.py
 ├── UTILS/
 │   ├── android_setup.py
