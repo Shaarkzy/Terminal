@@ -1,6 +1,6 @@
 # Shark Terminal
 
-Terminal like emulator with user daily activites....
+Terminal like emulator with Features
 Run Setup for libary installations and binary setup...
 Program only for Linux OS & Android
 

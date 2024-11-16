@@ -1,31 +1,51 @@
 #!/usr/bin/env python3
 try:
+    print("LOADING LIBRARIES")
     import sys as sy
+    print("━"*2, end="\r", flush=True)
     from colorama import Fore as F
+    print("━"*4, end="\r", flush=True)
     import time as tm
+    print("━"*6, end="\r", flush=True)
     import socket
+    print("━"*8, end="\r", flush=True)
     import subprocess as sub
+    print("━"*10, end="\r", flush=True)
     import random as rd
+    print("━"*12, end="\r", flush=True)
 #IMPORTING LIBRARIES......
     from os.path import exists
+    print("━"*14, end="\r", flush=True)
     import os
+    print("━"*16, end="\r", flush=True)
     import re
+    print("━"*18, end="\r", flush=True)
     import uuid
+    print("━"*20, end="\r", flush=True)
     import ipaddress
+    print("━"*22, end="\r", flush=True)
     import requests as r
+    print("━"*24, end="\r", flush=True)
     import json
+    print("━"*26, end="\r", flush=True)
     from tqdm import tqdm
+    print("━"*28, end="\r", flush=True)
     import platform as pt
+    print("━"*30, end="\r", flush=True)
     import psutil as p
+    print("━"*32, end="\r", flush=True)
     import phonenumbers as phone
+    print("━"*34, end="\r", flush=True)
     from phonenumbers import carrier, geocoder, timezone
+    print("━"*36, end="\r", flush=True)
     from Crypto.Cipher import AES
+    print("━"*38, end="\r", flush=True)
     from Crypto.Random import get_random_bytes
-    import logging
-    logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-    from scapy.all import *
+    print("━"*40, end="\r", flush=True)
     from tenable.io import TenableIO
+    print("━"*42, end="\r", flush=True)
     import netifaces as n
+    print("━"*44, end="\r", flush=True)
 
 except ModuleNotFoundError as err:
     print (f'shark: {err}')
@@ -78,12 +98,6 @@ class shark:
             pass
     #load the terminal on start
     def main(self):
-        num = 0
-        for i in range(300):
-            num += 0.2
-            d = F.YELLOW+'━'*int(num)
-            print(f'{d}', end="\r", flush=True)
-            tm.sleep(0.001)
         sys("clear")
         data = f"""
                 {F.CYAN}♣WELCOME·TO·MR·SHARK·TERMINAL♠
