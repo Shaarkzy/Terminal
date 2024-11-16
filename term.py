@@ -131,6 +131,7 @@ class shark:
               {F.BLUE}-ED encrypt/decrypt file{F.GREEN}
      Example: {F.BLUE}@file -CADRV(ED) filename.txt{F.GREEN}
      NOTE   : {F.BLUE}Can only encrypt and decrypt text contained file{F.GREEN}
+            : {F.BLUE}Can only encrypt files with .enc extension{F.GREEN}
 [12].To send message to a whatsapp contact: {F.CYAN}@send -w <number>{F.GREEN}
     Example: {F.BLUE}@send -w +1234567890{F.GREEN}
 [13].To send file via wifi: {F.CYAN}@send -file{F.GREEN}
@@ -571,12 +572,8 @@ MORE Functions COMING... '''
                 print (F.RED+"[x]File doesnt exists")
         elif option == "-ED":
             if exists(file):
-                open_file = open(file, 'rb')
-                data = open_file.read()
-                open_file.close()
-                
-                reg = re.search(r'enc'+'=', str(data))
-                if reg != None:
+                reg = file.endswith(".enc")
+                if reg == True:
                     print (F.GREEN+"[*]FILE IS IN ENCRYPTED FORMAT!!\n[*]WISH TO DECRYPT?")
                     opt = input(F.YELLOW+"[*]Y/N: "+F.WHITE).upper()
                     if opt == "Y":
@@ -589,16 +586,14 @@ MORE Functions COMING... '''
                             buffer_size = 65536
                             open_file = open(file, "rb")
                             iv = open_file.read(16)
-                            open_file.close()
   
                             cipher_encrypt = AES.new(key, AES.MODE_CFB, iv=iv)
-                            open_file = open(file, 'rb')
                             buffer = open_file.read(buffer_size)
+                            file = file.replace(".enc",".dec")
                             output_file = open(file, "wb")
 
                             while len(buffer) > 0:
-                                enc = 'enc'+'='
-                                new = buffer.replace(bytes(enc, 'UTF-8'), b"")
+                                new = buffer
                                 decrypted_bytes = cipher_encrypt.decrypt(new)
                                 new_data = decrypted_bytes
                                 output_file.write(new_data)
@@ -625,7 +620,7 @@ MORE Functions COMING... '''
                     else:
                         print (F.RED+"[x]Error, invalid input")
 
-                elif reg == None:
+                elif reg == False:
                     print (F.GREEN+"[*]FILE IS IN DECRYPTED FORMAT!!\n[*]WISH TO ENCRYPT?")
                     opt = input(F.YELLOW+"[%]Y/N: "+F.WHITE).upper()
                     if opt == "Y":
@@ -636,17 +631,20 @@ MORE Functions COMING... '''
                             key = key.encode()
 
                             buffer_size = 65536 
+                            iv = os.urandom(16)
                             
-                            cipher_encrypt = AES.new(key, AES.MODE_CFB)
+                            cipher_encrypt = AES.new(key, AES.MODE_CFB, iv=iv)
                             open_file = open(file, 'rb')
                             buffer = open_file.read(buffer_size)
+                            file = file+".enc"
                             output_file = open(file, "wb")
-                            output_file.write(cipher_encrypt.iv)
+                            output_file.write(iv)
 
                             while len(buffer) > 0:
                                 ciphered_bytes = cipher_encrypt.encrypt(buffer)
-                                enc = 'enc'+'='
-                                new_data = bytes(enc, 'UTF-8')+ciphered_bytes
+                                '''enc = 'enc'+'='
+                                new_data = bytes(enc, 'UTF-8')+ciphered_bytes'''
+                                new_data = ciphered_bytes
                                 output_file.write(new_data)
                                 buffer = open_file.read(buffer_size)
                             open_file.close()
@@ -1026,7 +1024,6 @@ if __name__ == '__main__':
                 shark.ip_osint(data.split()[2])
             elif "@exit" in data: 
                 print (F.RED+"[✓]EXITING PROGRAM...")
-                tm.sleep(0.1)
                 break
             elif data.lstrip().startswith('cd') and "cd" != data.strip():
                 d_path = ' '.join(filter(None, data.split()))
