@@ -527,6 +527,12 @@ MORE Functions COMING... '''
 
 
 
+    def key(self, num):
+        data = str(uuid.uuid4()).replace(':', '')[:num].replace('-', 'f')
+        return data
+
+
+
 
    # file systems 
     def file_sys(self, option, file): #13
@@ -624,6 +630,7 @@ MORE Functions COMING... '''
                                 print(f'{F.BLUE}DECRYPTING FILE: {d}', end="\r", flush=True)
                             tm.sleep(0.2)
                             print (F.BLUE+"[✓]FILE DECRYPTED SUCCESSFULLY                                ")
+                            print(f'{F.CYAN}[*]DECRYPTED FILE IS {F.YELLOW}{file}')
 
                         else:
                             print (F.RED+"[x]INVALID KEY BYTE SIZE")
@@ -640,9 +647,15 @@ MORE Functions COMING... '''
                     if opt == "Y":
                         #encryption here
                         print(F.BLUE+"[*]NOTE: KEY MUST BE EITHER 16, 24 OR 32 BYTES CHARACTER\n[*]MEANING YOUR KEY SHOULD BE ↑ABOVE↑ BYTES CHARACTER LONG")
-                        key = input(F.CYAN+"[%]KEY: "+F.WHITE)
-                        if len(key) == 16 or len(key) == 24 or len(key) == 32:
-                            key = key.encode()
+                        option = input(F.CYAN+"[%]Generate Key? y/n: ").upper()
+                        if option == "Y":
+                            num = int(input(F.YELLOW+'[%]Key Length: '))
+                            keyD = self.key(num)
+                        else:
+                            keyD = input(F.CYAN+"[%]KEY: "+F.WHITE)
+                        if len(keyD) == 16 or len(keyD) == 24 or len(keyD) == 32:
+                            print(f'{F.CYAN}[*]YOUR KEY IS: {F.WHITE}{keyD}')
+                            key = keyD.encode()
 
                             buffer_size = 65536 
                             iv = os.urandom(16)
@@ -656,8 +669,6 @@ MORE Functions COMING... '''
 
                             while len(buffer) > 0:
                                 ciphered_bytes = cipher_encrypt.encrypt(buffer)
-                                '''enc = 'enc'+'='
-                                new_data = bytes(enc, 'UTF-8')+ciphered_bytes'''
                                 new_data = ciphered_bytes
                                 output_file.write(new_data)
                                 buffer = open_file.read(buffer_size)
@@ -672,14 +683,14 @@ MORE Functions COMING... '''
                                 print(f'{F.BLUE}ENCRYPTING FILE:{d}', end="\r", flush=True)
                             tm.sleep(0.2)
                             print (F.BLUE+"[✓]FILE ENCRYPTED SUCCESSFULLY                                    ")
+                            print(f'{F.CYAN}[*]ENCRYPTED FILE IS {F.YELLOW}{file}')
+
                             tm.sleep(0.6)
                             key_file = open("key.txt", "a")
                             cur_dir = os.getcwd()
-                            key1 = str(key).replace("b", "")
-                            key2 = key1.replace("'", "")
-                            data = "∞[filnename= "+file+"|:|key= "+key2+" ]∞"
+                            data = "~[filnename= "+file+"|:|key= "+keyD+" ]~"
                             key_file.write(data)
-                            print(f"{F.CYAN}[*]KEY SAVED ON {cur_dir}/key.txt")
+                            print(f"{F.CYAN}[*]KEY SAVED ON {F.YELLOW}{cur_dir}/{F.WHITE}key.txt")
                         else:
                             print(F.RED+"[x]INVALID KEY BYTE SIZE")
 
