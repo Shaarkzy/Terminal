@@ -17,8 +17,8 @@ to build and configure tools
 ├── setup.sh
 ├── term.py
 ├── UTILS/
-│   ├── android_setup.py
-│   ├── kali_setup.py
+│   ├── android_setup.sh
+│   ├── kali_setup.sh
 │   └── LIBRARY_SETUP/
 │       ├── pycryptodome.sh
 │       └── pytenable.sh
