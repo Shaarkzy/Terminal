@@ -80,7 +80,7 @@ def inpu():
                 break
         
         s = F.BLUE+"$"
-        data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[~/{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.GREEN)
+        data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.GREEN)
         return data
     except:
         quit(0)
