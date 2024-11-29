@@ -27,8 +27,8 @@ to build and configure tools
 **Note:**
 ```
 1. Tested under Kali LInux Os and Android OS
-2. Some tools requires superuser privileg (on feature 8, 9, 12)...
-3. For kali installation run setup.sh as root
+2. Some tools requires superuser privileg (on feature 10)...
+3. For kali installation run setup as root
 ```
 
 **Features:**
