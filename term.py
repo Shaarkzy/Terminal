@@ -605,30 +605,28 @@ MORE Functions COMING... '''
  
                             buffer_size = 65536
                             open_file = open(file, "rb")
+                            size = len(open_file.read())
+                            open_file.close()
+                            
+                            open_file = open(file, "rb")
                             iv = open_file.read(16)
   
                             cipher_encrypt = AES.new(key, AES.MODE_CFB, iv=iv)
                             buffer = open_file.read(buffer_size)
                             file = file.replace(".enc",".dec")
                             output_file = open(file, "wb")
-
-                            while len(buffer) > 0:
-                                new = buffer
-                                decrypted_bytes = cipher_encrypt.decrypt(new)
-                                new_data = decrypted_bytes
-                                output_file.write(new_data)
-                                buffer = open_file.read(buffer_size)
+                            print(F.YELLOW+"")
+                            with tqdm(total=size, unit='B', unit_scale=True, desc="DECRYPTING FILE", ascii=False) as progress_bar:
+                                while len(buffer) > 0:
+                                    new = buffer
+                                    decrypted_bytes = cipher_encrypt.decrypt(new)
+                                    new_data = decrypted_bytes
+                                    output_file.write(new_data)
+                                    buffer = open_file.read(buffer_size)
+                                    progress_bar.update(len(new_data))
 
                             open_file.close()
                             output_file.close()
-
-                            num = 0
-                            for i in range(200):
-                                num += 0.2
-                                d = F.GREEN+"━"*int(num)
-                                tm.sleep(0.01)
-                                print(f'{F.BLUE}DECRYPTING FILE: {d}', end="\r", flush=True)
-                            tm.sleep(0.2)
                             print (F.BLUE+"[✓]FILE DECRYPTED SUCCESSFULLY                                ")
                             print(f'{F.CYAN}[*]DECRYPTED FILE IS {F.YELLOW}{file}')
 
@@ -656,6 +654,9 @@ MORE Functions COMING... '''
                         if len(keyD) == 16 or len(keyD) == 24 or len(keyD) == 32:
                             print(f'{F.CYAN}[*]YOUR KEY IS: {F.WHITE}{keyD}')
                             key = keyD.encode()
+                            open_file = open(file, "rb")
+                            size = len(open_file.read())
+                            open_file.close()
 
                             buffer_size = 65536 
                             iv = os.urandom(16)
@@ -666,22 +667,17 @@ MORE Functions COMING... '''
                             file = file+".enc"
                             output_file = open(file, "wb")
                             output_file.write(iv)
-
-                            while len(buffer) > 0:
-                                ciphered_bytes = cipher_encrypt.encrypt(buffer)
-                                new_data = ciphered_bytes
-                                output_file.write(new_data)
-                                buffer = open_file.read(buffer_size)
+                            
+                            print(F.YELLOW+"")
+                            with tqdm(total=size, unit='B', unit_scale=True, desc="ENCRYPTING FILE", ascii=False) as progress_bar:
+                                while len(buffer) > 0:
+                                    ciphered_bytes = cipher_encrypt.encrypt(buffer)
+                                    new_data = ciphered_bytes
+                                    output_file.write(new_data)
+                                    buffer = open_file.read(buffer_size)
+                                    progress_bar.update(len(new_data))
                             open_file.close()
                             output_file.close()
-
-                            num = 0
-                            for i in range(200):
-                                num += 0.2
-                                d = F.GREEN+"━"*int(num)
-                                tm.sleep(0.01)
-                                print(f'{F.BLUE}ENCRYPTING FILE:{d}', end="\r", flush=True)
-                            tm.sleep(0.2)
                             print (F.BLUE+"[✓]FILE ENCRYPTED SUCCESSFULLY                                    ")
                             print(f'{F.CYAN}[*]ENCRYPTED FILE IS {F.YELLOW}{file}')
 
@@ -753,7 +749,7 @@ MORE Functions COMING... '''
             c.send(str(size).encode())
             print (F.CYAN+"") 
             with tqdm(total=size, unit='B', unit_scale=True, desc="Uploading", ascii=False) as progress_bar:
-                with open(file_path, 'rb') as file:
+                with open(file_path, ' rb') as file:
                     for data in iter(lambda: file.read(1024), b''):
                         c.send(data)
                         progress_bar.update(len(data))
