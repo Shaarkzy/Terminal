@@ -333,17 +333,6 @@ MORE Functions COMING... '''
         try:
             open_file = open(file, 'r')
             read_file = open_file.read()
-            num = 0
-            for i in read_file:
-                if i != '1' and i != '0' and i != ' ':
-                    num = 0
-                    for j in read_file:
-                        num += 1
-                        if read_file[num] == i:
-                            error_loc = num
-                            error_data = i
-                            open_file.close()
-                            
             open_file.close()
             data =  read_file
             split_data = data.split(' ')
@@ -351,15 +340,11 @@ MORE Functions COMING... '''
             write_data = ''
             num = -1
             for data in split_data:
-                try:
-                    num += 1
-                    int_data = int(data, 2)
-                    charac = chr(int_data)
-    
-                    write_data = write_data + charac
-                    new_data = write_data
-                except:
-                    pass   
+                num += 1
+                int_data = int(data, 2)
+                charac = chr(int_data)
+                write_data = write_data + charac
+                new_data = write_data
             new_file.write(new_data)
             print(f'{F.CYAN+"[✓]DATA SAVED TO"} {file}.txt')
             new_file.close()
@@ -368,7 +353,7 @@ MORE Functions COMING... '''
         except:
             print(F.RED+'[x]AN ERROR OCCURED')
             try:
-                print(f'{F.GREEN+"[*]First Invalid Data Detected is:"} {error_data} In String Location: {error_loc}')
+                print("[x] Invalid Bytes Detected")
                 opt = input(F.WHITE+'[*]Commence File Repair Now [Y/N]?: ').upper()
                 if opt == 'Y':
                     shark.repair(file)
