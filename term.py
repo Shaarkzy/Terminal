@@ -569,10 +569,14 @@ MORE Functions COMING... '''
             if exists(file):
                 try:
                     open_file = open(file, "r")
-                    print (F.BLUE+f"Data: {open_file.read()}")
+                    print(F.CYAN+f"[*]SIZE: {len(open_file.read())} bytes")
+                    open_file.seek(0)
+                    print (f"{F.BLUE}[*]Data:\n{F.WHITE}{open_file.read()}")
                 except:
                     open_file = open(file, 'rb')
-                    print (F.BLUE+f"Data: {open_file.read()}")
+                    print(F.CYAN+f"[*]SIZE: {len(open_file.read())} bytes")
+                    open_file.seek(0)
+                    print (f"{F.BLUE}Data:\n{F.WHITE} {open_file.read()}")
             else:
                 print (F.RED+"[x]File doesnt exists")
         elif option == "-ED":
@@ -598,7 +602,7 @@ MORE Functions COMING... '''
   
                             cipher_encrypt = AES.new(key, AES.MODE_CFB, iv=iv)
                             buffer = open_file.read(buffer_size)
-                            file = file.replace(".enc",".dec")
+                            file = file.replace(".enc","")
                             output_file = open(file, "wb")
                             print(F.YELLOW+"")
                             with tqdm(total=size, unit='B', unit_scale=True, desc="DECRYPTING FILE", ascii=False) as progress_bar:
