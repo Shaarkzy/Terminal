@@ -3,7 +3,7 @@ try:
     print("LOADING LIBRARIES")
     import sys as sy
     print("━"*2, end="\r", flush=True)
-    from colorama import Fore as F
+    from colorama import Fore as F, Back as B, Style as Sty
     print("━"*4, end="\r", flush=True)
     import time as tm
     print("━"*6, end="\r", flush=True)
@@ -59,7 +59,7 @@ sys("clear")
 #check for supported operating system
 pt = pt.system()
 if pt != "Linux":
-    print(F.RED+"[*]OPERARING SYSTEM NOT SUPPORTED")
+    print(F.RED+"[*]Operating System Not Supported")
     quit(0)
 else:
     pass
@@ -92,17 +92,17 @@ class shark:
     def __init__(self):
         try:
             #Run OOP's
-            self.runner = "Runner"
             self.soc = socket
+            self.os = os
+            self.count = 0
         except:
             pass
     #load the terminal on start
     def main(self):
         sys("clear")
         data = f"""
-                {F.CYAN}♣WELCOME·TO·MR·SHARK·TERMINAL♠
-                {F.GREEN} For help and functions: {F.CYAN}@help
-                    {F.BLUE}Ctrl+c to close if stuck 
+                {F.BLACK}{B.CYAN}♣WELCOME·TO·MR·SHARK·TERMINAL♠{Sty.RESET_ALL}
+                {F.GREEN}    For Help: Run {F.CYAN}@help
                     """
         print (data)
     
@@ -112,70 +112,71 @@ class shark:
     #HELP LIST FUNCTION.......
     def help(self): #1
         tools = f'''
-[1]. Getting Ip address: {F.CYAN}@get -ip [target]{F.GREEN}
+[1]. Getting Ip Address: {F.CYAN}@get -ip [target]{F.GREEN}
      Example: {F.BLUE}@get -ip google.com{F.GREEN}
-[2]. Port scanning multiple: {F.CYAN}@port -scan [target]{F.GREEN}
+[2]. Port Scanning Multiple: {F.CYAN}@port -scan [target]{F.GREEN}
      Example: {F.BLUE}@port -scan 127.0.0.1{F.GREEN}
-[3]. Port scanning single: {F.CYAN}@port--s -scan [target] [port]{F.GREEN}
+[3]. Port Scanning Single: {F.CYAN}@port--s -scan [target] [port]{F.GREEN}
      Example: {F.BLUE}@port--s -scan 127.0.0.1 80{F.GREEN}
-[4]. Convert Number to Binary: {F.CYAN}@num -b [number] [base]{F.GREEN}
+[4]. Convert Number To Binary: {F.CYAN}@num -b [number] [base]{F.GREEN}
      Example: {F.BLUE}@num -b 2000 2{F.GREEN}
-[5]. Convert Binary to Number: {F.CYAN}@bina -n [binary] [base]{F.GREEN}
+[5]. Convert Binary To Number: {F.CYAN}@bina -n [binary] [base]{F.GREEN}
      Example: {F.BLUE}@bina -n 1011101010 2{F.GREEN}
-[6]. Convert Alphabet to Binary: {F.CYAN}@alpha -b{F.GREEN}
+[6]. Convert Alphabet To Binary: {F.CYAN}@alpha -b{F.GREEN}
      Example: {F.BLUE}@alpha -b{F.GREEN} 
-[7]. Convert Binary to Alphabet: {F.CYAN}@bina -a{F.GREEN}
+[7]. Convert Binary To Alphabet: {F.CYAN}@bina -a{F.GREEN}
      Example: {F.BLUE}@bina -a{F.GREEN} 
-[8]. To get device NETWORKS INFO: {F.CYAN}@ip -details{F.GREEN}
+[8]. To Get Device Network Info: {F.CYAN}@ip -details{F.GREEN}
      Example: {F.BLUE}@ip -details{F.GREEN}
-[9]. To get cpu info: {F.CYAN}@cpu{F.GREEN}
+[9]. To Get Cpu Info: {F.CYAN}@cpu{F.GREEN}
      Example: {F.BLUE}@cpu{F.GREEN}
-[10].To start wifi chat room: 
+[10].To Start Wifi Chat Room: 
       HOST   : {F.CYAN}@open -server{F.GREEN}
       CLIENT : {F.CYAN}@con -server <ip> <port>{F.GREEN}
       Example: {F.CYAN}@con -server 127.0.0.1 12345{F.GREEN} 
-      Note   : {F.BLUE}To exit chat any user can input "@bye"..{F.GREEN}
-             : {F.BLUE}Doesn't support telnet{F.GREEN}
-[11].To create file: {F.CYAN}@file <option> <file_name>{F.GREEN}
-     Options: {F.BLUE}-C create file{F.GREEN}
-              {F.BLUE}-A append data to existsing file{F.GREEN}
-              {F.BLUE}-D delete file{F.GREEN}
-              {F.BLUE}-R read data from a file{F.GREEN}
-              {F.BLUE}-V check if file exists{F.GREEN}
-              {F.BLUE}-ED encrypt/decrypt file{F.GREEN}
+      Note   : {F.BLUE}To Exit Chat Any User Can Input "@bye"..{F.GREEN}
+             : {F.BLUE}Doesn't Support Telnet{F.GREEN}
+[11].To Create File: {F.CYAN}@file <option> <file_name>{F.GREEN}
+     Options: {F.BLUE}-C Create File{F.GREEN}
+              {F.BLUE}-A Append Data To Existsing File{F.GREEN}
+              {F.BLUE}-D Delete File{F.GREEN}
+              {F.BLUE}-R Read Data From A File{F.GREEN}
+              {F.BLUE}-V Check If File Exist{F.GREEN}
+              {F.BLUE}-ED Encrypt/Decrypt File{F.GREEN}
      Example: {F.BLUE}@file -CADRV(ED) filename.txt{F.GREEN}
-     NOTE   : {F.BLUE}Can only encrypt and decrypt text contained file{F.GREEN}
-            : {F.BLUE}Can only encrypt files with .enc extension{F.GREEN}
-[12].To send message to a whatsapp contact: {F.CYAN}@send -w <number>{F.GREEN}
+     NOTE   :{F.BLUE}Can only encrypt files with .enc extension{F.GREEN}
+[12].To Send Message To A Whatsapp Contact: {F.CYAN}@send -w <number>{F.GREEN}
     Example: {F.BLUE}@send -w +1234567890{F.GREEN}
-[13].To send file via wifi: {F.CYAN}@send -file{F.GREEN}
-     To recieve file       : {F.CYAN}@recv -file <host> <port>{F.GREEN}
+[13].To Send File Via Wifi: {F.CYAN}@send -file{F.GREEN}
+     To Recieve File       : {F.CYAN}@recv -file <host> <port>{F.GREEN}
      Example: {F.BLUE}@recv @file 127.0.0.1 12345{F.GREEN}
-     NOTE   : {F.BLUE}Program can't send File with Permission..{F.GREEN}
-            : {F.BLUE}Doesn't suppport telnet{F.GREEN}
-[14].To start remote shell via wifi::
+     NOTE   : {F.BLUE}Program Can't Executable File..{F.GREEN}
+            : {F.BLUE}Doesn't Suppport Telnet{F.GREEN}
+[14].To Start Remote Shell Via Wifi::
      HOST   : {F.CYAN}@shell -host{F.GREEN}
      CLIENT : {F.CYAN}@shell -client <ip> <port>{F.GREEN}
      Example: {F.BLUE}@shell -client 127.0.0.1 12345{F.GREEN}
-     NOTE   : {F.BLUE}Doesn't support telnet{F.GREEN}
-            : {F.BLUE}To exit session input <exit>{F.GREEN}
-[15].To encrypt a text: {F.CYAN}@crypt -t{F.GREEN}
+     NOTE   : {F.BLUE}Doesn't Support Telnet{F.GREEN}
+            : {F.BLUE}To Exit Session Input: <exit>{F.GREEN}
+[15].To Encrypt A Text: {F.CYAN}@crypt -t{F.GREEN}
      Example: {F.BLUE}@crypt -t{F.GREEN}
-     Note   : {F.BLUE}Can only encrypt string format not(int, bytes){F.GREEN}
-[16].To check mobile number details: {F.CYAN}@check -no <country code> <number>{F.GREEN}
+     Note   : {F.BLUE}Can Only Encrypt String Format Not(int, bytes){F.GREEN}
+[16].To Check Mobile Number Details: {F.CYAN}@check -no <country code> <number>{F.GREEN}
      Example: {F.BLUE}@check -no +123123450000{F.GREEN}
-     NOTE   : {F.BLUE}Without country code: default is <+62>{F.GREEN}
-[17].To scan vulnerability: {F.CYAN}@scan -v <target>{F.GREEN}
+     NOTE   : {F.BLUE}Without Country Code: Default Is <+62>{F.GREEN}
+[17].To Scan Vulnerability: {F.CYAN}@scan -v <target>{F.GREEN}
      Example: {F.BLUE}@scan -v 192.168.00.00{F.GREEN}
-     NOTE   : {F.BLUE}GET YOUR CREDENTIAL (ACCESS , SECRET & API KEY) FROM tenable.io website{F.GREEN}
-[17].To check weather: {F.CYAN}@check -w <city>{F.GREEN}
+     NOTE   : {F.BLUE}Get Your Credential (ACCESS , SECRET & API KEY) From tenable.io Website{F.GREEN}
+[18].To Check Weather: {F.CYAN}@check -w <city>{F.GREEN}
      Example: {F.BLUE}@check -w London{F.GREEN}
-     NOTE   : {F.BLUE}Get your api key from api.openweathermap.org{F.GREEN}
-[18].To gather info about an Ip address: {F.CYAN}@ip -scrp <0.0.0.0>{F.GREEN}
-     Example: {F.BLUE}ip -scrp 100.101.102.103{F.GREEN}
-[00]. To exit program: {F.CYAN}@exit{F.GREEN}
+     NOTE   : {F.BLUE}Get Your Api key From Api.openweathermap.org{F.GREEN}
+[19].To Gather Info About An Ip Address: {F.CYAN}@ip -scrp <0.0.0.0>{F.GREEN}
+     Example: {F.BLUE}@ip -scrp 100.101.102.103{F.GREEN}
+[20].To Search File In File System: {F.CYAN}@srch{F.GREEN}
+     Example: {F.BLUR}@srch{F.GREEN}
+[00]. To Exit Program: {F.CYAN}@exit{F.GREEN}
 
-MORE Functions COMING... '''
+More Tools Coming... '''
         print (F.GREEN+tools)
 
 
@@ -187,7 +188,7 @@ MORE Functions COMING... '''
             data = self.soc.gethostbyname(host)
             print (F.CYAN+f"[✓]{host}: {F.BLUE}{data}")
         except:
-            print (F.RED+"[x]Error, maybe invalid host or no network connection [*]")
+            print (F.RED+"[x]Error, Maybe Invalid Host Or No Internet Connection")
 
 
 
@@ -199,7 +200,7 @@ MORE Functions COMING... '''
         try:
             re_search = re.search(r'(time=)(\d+)', data)
             interval = int(re_search.group(2))/1000
-            print (F.CYAN+"[*]STARTING SCANNING IN TIME INTERVAL: "+F.YELLOW+str(interval))
+            print (F.CYAN+"[*]Start Scanning In Time Interval: "+F.YELLOW+str(interval))
 
 
             total_port = 0
@@ -212,17 +213,17 @@ MORE Functions COMING... '''
                     check =  sock.connect_ex((ip, port))
                     if check == 0:
                         total_port += 1
-                        print (F.BLUE+f"[✓]port {port} opened for {ip}")
+                        print (F.BLUE+f"[✓]Port {port} Opened For {ip}")
                         sock.close()
                     else:
                         pass
                         sock.close()
                 except:
                     break
-            print (F.GREEN+f"[*]Total port opened for {ip} is : {total_port}")
+            print (F.GREEN+f"[*]Total Port Opened for {ip} is : {total_port}")
             sock.close()
         except:
-            print(F.RED+"[OPP's]SERVER NOT RECHEABLE :'( ")
+            print(F.RED+"[x]Server Not Reachable")
 
     
 
@@ -234,14 +235,14 @@ MORE Functions COMING... '''
             sock.settimeout(0.5)
             check = sock.connect_ex((ip, int(port)))
             if check == 0:
-                print (F.BLUE+f"[✓]Port: {port} opened")
+                print (F.BLUE+f"[✓]Port: {port} Opened")
                 sock.close()
             else:
-                print (F.BLUE+f"[x]Port: {port} closed")
+                print (F.BLUE+f"[x]Port: {port} Closed")
                 sock.close()
 
         except:
-            print (F.RED+"[x]An error occured, Internet Issue")
+            print (F.RED+"[x]An Error Occured, Internet Issue")
             sock.close()
 
     def ip_osint(self, ip):
@@ -261,10 +262,10 @@ MORE Functions COMING... '''
    #converting binary to interger
     def Bina_Num(self, binary, base): #5
         try:
-            print (F.GREEN+"[%]OUTPUT"+F.BLUE)
+            print (F.GREEN+"[%]Output"+F.BLUE)
             print (F.BLUE+str(int(binary, int(base))))
         except:
-            print (F.RED+"[x]An error occured")
+            print (F.RED+"[x]An Error Occured")
 
 
 
@@ -274,10 +275,10 @@ MORE Functions COMING... '''
         try:
             num = int(num)
             base = int(base)
-            print (F.GREEN+"[%]OUTPUT"+F.BLUE)
+            print (F.GREEN+"[*]Output"+F.BLUE)
             print (F.BLUE+bin(num) [base: ])
         except:
-            print (F.RED+"[x]An error occured")
+            print (F.RED+"[x]An Error Occured")
 
 
 
@@ -323,7 +324,7 @@ MORE Functions COMING... '''
              except:
                  new_file.write(new_data)
                  save_to = file.replace('.txt', '')
-                 print(f'{F.CYAN+"[✓]DATA SAVED TO"} {save_to}.bin')
+                 print(f'{F.CYAN+"[✓]Data Saved To"} {save_to}.bin')
                  new_file.close()
                  break
 
@@ -346,19 +347,19 @@ MORE Functions COMING... '''
                 write_data = write_data + charac
                 new_data = write_data
             new_file.write(new_data)
-            print(f'{F.CYAN+"[✓]DATA SAVED TO"} {file}.txt')
+            print(f'{F.CYAN+"[✓]Data Saved To"} {file}.txt')
             new_file.close()
         except FileNotFoundError as err:
             print(err)
         except:
-            print(F.RED+'[x]AN ERROR OCCURED')
+            print(F.RED+'[x]An Error Occured')
             try:
-                print("[x] Invalid Bytes Detected")
-                opt = input(F.WHITE+'[*]Commence File Repair Now [Y/N]?: ').upper()
+                print("[x]Invalid Bytes Detected")
+                opt = input(F.WHITE+'[?]Commence File Repair Now [Y/N]: ').upper()
                 if opt == 'Y':
                     shark.repair(file)
                 elif opt == 'N':
-                    print('ok')
+                    print('[*]File Not Repaired')
                 else:
                     print(F.RED+'[x]Invalid Input')
             except:
@@ -391,7 +392,7 @@ MORE Functions COMING... '''
             print("—"*50)
         except r.RequestException:
             print(F.CYAN+"[*]Interface: - Public Address -")
-            print(F.WHITE+"-- addr: ", "network not reachable")
+            print(F.WHITE+"-- addr: ", "Network Not Reachable")
             print("—"*50)
         interfaces = n.interfaces()
         for interface in interfaces:
@@ -399,9 +400,9 @@ MORE Functions COMING... '''
             addrs = n.ifaddresses(interface)
             for addr_family, addr_list in addrs.items():
                 for addr in addr_list:
-                    print(f"{F.WHITE}–– addr:", addr.get('addr', 'N/A'))
-                    print("-- netmask:", addr.get('netmask', 'N/A'))
-                    print("-- broadcast:", addr.get('broadcast', 'N/A'))
+                    print(f"{F.WHITE}–– addr:", addr.get('Addr', 'N/A'))
+                    print("-- Netmask:", addr.get('netmask', 'N/A'))
+                    print("-- Broadcast:", addr.get('broadcast', 'N/A'))
             print("—"*50)
         
 
@@ -411,7 +412,7 @@ MORE Functions COMING... '''
     #getting device cpu information
     def cpu_info(self): #10
         try:
-            print (F.BLUE+"[*]CPU DETAILS: ctrl+c to exit")
+            print (F.BLUE+"[*]Cpu Details: ctrl+c To Exit")
 
             while True:
 
@@ -427,17 +428,17 @@ MORE Functions COMING... '''
 
                 ram_used = F.BLUE+str((ram.used // (1024 ** 2)) // 1024)
 
-                cu = F.CYAN+'CPU USAGE'
-                co = F.CYAN+'CPU CORES'
-                cl = F.CYAN+'LOGICAL CPU'
-                ra = F.CYAN+'RAM:'
+                cu = F.CYAN+'Cpu Usage'
+                co = F.CYAN+'Cpu Cores'
+                cl = F.CYAN+'Logical Cores'
+                ra = F.CYAN+'Ram:'
 
 
-                print (f'{cu}:{cpu_p} | {co}:{cpu_us} | {cl}:{cpu_l} | A-{ra}:{ram_used}/{total_ram}GB', end='\r', flush=True)
+                print (f'{cu}:{cpu_p} | {co}:{cpu_us} | {cl}:{cpu_l} | A-{ra}:{ram_used}/{total_ram}Gb', end='\r', flush=True)
                 tm.sleep(0.5)
 
         except:
-            print (F.RED+"\n[*]EXITED")
+            print (F.RED+"\n[*]Exited")
 
 
 
@@ -447,36 +448,36 @@ MORE Functions COMING... '''
     def open_server(self): #11
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #sock = socket.socket()
-        print (F.CYAN+"[NOTE]: ONLY SUPPORT WLAN")
-        print(F.CYAN+"......: @bye to close chat")
+        print (F.CYAN+"[Note]: Only Support Wlan")
+        print(F.CYAN+"......: To Close Chat: @bye")
 
         tm.sleep(1)
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
         ip = self.get_private_addr()
         port = a3+a2+a1+a2+a3
-        print (F.BLUE+"[✓]SERVER STARTED")
+        print (F.BLUE+"[✓]Server Started")
         tm.sleep(1)
-        print (F.GREEN+f"[*]IP: {ip} : [*]PORT: {port}")
+        print (F.GREEN+f"[*]Ip: {ip} : [*]Port: {port}")
     
         sock.bind(("0.0.0.0", int(port)))
         sock.listen(5)
         c, addr = sock.accept()
 
         while True:
-            sen = input(F.CYAN+"[%]SEND-MESSAGE: "+F.WHITE)
+            sen = input(F.CYAN+"[%]Send-Message: "+F.WHITE)
             c.send(sen.encode())
-            print (F.BLUE+"[✓]MESSAGE SENT")
-            print (F.GREEN+"[*]WAITING FOR INCOMING MESSAGE")
+            print (F.BLUE+"[✓]Message Sent")
+            print (F.GREEN+"[*]Waiting For Incoming Message")
             if sen == "@bye":
                 tm.sleep(1)
-                print (F.RED+"[*]CLOSING CHAT")
+                print (F.RED+"[*]Closing Chat")
                 c.close()
                 break
             rec = c.recv(20480).decode()
-            print (F.CYAN+"[*]RECEIVED-MESSAGE: ",F.WHITE+rec)
+            print (F.CYAN+"[*]Received-Message: ",F.WHITE+rec)
             if rec == "@bye":
                 tm.sleep(1)
-                print (F.RED+"[*]USER CLOSED CHAT")
+                print (F.RED+"[*]User Closed Chat")
                 c.close()
                 break
 
@@ -488,24 +489,24 @@ MORE Functions COMING... '''
          sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
          sock.connect((ip, int(port)))
             
-         print (F.BLUE+"[✓]CONNECTED TO SERVER")
-         print (F.CYAN+"[NOTE]: ONLY SUPPORT WLAN")
-         print(F.CYAN+"......: @bye to close chat")
+         print (F.BLUE+"[✓]Connected To Server")
+         print (F.CYAN+"[Note]: Only Support Wlan")
+         print(F.CYAN+"......:  To Close Chat: @bye")
          tm.sleep(1)
          while True:
-             print(F.GREEN+"[*]WAITING FOR INCOMING MESSAGE")
+             print(F.GREEN+"[*]Waiting For Incoming Message")
              rec = sock.recv(20480).decode()
-             print (F.CYAN+"RECIEVED-MESSAGE: "+F.WHITE+rec)
+             print (F.CYAN+"[*]Recieved-Message: "+F.WHITE+rec)
              if rec == "@bye":
                  tm.sleep(1)
-                 print(F.RED+"[*]USER CLOSED CHAT")
+                 print(F.RED+"[*]User Closed Chat")
                  sock.close()
                  break
-             sen = input(F.CYAN+"[%]SEND-MESSAGE: "+F.WHITE)
+             sen = input(F.CYAN+"[%]Send-Message: "+F.WHITE)
              sock.send(sen.encode())
-             print (F.BLUE+"[✓]MESSAGE SENT")
+             print (F.BLUE+"[✓]Message Sent")
              if sen == "@bye":
-                 print (F.RED+"[*]CLOSING CHAT")
+                 print (F.RED+"[*]Closing Chat")
                  tm.sleep(1)
                  sock.close()
                  break
@@ -526,21 +527,21 @@ MORE Functions COMING... '''
                 data = input(F.YELLOW+"[%]Enter Data: "+F.WHITE)
                 open_file = open(file, "w")
                 open_file.write(data)
-                print (F.BLUE+"[✓]File created successfully".upper())
+                print (F.BLUE+"[✓]File Created Successfully".upper())
                 open_file.close()
             else:
-                print (F.RED+"[*]File already exists, wish to rewrite it".upper())
-                opt = input(F.YELLOW+"[*]Y/N: "+F.WHITE).upper()
+                print (F.RED+"[*]File Already Exist, Wish To Rewrite It".upper())
+                opt = input(F.YELLOW+"[?]Y/N: "+F.WHITE).upper()
                 if opt == "N":
-                    print (F.BLUE+"[✓]File was maintained".upper())
+                    print (F.BLUE+"[✓]File Was Maintained".upper())
                 elif opt == "Y":
                     data = input(F.YELLOW+"[%]Enter Data: "+F.WHITE)
                     open_file = open(file, "w")
                     open_file.write(data)
-                    print (F.BLUE+"[✓]File created successully".upper())
+                    print (F.BLUE+"[✓]File Created Successully".upper())
                     open_file.close()
                 else:
-                    print (F.RED+"[x]Error, try inputing valid data".upper())
+                    print (F.RED+"[x]Error, Try Inputing Valid Data".upper())
 
         elif option == "-A":
             try:
@@ -551,43 +552,43 @@ MORE Functions COMING... '''
                     open_file.close()
                     print (F.BLUE+"[✓]Done".upper())
                 else:
-                    print (F.RED+"[x]File doesnt exists".uppper())
+                    print (F.RED+"[x]File Doesn't Exist".uppper())
             except:
-                print (F.RED+"[x]An error occured")
+                print (F.RED+"[x]An Error Occured")
         elif option == "-D":
             if exists(file):
                 os.remove(file)
-                print (F.BLUE+"[✓]File deleted ".upper())
+                print (F.BLUE+"[✓]File Deleted ".upper())
             else:
-                print (F.RED+"[x]File doesnt exists".upper())
+                print (F.RED+"[x]File Doesnt Exist".upper())
         elif option == "-V":
             if exists(file):
-                print (F.BLUE+"[✓]File exists".upper())
+                print (F.BLUE+"[✓]File Exist".upper())
             else:
-                print (F.RED+"[x]File doesnt exists".upper())
+                print (F.RED+"[x]File Doesn't Exist".upper())
         elif option == "-R":
             if exists(file):
                 try:
                     open_file = open(file, "r")
-                    print(F.CYAN+f"[*]SIZE: {len(open_file.read())} bytes")
+                    print(F.CYAN+f"[*]Size: {len(open_file.read())} Bytes")
                     open_file.seek(0)
                     print (f"{F.BLUE}[*]Data:\n{F.WHITE}{open_file.read()}")
                 except:
                     open_file = open(file, 'rb')
-                    print(F.CYAN+f"[*]SIZE: {len(open_file.read())} bytes")
+                    print(F.CYAN+f"[*]Size: {len(open_file.read())} Bytes")
                     open_file.seek(0)
-                    print (f"{F.BLUE}Data:\n{F.WHITE} {open_file.read()}")
+                    print (f"{F.BLUE}[*]Data:\n{F.WHITE} {open_file.read()}")
             else:
-                print (F.RED+"[x]File doesnt exists")
+                print (F.RED+"[x]File Doesn't Exist")
         elif option == "-ED":
             if exists(file):
                 reg = file.endswith(".enc")
                 if reg == True:
-                    print (F.GREEN+"[*]FILE IS IN ENCRYPTED FORMAT!!\n[*]WISH TO DECRYPT?")
-                    opt = input(F.YELLOW+"[*]Y/N: "+F.WHITE).upper()
+                    print (F.GREEN+"[*]File Is In Encrypted Format!!\n[*]Wish To Decrypt")
+                    opt = input(F.YELLOW+"[?]Y/N: "+F.WHITE).upper()
                     if opt == "Y":
                         #decryption here
-                        print(F.BLUE+"[*]NOTE: KEY MUST BE EITHER 16, 24 OR 32 BYTES CHARACTER\n[*]MEANING YOUR KEY SHOULD BE ↑ABOVE↑ BYTES CHARACTER LONG")
+                        print(F.BLUE+"[Note]: Key Must Be EITHER 16, 24 Or 32 Bytes Character\n[*]Meaning Your Key Should Be ↑Above↑ Bytes Character Long")
                         key = input(F.CYAN+"[%]KEY: "+F.WHITE)
                         if len(key) == 16 or len(key) == 24 or len(key) == 32:
                             key = key.encode()
@@ -605,7 +606,7 @@ MORE Functions COMING... '''
                             file = file.replace(".enc","")
                             output_file = open(file, "wb")
                             print(F.YELLOW+"")
-                            with tqdm(total=size, unit='B', unit_scale=True, desc="DECRYPTING FILE", ascii=False) as progress_bar:
+                            with tqdm(total=size, unit='B', unit_scale=True, desc="Decrypting File", ascii=False) as progress_bar:
                                 while len(buffer) > 0:
                                     new = buffer
                                     decrypted_bytes = cipher_encrypt.decrypt(new)
@@ -616,32 +617,32 @@ MORE Functions COMING... '''
 
                             open_file.close()
                             output_file.close()
-                            print (F.BLUE+"[✓]FILE DECRYPTED SUCCESSFULLY                                ")
-                            print(f'{F.CYAN}[*]DECRYPTED FILE IS {F.YELLOW}{file}')
+                            print (F.BLUE+"[✓]File Decrypted Successfully                             ")
+                            print(f'{F.CYAN}[*]Decrypted File Is {F.YELLOW}{file}')
 
                         else:
-                            print (F.RED+"[x]INVALID KEY BYTE SIZE")
+                            print (F.RED+"[x]Invalid Key Byte Size")
 
                     elif opt == "N":
-                        print (F.BLUE+"[✓]OK")
+                        print (F.BLUE+"[✓]File Was Maintained")
 
                     else:
-                        print (F.RED+"[x]Error, invalid input")
+                        print (F.RED+"[x]Error, Invalid Input")
 
                 elif reg == False:
-                    print (F.GREEN+"[*]FILE IS IN DECRYPTED FORMAT!!\n[*]WISH TO ENCRYPT?")
+                    print (F.GREEN+"[*]File Is In Decrypted Format!!\n[*]Wish To Encrypted")
                     opt = input(F.YELLOW+"[%]Y/N: "+F.WHITE).upper()
                     if opt == "Y":
                         #encryption here
-                        print(F.BLUE+"[*]NOTE: KEY MUST BE EITHER 16, 24 OR 32 BYTES CHARACTER\n[*]MEANING YOUR KEY SHOULD BE ↑ABOVE↑ BYTES CHARACTER LONG")
-                        option = input(F.CYAN+"[%]Generate Key? y/n: ").upper()
+                        print(F.BLUE+"[*]Note: Key Must Be Either 16, 24 OR 32 Bytes Character\n[*]Meaning Your Key Should Be ↑Above↑ Bytes Character Long")
+                        option = input(F.CYAN+"[?]Generate Key [Y/N]: ").upper()
                         if option == "Y":
                             num = int(input(F.YELLOW+'[%]Key Length: '))
                             keyD = self.key(num)
                         else:
-                            keyD = input(F.CYAN+"[%]KEY: "+F.WHITE)
+                            keyD = input(F.CYAN+"[%]Key: "+F.WHITE)
                         if len(keyD) == 16 or len(keyD) == 24 or len(keyD) == 32:
-                            print(f'{F.CYAN}[*]YOUR KEY IS: {F.WHITE}{keyD}')
+                            print(f'{F.CYAN}[*]Your Key Is: {F.WHITE}{keyD}')
                             key = keyD.encode()
                             open_file = open(file, "rb")
                             size = len(open_file.read())
@@ -658,7 +659,7 @@ MORE Functions COMING... '''
                             output_file.write(iv)
                             
                             print(F.YELLOW+"")
-                            with tqdm(total=size, unit='B', unit_scale=True, desc="ENCRYPTING FILE", ascii=False) as progress_bar:
+                            with tqdm(total=size, unit='B', unit_scale=True, desc="Encrypting File", ascii=False) as progress_bar:
                                 while len(buffer) > 0:
                                     ciphered_bytes = cipher_encrypt.encrypt(buffer)
                                     new_data = ciphered_bytes
@@ -667,25 +668,25 @@ MORE Functions COMING... '''
                                     progress_bar.update(len(new_data))
                             open_file.close()
                             output_file.close()
-                            print (F.BLUE+"[✓]FILE ENCRYPTED SUCCESSFULLY                                    ")
-                            print(f'{F.CYAN}[*]ENCRYPTED FILE IS {F.YELLOW}{file}')
+                            print (F.BLUE+"[✓]File Encrypted Succesfully                                    ")
+                            print(f'{F.CYAN}[*]Encrypted File Is {F.YELLOW}{file}')
 
                             tm.sleep(0.6)
                             key_file = open("key.txt", "a")
                             cur_dir = os.getcwd()
-                            data = "~[filnename= "+file+"|:|key= "+keyD+" ]~"
+                            data = "~[Filnename= "+file+"|:|Key= "+keyD+" ]~"
                             key_file.write(data)
-                            print(f"{F.CYAN}[*]KEY SAVED ON {F.YELLOW}{cur_dir}/{F.WHITE}key.txt")
+                            print(f"{F.CYAN}[*]Key Saved On {F.YELLOW}{cur_dir}/{F.WHITE}key.txt")
                         else:
-                            print(F.RED+"[x]INVALID KEY BYTE SIZE")
+                            print(F.RED+"[x]Invalid Key Byte SIZE")
 
                     elif opt == "N":
-                        print (F.BLUE+"[✓]OK")
+                        print (F.BLUE+"[✓]File Was Maintained")
 
                     else:
-                        print (F.RED+"[x]Error, invalid input")
+                        print (F.RED+"[x]Error, Invalid Input")
             else:
-                print (F.RED+"[x]File doesnt exists")
+                print (F.RED+"[x]File Doesnt Exist")
 
 
 
@@ -695,9 +696,9 @@ MORE Functions COMING... '''
         try:
             message = input(F.YELLOW+"[%]Message: "+F.WHITE).replace(" ", "%20")
             sys(f'xdg-open https://wa.me/{number}?text={message}')
-            print (F.BLUE+"[*]OPENING WHATSAPP....")
+            print (F.BLUE+"[*]Opening Whatsapp....")
         except:
-            print ("[x]An Error occured")
+            print ("[x]An Error Occured")
 
 
 
@@ -708,16 +709,16 @@ MORE Functions COMING... '''
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
         port = a3+a2+a1+a2+a3
         sock.bind(('0.0.0.0', int(port)))
-        print (F.BLUE+"[✓]SERVER STARTED")
+        print (F.BLUE+"[✓]Server Started")
         ip = self.get_private_addr()
-        print(F.GREEN+f'[*]IP: {ip} : PORT {port}'+F.CYAN)
+        print(F.GREEN+f'[*]Ip: {ip} :[*]Port {port}'+F.CYAN)
 
         sock.listen(5)
 
         file_path = input(F.YELLOW+"[%]/path/to/file: "+F.WHITE)
         size = open(file_path, 'rb')
         size = len(size.read())
-        print (F.BLUE+"[*]WAITING FOR USER TO RECIEVE")
+        print (F.BLUE+"[*]Waiting For User To Receive")
         
 
         num = 0
@@ -732,7 +733,7 @@ MORE Functions COMING... '''
                 break
 
         c, addr = sock.accept()
-        c.send(f'[*]INCOMING FILE! [NAME: {file}] [SIZE: {size}bytes]\n'.encode())
+        c.send(f'[*]Incoming File! [Name: {file}] [Size: {size}bytes]\n'.encode())
         choice = c.recv(1024).decode()
         if "YES" in choice: 
             c.send(str(size).encode())
@@ -743,7 +744,7 @@ MORE Functions COMING... '''
                         c.send(data)
                         progress_bar.update(len(data))
             c.close()
-            print(F.BLUE+"[✓]FILE UPLOADED")
+            print(F.BLUE+"[✓]File Uploaded")
         else:
             c.close()
 
@@ -754,14 +755,14 @@ MORE Functions COMING... '''
     def recv_file(self, ip, port): #16
         c_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         c_socket.connect((ip, int(port)))
-        print(F.BLUE+"[✓]CONNECTED TO SERVER")
+        print(F.BLUE+"[✓]Connected To Server")
         #tm.sleep(1)
         data = c_socket.recv(1024).decode()
         print (F.BLUE+data)
 
         file = input(F.YELLOW+"[%]/save/to/path/to/file: "+F.WHITE)
 
-        choice = input(F.YELLOW+"[%]WISH TO ACCEPT: Y/N: "+F.WHITE).upper()
+        choice = input(F.YELLOW+"[?]Wish To Accept: [Y/N]: "+F.WHITE).upper()
         if choice == "Y":
             c_socket.send("YES".encode())
             size = c_socket.recv(1024).decode()
@@ -777,7 +778,7 @@ MORE Functions COMING... '''
                         new_file.write(bytes(rec))
                         progress_bar.update(len(rec))
             c_socket.close()
-            print (F.BLUE+"[✓]FILE DOWNLOADED")
+            print (F.BLUE+"[✓]File Downloaded")
 
 
 
@@ -789,21 +790,21 @@ MORE Functions COMING... '''
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
         ip = self.get_private_addr()
         port = a3+a2+a1+a2+a3
-        print(F.CYAN+"[*]NOTE: input <exit> to close session")
-        print (F.BLUE+"[✓]SHELL HOST STARTED")
+        print(F.CYAN+"[Note]: Input <exit> To Close Session")
+        print (F.BLUE+"[✓]Shell Host Started")
         tm.sleep(1)
-        print (F.GREEN+f"[*]IP: {ip} : [*]PORT: {port}")
+        print (F.GREEN+f"[*]Ip: {ip} : [*]Port: {port}")
 
         sock.bind(("0.0.0.0", int(port)))
         sock.listen(5)
         c, addr = sock.accept()
-        print (F.GREEN+"[✓]CLIENT CONNECTED")
+        print (F.GREEN+"[✓]Client Connected")
 
         while True:
             data = input(F.CYAN+"\n[shell]•••→ "+F.WHITE)
             if data == "exit":
                 c.send(data.encode())
-                print(F.RED+"[*]CLOSING SHELL")
+                print(F.RED+"[*]Closing Shell")
                 tm.sleep(1)
                 c.close()
                 break
@@ -818,14 +819,14 @@ MORE Functions COMING... '''
     def shell_client(self, ip, port): #18
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((ip, int(port)))
-        print(F.BLUE+"[✓]CONNECTED TO USER")
+        print(F.BLUE+"[✓]Connected To User")
         tm.sleep(1)
-        print(F.CYAN+"[*]SHELL ACTIVITY IN PROGRESS")
+        print(F.CYAN+"[*]Shell Activity In Progress")
         
         while True:
             data = sock.recv(1024).decode()
             if data == "exit":
-                print (F.RED+"[*]CLOSING SHELL")
+                print (F.RED+"[*]Closing Shell")
                 tm.sleep(1)
                 sock.close()
                 break
@@ -888,35 +889,35 @@ MORE Functions COMING... '''
             d = F.GREEN+'█'*int(num)
             r += 1
             tm.sleep(0.01)
-            print(f'{B}[*]LOADING INFORMATION: {d} : {C}{str(r)}%', end='\r', flush=True)
+            print(f'{B}[*]Loading Information: {d} : {C}{str(r)}%', end='\r', flush=True)
 
         print(f"\n\n{C}[*]Location             :{B}{location}")
         print(f"{C}[*]Region Code          :{B}{region_code}")
         print(f"{C}[*]Timezone             :{B}{timezoneF}")
         print(f"{C}[*]Operator             :{B}{jenis_provider}")
-        print(f"{C}[*]Valid number         :{B}{is_valid_number}")
-        print(f"{C}[*]Possible number      :{B}{is_possible_number}")
-        print(f"{C}[*]International format :{B}{formatted_number}")
-        print(f"{C}[*]Mobile format        :{B}{formated_num_mo}")
-        print(f"{C}[*]Original number      :{B}{parsed_num.national_number}")
-        print(f"{C}[*]E.164 format         :{B}{phone.format_number(parsed_num, phone.PhoneNumberFormat.E164)}")
-        print(f"{C}[*]Country code         :{B}{parsed_num.country_code}")
-        print(f"{C}[*]Local number         :{B}{parsed_num.national_number}")
+        print(f"{C}[*]Valid Number         :{B}{is_valid_number}")
+        print(f"{C}[*]Possible Number      :{B}{is_possible_number}")
+        print(f"{C}[*]International Format :{B}{formatted_number}")
+        print(f"{C}[*]Mobile Format        :{B}{formated_num_mo}")
+        print(f"{C}[*]Original Number      :{B}{parsed_num.national_number}")
+        print(f"{C}[*]E.164 Format         :{B}{phone.format_number(parsed_num, phone.PhoneNumberFormat.E164)}")
+        print(f"{C}[*]Country Code         :{B}{parsed_num.country_code}")
+        print(f"{C}[*]Local Number         :{B}{parsed_num.national_number}")
         if number_type == phone.PhoneNumberType.MOBILE:
-            print(f"{C}[*]Type                 :{B}This is a mobile number")
+            print(f"{C}[*]Type                 :{B}This Is A Mobile number")
         elif number_type == phone.PhoneNumberType.FIXED_LINE:
-            print(f"{C}[*]Type                 :{B}This is a fixed-line number")
+            print(f"{C}[*]Type                 :{B}This Is A Fixed-Line Number")
         else:
-            print(f"{C}[*]Type                 :{B}This is another type of number")
+            print(f"{C}[*]Type                 :{B}This Is Another Type Of Number")
 
 
 
 
    # vulnerability scanner
     def scan_vul(self, target): #21
-        api_key = input(F.YELLOW+"[*]API-KEY : "+F.WHITE)
-        secret_key = input(F.YELLOW+"[%]SECRET-KEY: "+F.WHITE)
-        access_key = input(F.YELLOW+"[%]ACESS-KEY: "+F.WHITE)
+        api_key = input(F.YELLOW+"[%]Api-Key : "+F.WHITE)
+        secret_key = input(F.YELLOW+"[%]Secret-Key: "+F.WHITE)
+        access_key = input(F.YELLOW+"[%]Access-Key: "+F.WHITE)
 
         api_url = 'https://cloud.tenable.com/api/v2/policies'
         headers = {
@@ -933,7 +934,7 @@ MORE Functions COMING... '''
                     policy_id = policy['policy_id']
 
                 load = TenableIO(api_key=api_key, secret_key=secret_key)
-                scan = load.scans.create("My scan", targets=[target], policy_id=policy_id)
+                scan = load.scans.create("My Scan", targets=[target], policy_id=policy_id)
                 scan.launch()
 
                 while scan.status() != 'completed':
@@ -944,9 +945,9 @@ MORE Functions COMING... '''
                     print(f"{F.BLUE}[*]Vulnerabilty: {F.GREEN}{vul['plugin_name']}\t{F.BLUE}[*]Severity: {F.GREEN}{vul['severity']}")
             
             else:
-                print(f"{F.RED}[x]ERROR: {F.BLUE}{response.status_code}-{F.GREEN}{response.text}")
+                print(f"{F.RED}[x]Error: {F.BLUE}{response.status_code}-{F.GREEN}{response.text}")
         except requests.exceptions.RequestException as e:
-            print(F.RE+"[x]Error connecting to host")
+            print(F.RE+"[x]Error Connecting To Host")
 
 
 
@@ -964,16 +965,63 @@ MORE Functions COMING... '''
             if response.status_code == 200:
                 main_weather = data["weather"][0]["description"]
                 temperature = data["main"]["temp"]
-                print(f"{F.BLUE}WEATHER: {F.GREEN}{main_weather} \t {F.BLUE}TEMPERATURE: {F.GREEN}{temperature}°C")
+                print(f"{F.BLUE}[*]Weather: {F.GREEN}{main_weather} \t {F.BLUE}[*]Temperature: {F.GREEN}{temperature}°C")
             else:
-                print(F.RED+"[x]Error loading credentials")
+                print(F.RED+"[x]Error Loading Credentials")
         except r.exceptions.RequestException as e:
-            print(F.RED+"[x]Error connecting to host")
+            print(F.RED+"[x]Error Connecting To Host")
             
-
-
-
-
+            
+    def search(self, directory, target_file):
+        try:
+            os = self.os
+            # List all items in the directory
+            items = os.listdir(directory)
+            for item in items:
+                # Construct full path
+                full_path = os.path.join(directory, item)
+            
+                # Check if it's a directory
+                if os.path.isdir(full_path):
+                    self.search(full_path, target_file)  # Recursive call for subdirectory
+            
+                # Check if it's the target file
+                elif os.path.isfile(full_path) and item == target_file:
+                    print(f"{F.GREEN}[✓]File Found: {F.WHITE}{full_path}")
+                    self.search_counter()
+                
+        except PermissionError:
+            print(f"{F.RED}[x]Permission Denied: {F.WHITE} {directory}")
+            
+            
+    def search_counter(self):
+        self.count+= 1
+        return self.count
+        
+            
+            
+    def trigger_search(self):
+        try:
+            os = input(f"{F.YELLOW}[?]Android/Kali: [1/2]:{F.WHITE} ")
+            if os == "1":
+                root = input(f"{F.CYAN}[?]Is your device rooted [Y/N]:{F.WHITE} ").upper()
+                if root == "Y":
+                    folder = "/"
+                elif root == "N":
+                    folder = "/data/data/com.termux"
+                else:
+                    return False
+            elif os == "2":
+                folder = "/"
+            else:
+                return False
+            target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
+            print("")
+            self.search(folder, target__file)
+            print(f"{F.CYAN}\n[*]File Occurence:{F.GREEN} {self.search_counter()-1}")
+            self.count = 0
+        except:
+            print(F.RED+"[x]An Error Occured")
 
 
 
@@ -1032,8 +1080,10 @@ if __name__ == '__main__':
                 shark.weather(data.split()[2])
             elif "@ip -scrp" in data:
                 shark.ip_osint(data.split()[2])
+            elif "@srch" in data:
+                shark.trigger_search()
             elif "@exit" in data: 
-                print (F.RED+"[✓]EXITING PROGRAM...")
+                print (F.RED+"[✓]Exiting Program...")
                 break
             elif data.lstrip().startswith('cd') and "cd" != data.strip():
                 d_path = ' '.join(filter(None, data.split()))
@@ -1041,7 +1091,7 @@ if __name__ == '__main__':
                 try:
                     os.chdir(path)
                 except:
-                    print (f"cd:{path}: No such file or directory")
+                    print (f"cd:{path}: No Such File Or Directory")
             elif data.strip() == 'cd':
                 
                 os.chdir(os.path.expanduser("~"))
@@ -1060,8 +1110,8 @@ if __name__ == '__main__':
         except ValueError as er:
             print(F.RED+"[x]", er)
         except PermissionError as er:
-            print(F.RED+"[x]", er,": needs administrator priviledge")
+            print(F.RED+"[x]", er,": Needs Administrator Priviledge")
         except KeyboardInterrupt:
             print(F.CYAN+"[✓] Closed")
         except:
-            print (F.RED+"[x]An Error occured")
+            print (F.RED+"[x]An Error Occured")

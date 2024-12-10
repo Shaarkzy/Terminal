@@ -46,5 +46,6 @@ to build and configure tools
 11. Mobile Number Osint(excluding personal information)
 12. Grab Website IP
 13. Gather information about an IP address.
+14. File searching.
 ```
 **Good luck**
