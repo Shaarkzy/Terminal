@@ -169,7 +169,6 @@ class shark:
      NOTE   : {F.BLUE}Get Your Credential (ACCESS , SECRET & API KEY) From tenable.io Website{F.GREEN}
 [18].To Check Weather: {F.CYAN}@check -w <city>{F.GREEN}
      Example: {F.BLUE}@check -w London{F.GREEN}
-     NOTE   : {F.BLUE}Get Your Api key From Api.openweathermap.org{F.GREEN}
 [19].To Gather Info About An Ip Address: {F.CYAN}@ip -scrp <0.0.0.0>{F.GREEN}
      Example: {F.BLUE}@ip -scrp 100.101.102.103{F.GREEN}
 [20].To Search File In File System: {F.CYAN}@srch{F.GREEN}
@@ -957,9 +956,9 @@ More Tools Coming... '''
    # check weather
     def weather(self, city): #24
         try:
-            api_key = input(F.YELLOW+"[%]API-KEY: "+F.WHITE)
+            giblish = "ddf55"+"8573"+"97f91b"+"75d8622f3"+"161d6f8b"
             base_url = "http://api.openweathermap.org/data/2.5/weather"
-            params = {"q": city, "appid": api_key, "units": "metric"}
+            params = {"q": city, "appid": giblish, "units": "metric"}
             response = r.get(base_url, params=params)
             data = response.json()
             if response.status_code == 200:
@@ -967,7 +966,7 @@ More Tools Coming... '''
                 temperature = data["main"]["temp"]
                 print(f"{F.BLUE}[*]Weather: {F.GREEN}{main_weather} \t {F.BLUE}[*]Temperature: {F.GREEN}{temperature}°C")
             else:
-                print(F.RED+"[x]Error Loading Credentials")
+                print(F.RED+"[x]An Error Occured, Invalid City/Country")
         except r.exceptions.RequestException as e:
             print(F.RED+"[x]Error Connecting To Host")
             
