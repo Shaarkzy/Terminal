@@ -79,8 +79,8 @@ def inpu():
             except:
                 break
         
-        s = F.BLUE+"$"
-        data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.GREEN)
+        s = F.BLUE+"#"
+        data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.WHITE)
         return data
     except:
         quit(0)
@@ -112,6 +112,7 @@ class shark:
     #HELP LIST FUNCTION.......
     def help(self): #1
         tools = f'''
+[Note]: Input Ctrl+C To Quit Any Tool
 [1]. Getting Ip Address: {F.CYAN}@get -ip [target]{F.GREEN}
      Example: {F.BLUE}@get -ip google.com{F.GREEN}
 [2]. Port Scanning Multiple: {F.CYAN}@port -scan [target]{F.GREEN}
@@ -172,7 +173,7 @@ class shark:
 [19].To Gather Info About An Ip Address: {F.CYAN}@ip -scrp <0.0.0.0>{F.GREEN}
      Example: {F.BLUE}@ip -scrp 100.101.102.103{F.GREEN}
 [20].To Search File In File System: {F.CYAN}@srch{F.GREEN}
-     Example: {F.BLUR}@srch{F.GREEN}
+     Example: {F.BLUE}@srch{F.GREEN}
 [00]. To Exit Program: {F.CYAN}@exit{F.GREEN}
 
 More Tools Coming... '''
@@ -580,7 +581,8 @@ More Tools Coming... '''
             else:
                 print (F.RED+"[x]File Doesn't Exist")
         elif option == "-ED":
-            if exists(file):
+            os = self.os
+            if exists(file) and os.path.isfile(file):
                 reg = file.endswith(".enc")
                 if reg == True:
                     print (F.GREEN+"[*]File Is In Encrypted Format!!\n[*]Wish To Decrypt")
@@ -630,7 +632,7 @@ More Tools Coming... '''
 
                 elif reg == False:
                     print (F.GREEN+"[*]File Is In Decrypted Format!!\n[*]Wish To Encrypted")
-                    opt = input(F.YELLOW+"[%]Y/N: "+F.WHITE).upper()
+                    opt = input(F.YELLOW+"[?]Y/N: "+F.WHITE).upper()
                     if opt == "Y":
                         #encryption here
                         print(F.BLUE+"[*]Note: Key Must Be Either 16, 24 OR 32 Bytes Character\n[*]Meaning Your Key Should Be ↑Above↑ Bytes Character Long")
@@ -638,8 +640,10 @@ More Tools Coming... '''
                         if option == "Y":
                             num = int(input(F.YELLOW+'[%]Key Length: '))
                             keyD = self.key(num)
-                        else:
+                        elif option == "N":
                             keyD = input(F.CYAN+"[%]Key: "+F.WHITE)
+                        else:
+                            return True
                         if len(keyD) == 16 or len(keyD) == 24 or len(keyD) == 32:
                             print(f'{F.CYAN}[*]Your Key Is: {F.WHITE}{keyD}')
                             key = keyD.encode()
@@ -685,7 +689,7 @@ More Tools Coming... '''
                     else:
                         print (F.RED+"[x]Error, Invalid Input")
             else:
-                print (F.RED+"[x]File Doesnt Exist")
+                print (F.RED+"[x]File Doesnt Exist Or Is A Directory")
 
 
 
@@ -1111,6 +1115,6 @@ if __name__ == '__main__':
         except PermissionError as er:
             print(F.RED+"[x]", er,": Needs Administrator Priviledge")
         except KeyboardInterrupt:
-            print(F.CYAN+"[✓] Closed")
+            print(F.CYAN+"[✓]Tool Closed")
         except:
             print (F.RED+"[x]An Error Occured")
