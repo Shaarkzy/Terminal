@@ -2,7 +2,7 @@
 try:
     print("LOADING LIBRARIES")
     import sys as sy
-    print("━"*2, end="\r", flush=True)
+    print("━"*2, end="\r", flush=True) 
     from colorama import Fore as F, Back as B, Style as Sty
     print("━"*4, end="\r", flush=True)
     import time as tm
@@ -46,6 +46,10 @@ try:
     print("━"*42, end="\r", flush=True)
     import netifaces as n
     print("━"*44, end="\r", flush=True)
+    import mimetypes
+    print("━"*46, end="\r", flush=True)
+    from datetime import datetime
+    print("━"*48, end="\r", flush=True)
 
 except ModuleNotFoundError as err:
     print (f'shark: {err}')
@@ -112,7 +116,8 @@ class shark:
     #HELP LIST FUNCTION.......
     def help(self): #1
         tools = f'''
-[Note]: Input Ctrl+C To Quit Any Tool
+---[Note]: Input Ctrl+C To Quit Any Tool---
+
 [1]. Getting Ip Address: {F.CYAN}@get -ip [target]{F.GREEN}
      Example: {F.BLUE}@get -ip google.com{F.GREEN}
 [2]. Port Scanning Multiple: {F.CYAN}@port -scan [target]{F.GREEN}
@@ -142,7 +147,7 @@ class shark:
               {F.BLUE}-A Append Data To Existsing File{F.GREEN}
               {F.BLUE}-D Delete File{F.GREEN}
               {F.BLUE}-R Read Data From A File{F.GREEN}
-              {F.BLUE}-V Check If File Exist{F.GREEN}
+              {F.BLUE}-V Check The Properties Of A File{F.GREEN}
               {F.BLUE}-ED Encrypt/Decrypt File{F.GREEN}
      Example: {F.BLUE}@file -CADRV(ED) filename.txt{F.GREEN}
      NOTE   :{F.BLUE}Can only encrypt files with .enc extension{F.GREEN}
@@ -556,27 +561,63 @@ More Tools Coming... '''
             except:
                 print (F.RED+"[x]An Error Occured")
         elif option == "-D":
+            os = self.os
             if exists(file):
                 os.remove(file)
                 print (F.BLUE+"[✓]File Deleted ".upper())
             else:
                 print (F.RED+"[x]File Doesnt Exist".upper())
         elif option == "-V":
+            os = self.os
             if exists(file):
-                print (F.BLUE+"[✓]File Exist".upper())
+                t = open(file, "r")
+                t.close()
+                file_size_bytes = os.path.getsize(file)
+                if file_size_bytes < 1024:
+                    file_size = f"{file_size_bytes} bytes"
+                elif file_size_bytes < 1024 ** 2:
+                    file_size = f"{file_size_bytes / 1024:.2f} KB"
+                elif file_size_bytes < 1024 ** 3:
+                    file_size = f"{file_size_bytes / (1024 ** 2):.2f} MB"
+                else:
+                    file_size = f"{file_size_bytes / (1024 ** 3):.2f} GB"
+
+                file_extension = os.path.splitext(file)[1] or "No extension"
+
+                mime_type, _ = mimetypes.guess_type(file)
+                file_type_data = mime_type if mime_type else "Unknown"
+
+                last_modified_timestamp = os.path.getmtime(file)
+                last_modified_time = datetime.fromtimestamp(last_modified_timestamp).strftime('%d-%m-%Y %H:%M:%S')
+
+                location = os.path.abspath(file)
+
+                is_hidden = "Yes" if os.path.basename(file).startswith('.') else "No"
+                is_executable = "Yes" if os.access(file, os.X_OK) else "No"
+
+                data = {
+                    "File Size": file_size,
+                    "File Extension": file_extension,
+                    "File Type": file_type_data,
+                    "Last Modified Time D/M/Y": last_modified_time,
+                    "Location": location,
+                    "Hidden": is_hidden,
+                    "Executable": is_executable,
+                }
+
+                for key, value in data.items():
+                    print(f"{F.CYAN}[*]{key}: {F.GREEN}{value}")
             else:
-                print (F.RED+"[x]File Doesn't Exist".upper())
+                print (F.RED+"[x]No Such File Or Directory")
+                
+                
         elif option == "-R":
             if exists(file):
                 try:
                     open_file = open(file, "r")
-                    print(F.CYAN+f"[*]Size: {len(open_file.read())} Bytes")
-                    open_file.seek(0)
                     print (f"{F.BLUE}[*]Data:\n{F.WHITE}{open_file.read()}")
                 except:
                     open_file = open(file, 'rb')
-                    print(F.CYAN+f"[*]Size: {len(open_file.read())} Bytes")
-                    open_file.seek(0)
                     print (f"{F.BLUE}[*]Data:\n{F.WHITE} {open_file.read()}")
             else:
                 print (F.RED+"[x]File Doesn't Exist")
@@ -820,6 +861,7 @@ More Tools Coming... '''
 
    # open shell connection
     def shell_client(self, ip, port): #18
+        os = self.os
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((ip, int(port)))
         print(F.BLUE+"[✓]Connected To User")
@@ -994,7 +1036,7 @@ More Tools Coming... '''
                     self.search_counter()
                 
         except PermissionError:
-            print(f"{F.RED}[x]Permission Denied: {F.WHITE} {directory}")
+            print(f"{F.RED}[x]Permission Denied: {F.WHITE}{directory}")
             
             
     def search_counter(self):
@@ -1007,7 +1049,7 @@ More Tools Coming... '''
         try:
             os = input(f"{F.YELLOW}[?]Android/Kali: [1/2]:{F.WHITE} ")
             if os == "1":
-                root = input(f"{F.CYAN}[?]Is your device rooted [Y/N]:{F.WHITE} ").upper()
+                root = input(f"{F.CYAN}[?]Is Your Device Rooted [Y/N]:{F.WHITE} ").upper()
                 if root == "Y":
                     folder = "/"
                 elif root == "N":
@@ -1114,7 +1156,17 @@ if __name__ == '__main__':
             print(F.RED+"[x]", er)
         except PermissionError as er:
             print(F.RED+"[x]", er,": Needs Administrator Priviledge")
+        except socket.error as er:
+            print(F.RED+"[x]", er)
+        except socket.timeout as er:
+            print(F.RED+"[x]", er)
+        except socket.herror as er:
+            print(F.RED+"[x]", er)
+        except socket.gaierror as er:
+            print(F.RED+"[x]", er)
         except KeyboardInterrupt:
             print(F.CYAN+"[✓]Tool Closed")
+        except IndexError:
+            print(F.RED+"[x]Args Error")
         except:
-            print (F.RED+"[x]An Error Occured")
+            print(F.RED+"[x]An Error Occured")
