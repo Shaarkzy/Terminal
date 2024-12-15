@@ -147,7 +147,7 @@ class shark:
               {F.BLUE}-A Append Data To Existsing File{F.GREEN}
               {F.BLUE}-D Delete File{F.GREEN}
               {F.BLUE}-R Read Data From A File{F.GREEN}
-              {F.BLUE}-V Check The Properties Of A File{F.GREEN}
+              {F.BLUE}-V Check The Properties Of A File And Folder{F.GREEN}
               {F.BLUE}-ED Encrypt/Decrypt File{F.GREEN}
      Example: {F.BLUE}@file -CADRV(ED) filename.txt{F.GREEN}
      NOTE   :{F.BLUE}Can only encrypt files with .enc extension{F.GREEN}
@@ -569,9 +569,7 @@ More Tools Coming... '''
                 print (F.RED+"[x]File Doesnt Exist".upper())
         elif option == "-V":
             os = self.os
-            if exists(file):
-                t = open(file, "r")
-                t.close()
+            if os.path.isfile(file):
                 file_size_bytes = os.path.getsize(file)
                 if file_size_bytes < 1024:
                     file_size = f"{file_size_bytes} bytes"
@@ -605,6 +603,45 @@ More Tools Coming... '''
                     "Executable": is_executable,
                 }
 
+                for key, value in data.items():
+                    print(f"{F.CYAN}[*]{key}: {F.GREEN}{value}")
+            elif os.path.isdir(file):
+                c_file = file
+                total_size = 0
+                file_count = 0
+                folder_count = 0
+
+                for root, dirs, files in os.walk(c_file):
+                    folder_count += len(dirs)
+                    file_count += len(files)
+                    for file in files:
+                        total_size += os.path.getsize(os.path.join(root, file))
+
+                if total_size < 1024:
+                    formatted_size = f"{total_size} bytes"
+                elif total_size < 1024 ** 2:
+                        formatted_size = f"{total_size / 1024:.2f} KB"
+                elif total_size < 1024 ** 3:
+                        formatted_size = f"{total_size / (1024 ** 2):.2f} MB"
+                else:
+                        formatted_size = f"{total_size / (1024 ** 3):.2f} GB"
+
+
+                last_modified_timestamp = os.path.getmtime(c_file)
+                last_modified_time = datetime.fromtimestamp(last_modified_timestamp).strftime('%d-%m-%Y %H:%M:%S')
+
+                location = os.path.abspath(c_file)
+
+                is_hidden = "Yes" if os.path.basename(c_file).startswith('.') else "No"
+
+                data = {
+                    "Number of Files": file_count,
+                    "Number of Subfolders":folder_count,
+                    "Total Size": formatted_size,
+                    "Last Modified Time D/M/Y": last_modified_time,
+                    "Location": location,
+                    "Hidden": is_hidden,
+                }
                 for key, value in data.items():
                     print(f"{F.CYAN}[*]{key}: {F.GREEN}{value}")
             else:
@@ -1047,7 +1084,7 @@ More Tools Coming... '''
             
     def trigger_search(self):
         try:
-            os = input(f"{F.YELLOW}[?]Android/Kali: [1/2]:{F.WHITE} ")
+            os = input(f"{F.YELLOW}[?]Android/Kali[1/2]:{F.WHITE} ")
             if os == "1":
                 root = input(f"{F.CYAN}[?]Is Your Device Rooted [Y/N]:{F.WHITE} ").upper()
                 if root == "Y":
@@ -1167,6 +1204,6 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             print(F.CYAN+"[✓]Tool Closed")
         except IndexError:
-            print(F.RED+"[x]Args Error")
+            print(F.RED+"[x]Argument Error")
         except:
             print(F.RED+"[x]An Error Occured")
