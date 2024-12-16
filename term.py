@@ -353,34 +353,30 @@ More Tools Coming... '''
    
     # get device cpu information
     def cpu_info(self): #10
-        try:
-            print (F.BLUE+"[*]Cpu Details: ctrl+c To Exit")
+        print (F.BLUE+"[*]Cpu Details: ctrl+c To Exit")
 
-            while True:
+        while True:
 
-                cpu_p = F.GREEN+str(p.cpu_percent())+'%'
-                cpu_us =F.GREEN+str(p.cpu_count(logical=False))
-                cpu_l = F.GREEN+str(p.cpu_count(logical=True))
+            cpu_p = F.GREEN+str(p.cpu_percent())+'%'
+            cpu_us =F.GREEN+str(p.cpu_count(logical=False))
+            cpu_l = F.GREEN+str(p.cpu_count(logical=True))
 
-                ram = p.virtual_memory()
-                disk = p.disk_partitions()[0]
-                d_usage = p.disk_usage(disk.mountpoint)
+            ram = p.virtual_memory()
+            disk = p.disk_partitions()[0]
+            d_usage = p.disk_usage(disk.mountpoint)
 
-                total_ram = F.BLUE+str((ram.total // (1024 ** 2))//1024)
+            total_ram = F.BLUE+str((ram.total // (1024 ** 2))//1024)
 
-                ram_used = F.BLUE+str((ram.used // (1024 ** 2)) // 1024)
+            ram_used = F.BLUE+str((ram.used // (1024 ** 2)) // 1024)
 
-                cu = F.CYAN+'Cpu Usage'
-                co = F.CYAN+'Cpu Cores'
-                cl = F.CYAN+'Logical Cores'
-                ra = F.CYAN+'Ram:'
+            cu = F.CYAN+'Cpu Usage'
+            co = F.CYAN+'Cpu Cores'
+            cl = F.CYAN+'Logical Cores'
+            ra = F.CYAN+'Ram:'
 
 
-                print (f'{cu}:{cpu_p} | {co}:{cpu_us} | {cl}:{cpu_l} | A-{ra}:{ram_used}/{total_ram}Gb', end='\r', flush=True)
-                tm.sleep(0.5)
-
-        except:
-            print (F.RED+"\n[*]Exited")
+            print (f'{cu}:{cpu_p} | {co}:{cpu_us} | {cl}:{cpu_l} | A-{ra}:{ram_used}/{total_ram}Gb', end='\r', flush=True)
+            tm.sleep(0.5)
 
 
 
@@ -486,17 +482,14 @@ More Tools Coming... '''
                     print (F.RED+"[x]Error, Try Inputing Valid Data".upper())
 
         elif option == "-a":
-            try:
-                if exists(file):
-                    data = input(F.YELLOW+"[%]Enter Data: "+F.WHITE)
-                    open_file = open(file, "a")
-                    open_file.write(data)
-                    open_file.close()
-                    print (F.BLUE+"[✓]Done".upper())
-                else:
-                    print (F.RED+"[x]File Doesn't Exist".uppper())
-            except:
-                print (F.RED+"[x]An Error Occured")
+            if exists(file):
+                data = input(F.YELLOW+"[%]Enter Data: "+F.WHITE)
+                open_file = open(file, "a")
+                open_file.write(data)
+                open_file.close()
+                print (F.BLUE+"[✓]Done".upper())
+            else:
+                print (F.RED+"[x]File Doesn't Exist".uppper())
         elif option == "-d":
             os = self.os
             if exists(file):
@@ -586,7 +579,16 @@ More Tools Coming... '''
                 
                 
         elif option == "-r":
-            if exists(file):
+            tuggle = False
+            ext = { 
+                ".mp4", ".avi", ".mov", ".wmv", ".flv", ".mkv", ".m2ts", ".mts", ".webm", ".mpeg", ".mpg", ".3gp", ".ogv", ".divx", ".mp3", ".wav", ".aac", ".ogg", ".flac", ".m4a", ".wma", ".aiff", ".pcm", ".dts", ".ac3", ".mid", ".iso", ".ova", ".jpeg", ".png", ".jpg"
+                }
+            for ex in ext:
+                if file.endswith(ex):
+                    tuggle = True
+            if exists(file) and tuggle:
+                print(F.RED+"[x]File Type Not Supported")
+            elif exists(file):
                 try:
                     open_file = open(file, "r")
                     print (f"{F.BLUE}[*]Data:\n{F.WHITE}{open_file.read()}")
@@ -711,12 +713,9 @@ More Tools Coming... '''
 
     # send message to a whatsapp contact
     def send_mess(self, number): #14
-        try:
-            message = input(F.YELLOW+"[%]Message: "+F.WHITE).replace(" ", "%20")
-            sys(f'xdg-open https://wa.me/{number}?text={message}')
-            print (F.BLUE+"[*]Opening Whatsapp....")
-        except:
-            print ("[x]An Error Occured")
+        message = input(F.YELLOW+"[%]Message: "+F.WHITE).replace(" ", "%20")
+        sys(f'xdg-open https://wa.me/{number}?text={message}')
+        print (F.BLUE+"[*]Opening Whatsapp....")
 
 
 
@@ -757,7 +756,7 @@ More Tools Coming... '''
             c.send(str(size).encode())
             print (F.CYAN+"") 
             with tqdm(total=size, unit='B', unit_scale=True, desc="Uploading", ascii=False) as progress_bar:
-                with open(file_path, ' rb') as file:
+                with open(file_path, 'rb') as file:
                     for data in iter(lambda: file.read(1024), b''):
                         c.send(data)
                         progress_bar.update(len(data))
@@ -992,25 +991,16 @@ More Tools Coming... '''
             
     # search a file        
     def search(self, directory, target_file):
-        try:
-            os = self.os
-            # List all items in the directory
-            items = os.listdir(directory)
-            for item in items:
-                # Construct full path
-                full_path = os.path.join(directory, item)
+        os = self.os
+        items = os.listdir(directory)
+        for item in items:
+            full_path = os.path.join(directory, item)
+            if os.path.isdir(full_path):
+                self.search(full_path, target_file)
             
-                # Check if it's a directory
-                if os.path.isdir(full_path):
-                    self.search(full_path, target_file)  # Recursive call for subdirectory
-            
-                # Check if it's the target file
-                elif os.path.isfile(full_path) and item == target_file:
-                    print(f"{F.GREEN}[✓]File Found: {F.WHITE}{full_path}")
-                    self.search_counter()
-                
-        except PermissionError:
-            print(f"{F.RED}[x]Permission Denied: {F.WHITE}{directory}")
+            elif os.path.isfile(full_path) and item == target_file:
+                print(f"{F.GREEN}[✓]File Found: {F.WHITE}{full_path}")
+                self.search_counter()
             
     # search counter       
     def search_counter(self):
@@ -1020,28 +1010,24 @@ More Tools Coming... '''
             
     # file search trigger        
     def trigger_search(self):
-        try:
-            os = input(f"{F.YELLOW}[?]Android/Kali[1/2]:{F.WHITE} ")
-            if os == "1":
-                root = input(f"{F.CYAN}[?]Is Your Device Rooted [Y/N]:{F.WHITE} ").upper()
-                if root == "Y":
-                    folder = "/"
-                elif root == "N":
-                    folder = "/data/data/com.termux"
-                else:
-                    return False
-            elif os == "2":
+        os = input(f"{F.YELLOW}[?]Android/Kali[1/2]:{F.WHITE} ")
+        if os == "1":
+            root = input(f"{F.CYAN}[?]Is Your Device Rooted [Y/N]:{F.WHITE} ").upper()
+            if root == "Y":
                 folder = "/"
+            elif root == "N":
+                folder = "/data/data/com.termux"
             else:
                 return False
-            target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
-            print("")
-            self.search(folder, target__file)
-            print(f"{F.CYAN}\n[*]File Occurence:{F.GREEN} {self.search_counter()-1}")
-            self.count = 0
-        except:
-            print(F.RED+"[x]An Error Occured")
-
+        elif os == "2":
+            folder = "/"
+        else:
+            return False
+        target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
+        print("")
+        self.search(folder, target__file)
+        print(f"{F.CYAN}\n[*]File Occurence:{F.GREEN} {self.search_counter()-1}")
+        self.count = 0
 
 
 
