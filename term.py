@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+# import all libraries
 from UTILS.LIBRARY_SETUP.library import *
 
+# clear screen after loading libraries
 sys("clear")
-#check for supported operating system
+
+# check for supported operating system
 pt = pt.system()
 if pt != "Linux":
     print(F.RED+"[*]Operating System Not Supported")
@@ -10,30 +13,21 @@ if pt != "Linux":
 else:
     pass
 
-#input function
+# input function
 def inpu():
-    try:
-        print ("\n")
-        subt = sub.getoutput("whoami")
-        direc = os.getcwd()
-        num = -1
-        while True:
-            try:
-                num += 1
-                new_direc = direc.split("/")[num]
-                new_path = F.BLUE+new_direc+F.YELLOW
-            except:
-                break
+    print("\n")
+    subt = sub.getoutput("whoami")
+    direc = os.getcwd()
+    new_path = "/".join(direc.split(os.sep)[-3:])
+    new_path = F.BLUE+new_path+F.YELLOW
         
-        s = F.BLUE+"#"
-        data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.WHITE)
-        return data
-    except:
-        quit(0)
+    s = F.BLUE+"#"
+    data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.WHITE)
+    return data
 
 
 
-#DECLARING CLASS for the whole function
+# initialize the class
 class shark:
     def __init__(self):
         try:
@@ -43,9 +37,8 @@ class shark:
             self.count = 0
         except:
             pass
-    #load the terminal on start
+    # load the welcome screen on start
     def main(self):
-        sys("clear")
         data = f"""
                 {F.BLACK}{B.CYAN}••WELCOME·TO·MR·SHARK·TERMINAL••{Sty.RESET_ALL}
                 {F.GREEN}    For Help: Run {F.CYAN}@help
@@ -55,7 +48,7 @@ class shark:
 
 
 
-    #HELP LIST FUNCTION.......
+    # functuon for list of tools
     def help(self): #1
         tools = f'''
 ---[Note]: Input Ctrl+C To Quit Any Tool---
@@ -129,7 +122,7 @@ More Tools Coming... '''
 
 
 
-    #getting dns details of web host
+    # getting ip address of a site
     def get_ip(self, host): #2
         try:
             data = self.soc.gethostbyname(host)
@@ -140,7 +133,7 @@ More Tools Coming... '''
 
 
 
-    #multiple port scanning using ping results as timeout
+    # multiple port scanning using ping interval as timeout
     def port_scan(self, ip): #3
         data = sub.getoutput(f'ping -w 1 {ip} ')
 
@@ -175,7 +168,7 @@ More Tools Coming... '''
     
 
 
-   #single port scan
+   # single port scan
     def port_scan_sin(self, ip, port): #4
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -192,6 +185,7 @@ More Tools Coming... '''
             print (F.RED+"[x]An Error Occured, Internet Issue")
             sock.close()
 
+    # gather information about an ip address
     def ip_osint(self, ip):
         try:
             res = r.get(f"https://ipinfo.io/{ip}", timeout=5)
@@ -206,7 +200,7 @@ More Tools Coming... '''
 
 
 
-   #converting binary to interger
+   # converting binary to number
     def Bina_Num(self, binary, base): #5
         try:
             print (F.GREEN+"[%]Output"+F.BLUE)
@@ -217,7 +211,7 @@ More Tools Coming... '''
 
 
 
-    #converting number to binary
+    # converting number to binary
     def Num_Bina(self, num, base): #6
         try:
             num = int(num)
@@ -228,7 +222,7 @@ More Tools Coming... '''
             print (F.RED+"[x]An Error Occured")
 
 
-
+    # repair binary files with invalid byte
     def repair(self, file):
         if True:
             open_file = open(file, 'r')
@@ -248,7 +242,7 @@ More Tools Coming... '''
             pass
 
 
-
+    # convert alphabet to binary
     def Alpha_Bina(self, file):
         
          open_file = open(file, 'r')
@@ -276,7 +270,7 @@ More Tools Coming... '''
                  break
 
 
-
+    # convert binary to alphabet
     def Bina_Alpha(self, file):
         try:
             open_file = open(file, 'r')
@@ -313,6 +307,7 @@ More Tools Coming... '''
                 print(F.RED+'[x]Invalid Binary File Format')
                     
             
+    # get private ip address of a device
     def get_private_addr(self):
         interfaces = n.interfaces()
         for interface in interfaces:
@@ -329,7 +324,7 @@ More Tools Coming... '''
 
    
 
-   # getting device network details
+   # get device network details and interfaces
     def get_device_ip(self):
         try:
             response = r.get('https://api.ipify.org?format=json', timeout=2)
@@ -356,7 +351,7 @@ More Tools Coming... '''
 
 
    
-    #getting device cpu information
+    # get device cpu information
     def cpu_info(self): #10
         try:
             print (F.BLUE+"[*]Cpu Details: ctrl+c To Exit")
@@ -391,7 +386,7 @@ More Tools Coming... '''
 
 
 
-   #open server for wifi chat
+   # open server for wifi chat room
     def open_server(self): #11
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #sock = socket.socket()
@@ -431,7 +426,7 @@ More Tools Coming... '''
 
 
 
-    #connect to wifi chat server
+    # connect to wifi chat room server
     def connect_server(self, ip, port): #12
          sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
          sock.connect((ip, int(port)))
@@ -459,7 +454,7 @@ More Tools Coming... '''
                  break
 
 
-
+    # generate key for encryption
     def key(self, num):
         data = str(uuid.uuid4()).replace(':', '')[:num].replace('-', 'f')
         return data
@@ -467,7 +462,7 @@ More Tools Coming... '''
 
 
 
-   # file systems 
+   # file utilities
     def file_sys(self, option, file): #13
         if option == "-c":
             if exists(file) == False:
@@ -726,7 +721,7 @@ More Tools Coming... '''
 
 
 
-   #send file via wifi or localhost
+   # send file via wifi or localhost
     def send_file(self): #15
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
@@ -774,7 +769,7 @@ More Tools Coming... '''
 
 
 
-   #recieve file via wifi or localhost
+   # recieve file via wifi or localhost
     def recv_file(self, ip, port): #16
         c_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         c_socket.connect((ip, int(port)))
@@ -806,7 +801,7 @@ More Tools Coming... '''
 
 
 
-    # connect to shell client
+    # open server for shell
     def shell_host(self): #17
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         tm.sleep(1)
@@ -838,7 +833,7 @@ More Tools Coming... '''
 
 
 
-   # open shell connection
+   # connect to shell host
     def shell_client(self, ip, port): #18
         os = self.os
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -869,7 +864,7 @@ More Tools Coming... '''
 
 
 
-    # encrypt string 
+    # encrypt a string 
     def crypt(self): #19
         data = input(F.CYAN+"[%]Data: "+F.WHITE)
         data1 = data.replace(" ", "~").encode()
@@ -978,7 +973,7 @@ More Tools Coming... '''
 
 
 
-   # check weather
+   # check weather information of a city/country
     def weather(self, city): #24
         try:
             giblish = "ddf55"+"8573"+"97f91b"+"75d8622f3"+"161d6f8b"
@@ -995,7 +990,7 @@ More Tools Coming... '''
         except r.exceptions.RequestException as e:
             print(F.RED+"[x]Error Connecting To Host")
             
-            
+    # search a file        
     def search(self, directory, target_file):
         try:
             os = self.os
@@ -1017,13 +1012,13 @@ More Tools Coming... '''
         except PermissionError:
             print(f"{F.RED}[x]Permission Denied: {F.WHITE}{directory}")
             
-            
+    # search counter       
     def search_counter(self):
         self.count+= 1
         return self.count
         
             
-            
+    # file search trigger        
     def trigger_search(self):
         try:
             os = input(f"{F.YELLOW}[?]Android/Kali[1/2]:{F.WHITE} ")
@@ -1050,7 +1045,7 @@ More Tools Coming... '''
 
 
 
-#RUNNING ALL FUNCTIONS
+# relay for all tools
 shark = shark()
 if __name__ == '__main__':
     shark.main()
@@ -1149,3 +1144,5 @@ if __name__ == '__main__':
             print(F.RED+"[x]Argument Error")
         except:
             print(F.RED+"[x]An Error Occured")
+
+# end 

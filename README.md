@@ -41,15 +41,14 @@ to build and configure tools
 3. File Management (Supports Cryptography)
 4. Wifi Chat Room
 5. File Transfer Via Wifi
-6. Reverse Shell
+6. Shell Host/Client
 7. Weather Tools
 8. Vulnerabilty Scanner
 9. Network Information
 10. Cpu Information (might work without root access on earlier Android versions)
 11. Mobile Number Osint(excluding personal information)
 12. Grab Website IP
-13. Gather Information About An IP Address
-14. File Searching
-15. File And Folder Property Viewer.
+13. Gather information about an IP address.
+14. File searching.
 ```
 **Good luck**
