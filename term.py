@@ -202,24 +202,18 @@ More Tools Coming... '''
 
    # converting binary to number
     def Bina_Num(self, binary, base): #5
-        try:
-            print (F.GREEN+"[%]Output"+F.BLUE)
-            print (F.BLUE+str(int(binary, int(base))))
-        except:
-            print (F.RED+"[x]An Error Occured")
+        print (F.GREEN+"[%]Output"+F.BLUE)
+        print (F.BLUE+str(int(binary, int(base))))
 
 
 
 
     # converting number to binary
     def Num_Bina(self, num, base): #6
-        try:
-            num = int(num)
-            base = int(base)
-            print (F.GREEN+"[*]Output"+F.BLUE)
-            print (F.BLUE+bin(num) [base: ])
-        except:
-            print (F.RED+"[x]An Error Occured")
+        num = int(num)
+        base = int(base)
+        print (F.GREEN+"[*]Output"+F.BLUE)
+        print (F.BLUE+bin(num) [base: ])
 
 
     # repair binary files with invalid byte
