@@ -8,7 +8,7 @@ sys("clear")
 # check for supported operating system
 pt = pt.system()
 if pt != "Linux":
-    print(F.RED+"[*]Operating System Not Supported")
+    print(F.RED+"[x]Operating System Not Supported")
     quit(0)
 else:
     pass
