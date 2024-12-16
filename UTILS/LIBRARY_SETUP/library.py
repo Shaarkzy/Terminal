@@ -81,11 +81,16 @@ def load_libraries():
     print("━"*50, end="\r", flush=True)
     
     from os import system as sys
+    print("━"*52, end="\r", flush=True)
+    
 
 __all__ = [
     "sy", "F", "B", "Sty", "tm", "socket", "sub", "rd", "exists", "os", "re", "uuid",
     "ipaddress", "r", "json", "tqdm", "pt", "p", "phone", "carrier", "geocoder", 
     "timezone", "AES", "get_random_bytes", "TenableIO", "n", "mimetypes", "datetime", "glob", "sys"
 ]
-
-load_libraries()
+try:
+    load_libraries()
+except ModuleNotFoundError as er:
+    print(er)
+    quit(0)

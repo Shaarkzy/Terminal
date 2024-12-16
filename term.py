@@ -30,13 +30,10 @@ def inpu():
 # initialize the class
 class shark:
     def __init__(self):
-        try:
-            #Run OOP's
-            self.soc = socket
-            self.os = os
-            self.count = 0
-        except:
-            pass
+        self.soc = socket
+        self.os = os
+        self.count = 0
+        
     # load the welcome screen on start
     def main(self):
         data = f"""
