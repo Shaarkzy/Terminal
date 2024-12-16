@@ -47,7 +47,7 @@ class shark:
     def main(self):
         sys("clear")
         data = f"""
-                {F.BLACK}{B.CYAN}•WELCOME·TO·MR·SHARK·TERMINAL•{Sty.RESET_ALL}
+                {F.BLACK}{B.CYAN}••WELCOME·TO·MR·SHARK·TERMINAL••{Sty.RESET_ALL}
                 {F.GREEN}    For Help: Run {F.CYAN}@help
                     """
         print (data)
@@ -85,13 +85,13 @@ class shark:
       Note   : {F.BLUE}To Exit Chat Any User Can Input "@bye"..{F.GREEN}
              : {F.BLUE}Doesn't Support Telnet{F.GREEN}
 [11].To Create File: {F.CYAN}@file <option> <file_name>{F.GREEN}
-     Options: {F.BLUE}-C Create File{F.GREEN}
-              {F.BLUE}-A Append Data To Existsing File{F.GREEN}
-              {F.BLUE}-D Delete File{F.GREEN}
-              {F.BLUE}-R Read Data From A File{F.GREEN}
-              {F.BLUE}-V Check The Properties Of A File And Folder{F.GREEN}
-              {F.BLUE}-ED Encrypt/Decrypt File{F.GREEN}
-     Example: {F.BLUE}@file -CADRV(ED) filename.txt{F.GREEN}
+     Options: {F.BLUE}-c Create File{F.GREEN}
+              {F.BLUE}-a Append Data To Existsing File{F.GREEN}
+              {F.BLUE}-d Delete File{F.GREEN}
+              {F.BLUE}-r Read Data From A File{F.GREEN}
+              {F.BLUE}-v Check The Properties Of A File And Folder{F.GREEN}
+              {F.BLUE}-ed Encrypt/Decrypt File{F.GREEN}
+     Example: {F.BLUE}@file -cardrv(ed) filename.txt{F.GREEN}
      NOTE   :{F.BLUE}Can only encrypt files with .enc extension{F.GREEN}
 [12].To Send Message To A Whatsapp Contact: {F.CYAN}@send -w <number>{F.GREEN}
     Example: {F.BLUE}@send -w +1234567890{F.GREEN}
@@ -119,7 +119,7 @@ class shark:
      Example: {F.BLUE}@check -w London{F.GREEN}
 [19].To Gather Info About An Ip Address: {F.CYAN}@ip -scrp <0.0.0.0>{F.GREEN}
      Example: {F.BLUE}@ip -scrp 100.101.102.103{F.GREEN}
-[20].To Search File In File System: {F.CYAN}@srch{F.GREEN}
+[20].To Search File In File System: {F.CYAN}@srch -f{F.GREEN}
      Example: {F.BLUE}@srch{F.GREEN}
 [00]. To Exit Program: {F.CYAN}@exit{F.GREEN}
 
@@ -469,7 +469,7 @@ More Tools Coming... '''
 
    # file systems 
     def file_sys(self, option, file): #13
-        if option == "-C":
+        if option == "-c":
             if exists(file) == False:
                 data = input(F.YELLOW+"[%]Enter Data: "+F.WHITE)
                 open_file = open(file, "w")
@@ -490,7 +490,7 @@ More Tools Coming... '''
                 else:
                     print (F.RED+"[x]Error, Try Inputing Valid Data".upper())
 
-        elif option == "-A":
+        elif option == "-a":
             try:
                 if exists(file):
                     data = input(F.YELLOW+"[%]Enter Data: "+F.WHITE)
@@ -502,14 +502,14 @@ More Tools Coming... '''
                     print (F.RED+"[x]File Doesn't Exist".uppper())
             except:
                 print (F.RED+"[x]An Error Occured")
-        elif option == "-D":
+        elif option == "-d":
             os = self.os
             if exists(file):
                 os.remove(file)
                 print (F.BLUE+"[✓]File Deleted ".upper())
             else:
                 print (F.RED+"[x]File Doesnt Exist".upper())
-        elif option == "-V":
+        elif option == "-v":
             os = self.os
             if os.path.isfile(file):
                 file_size_bytes = os.path.getsize(file)
@@ -590,7 +590,7 @@ More Tools Coming... '''
                 print (F.RED+"[x]No Such File Or Directory")
                 
                 
-        elif option == "-R":
+        elif option == "-r":
             if exists(file):
                 try:
                     open_file = open(file, "r")
@@ -600,7 +600,7 @@ More Tools Coming... '''
                     print (f"{F.BLUE}[*]Data:\n{F.WHITE} {open_file.read()}")
             else:
                 print (F.RED+"[x]File Doesn't Exist")
-        elif option == "-ED":
+        elif option == "-ed":
             os = self.os
             if exists(file) and os.path.isfile(file):
                 reg = file.endswith(".enc")
@@ -1104,7 +1104,7 @@ if __name__ == '__main__':
                 shark.weather(data.split()[2])
             elif "@ip -scrp" in data:
                 shark.ip_osint(data.split()[2])
-            elif "@srch" in data:
+            elif "@srch -f" in data:
                 shark.trigger_search()
             elif "@exit" in data: 
                 print (F.RED+"[✓]Exiting Program...")
