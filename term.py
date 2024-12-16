@@ -1,65 +1,7 @@
 #!/usr/bin/env python3
-try:
-    print("LOADING LIBRARIES")
-    import sys as sy
-    print("━"*2, end="\r", flush=True) 
-    from colorama import Fore as F, Back as B, Style as Sty
-    print("━"*4, end="\r", flush=True)
-    import time as tm
-    print("━"*6, end="\r", flush=True)
-    import socket
-    print("━"*8, end="\r", flush=True)
-    import subprocess as sub
-    print("━"*10, end="\r", flush=True)
-    import random as rd
-    print("━"*12, end="\r", flush=True)
-#IMPORTING LIBRARIES......
-    from os.path import exists
-    print("━"*14, end="\r", flush=True)
-    import os
-    print("━"*16, end="\r", flush=True)
-    import re
-    print("━"*18, end="\r", flush=True)
-    import uuid
-    print("━"*20, end="\r", flush=True)
-    import ipaddress
-    print("━"*22, end="\r", flush=True)
-    import requests as r
-    print("━"*24, end="\r", flush=True)
-    import json
-    print("━"*26, end="\r", flush=True)
-    from tqdm import tqdm
-    print("━"*28, end="\r", flush=True)
-    import platform as pt
-    print("━"*30, end="\r", flush=True)
-    import psutil as p
-    print("━"*32, end="\r", flush=True)
-    import phonenumbers as phone
-    print("━"*34, end="\r", flush=True)
-    from phonenumbers import carrier, geocoder, timezone
-    print("━"*36, end="\r", flush=True)
-    from Crypto.Cipher import AES
-    print("━"*38, end="\r", flush=True)
-    from Crypto.Random import get_random_bytes
-    print("━"*40, end="\r", flush=True)
-    from tenable.io import TenableIO
-    print("━"*42, end="\r", flush=True)
-    import netifaces as n
-    print("━"*44, end="\r", flush=True)
-    import mimetypes
-    print("━"*46, end="\r", flush=True)
-    from datetime import datetime
-    print("━"*48, end="\r", flush=True)
+from UTILS.LIBRARY_SETUP.library import *
 
-except ModuleNotFoundError as err:
-    print (f'shark: {err}')
-    quit(0)
-
-
-from os import system as sys
-#CLEAR SCREEN......
 sys("clear")
-
 #check for supported operating system
 pt = pt.system()
 if pt != "Linux":
@@ -105,7 +47,7 @@ class shark:
     def main(self):
         sys("clear")
         data = f"""
-                {F.BLACK}{B.CYAN}♣WELCOME·TO·MR·SHARK·TERMINAL♠{Sty.RESET_ALL}
+                {F.BLACK}{B.CYAN}•WELCOME·TO·MR·SHARK·TERMINAL•{Sty.RESET_ALL}
                 {F.GREEN}    For Help: Run {F.CYAN}@help
                     """
         print (data)
@@ -755,7 +697,7 @@ More Tools Coming... '''
                             tm.sleep(0.6)
                             key_file = open("key.txt", "a")
                             cur_dir = os.getcwd()
-                            data = "~[Filnename= "+file+"|:|Key= "+keyD+" ]~"
+                            data = "[Filnename= "+file+" :Key= "+keyD+" ]\n"
                             key_file.write(data)
                             print(f"{F.CYAN}[*]Key Saved On {F.YELLOW}{cur_dir}/{F.WHITE}key.txt")
                         else:
@@ -1170,16 +1112,16 @@ if __name__ == '__main__':
             elif data.lstrip().startswith('cd') and "cd" != data.strip():
                 d_path = ' '.join(filter(None, data.split()))
                 path = d_path[3:]
-                try:
-                    os.chdir(path)
-                except:
+                matches = glob.glob(path)
+                if matches:
+                    os.chdir(matches[0])
+                else:
                     print (f"cd:{path}: No Such File Or Directory")
             elif data.strip() == 'cd':
                 
                 os.chdir(os.path.expanduser("~"))
             
             else:
-                print (F.WHITE+"")
                 sys(data)
         except FileNotFoundError as er:
             print(F.RED+"[x]", er)

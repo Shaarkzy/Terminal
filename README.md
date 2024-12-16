@@ -21,7 +21,10 @@ to build and configure tools
 │   ├── kali_setup.sh
 │   └── LIBRARY_SETUP/
 │       ├── pycryptodome.sh
-│       └── pytenable.sh
+│       ├── pytenable.sh
+│       ├── __pycache__
+│       └── library.py
+│
 ```
 
 **Note:**
