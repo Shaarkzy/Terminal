@@ -50,29 +50,29 @@ class shark:
         tools = f'''
 ---[Note]: Input Ctrl+C To Quit Any Tool---
 
-[1]. Getting Ip Address: {F.CYAN}@get -ip [target]{F.GREEN}
-     Example: {F.BLUE}@get -ip google.com{F.GREEN}
-[2]. Port Scanning Multiple: {F.CYAN}@port -scan [target]{F.GREEN}
-     Example: {F.BLUE}@port -scan 127.0.0.1{F.GREEN}
-[3]. Port Scanning Single: {F.CYAN}@port--s -scan [target] [port]{F.GREEN}
-     Example: {F.BLUE}@port--s -scan 127.0.0.1 80{F.GREEN}
+[1]. Getting Ip Address: {F.CYAN}@get -i [target]{F.GREEN}
+     Example: {F.BLUE}@get -i google.com{F.GREEN}
+[2]. Port Scanning Multiple: {F.CYAN}@port -sm [target]{F.GREEN}
+     Example: {F.BLUE}@port -sm 127.0.0.1{F.GREEN}
+[3]. Port Scanning Single: {F.CYAN}@port -sn [target] [port]{F.GREEN}
+     Example: {F.BLUE}@port -sn 127.0.0.1 80{F.GREEN}
 [4]. Convert Number To Binary: {F.CYAN}@num -b [number] [base]{F.GREEN}
      Example: {F.BLUE}@num -b 2000 2{F.GREEN}
 [5]. Convert Binary To Number: {F.CYAN}@bina -n [binary] [base]{F.GREEN}
      Example: {F.BLUE}@bina -n 1011101010 2{F.GREEN}
-[6]. Convert Alphabet To Binary: {F.CYAN}@alpha -b{F.GREEN}
-     Example: {F.BLUE}@alpha -b{F.GREEN} 
-[7]. Convert Binary To Alphabet: {F.CYAN}@bina -a{F.GREEN}
-     Example: {F.BLUE}@bina -a{F.GREEN} 
+[6]. Convert Alphabet To Binary: {F.CYAN}@alpha -bina{F.GREEN}
+     Example: {F.BLUE}@alpha -bina{F.GREEN} 
+[7]. Convert Binary To Alphabet: {F.CYAN}@bina -alpha{F.GREEN}
+     Example: {F.BLUE}@bina -alpha{F.GREEN} 
 [8]. To Get Device Network Info: {F.CYAN}@ip -details{F.GREEN}
      Example: {F.BLUE}@ip -details{F.GREEN}
 [9]. To Get Cpu Info: {F.CYAN}@cpu{F.GREEN}
      Example: {F.BLUE}@cpu{F.GREEN}
 [10].To Start Wifi Chat Room: 
       HOST   : {F.CYAN}@open -server{F.GREEN}
-      CLIENT : {F.CYAN}@con -server <ip> <port>{F.GREEN}
-      Example: {F.CYAN}@con -server 127.0.0.1 12345{F.GREEN} 
-      Note   : {F.BLUE}To Exit Chat Any User Can Input "@bye"..{F.GREEN}
+      CLIENT : {F.CYAN}@con -s <ip> <port>{F.GREEN}
+      Example: {F.CYAN}@con -s 127.0.0.1 12345{F.GREEN} 
+      Note   : {F.BLUE}To Exit Chat, Users Can Input "@bye"..{F.GREEN}
              : {F.BLUE}Doesn't Support Telnet{F.GREEN}
 [11].To Create File: {F.CYAN}@file <option> <file_name>{F.GREEN}
      Options: {F.BLUE}-c Create File{F.GREEN}
@@ -86,31 +86,30 @@ class shark:
 [12].To Send Message To A Whatsapp Contact: {F.CYAN}@send -w <number>{F.GREEN}
     Example: {F.BLUE}@send -w +1234567890{F.GREEN}
 [13].To Send File Via Wifi: {F.CYAN}@send -file{F.GREEN}
-     To Recieve File       : {F.CYAN}@recv -file <host> <port>{F.GREEN}
-     Example: {F.BLUE}@recv @file 127.0.0.1 12345{F.GREEN}
-     NOTE   : {F.BLUE}Program Can't Executable File..{F.GREEN}
-            : {F.BLUE}Doesn't Suppport Telnet{F.GREEN}
+     To Recieve File       : {F.CYAN}@recv -f <host> <port>{F.GREEN}
+     Example: {F.BLUE}@recv -f 127.0.0.1 12345{F.GREEN}
+     NOTE: {F.BLUE}Doesn't Suppport Telnet{F.GREEN}
 [14].To Start Remote Shell Via Wifi::
      HOST   : {F.CYAN}@shell -host{F.GREEN}
-     CLIENT : {F.CYAN}@shell -client <ip> <port>{F.GREEN}
+     CLIENT : {F.CYAN}@shell -c <ip> <port>{F.GREEN}
      Example: {F.BLUE}@shell -client 127.0.0.1 12345{F.GREEN}
      NOTE   : {F.BLUE}Doesn't Support Telnet{F.GREEN}
             : {F.BLUE}To Exit Session Input: <exit>{F.GREEN}
 [15].To Encrypt A Text: {F.CYAN}@crypt -t{F.GREEN}
-     Example: {F.BLUE}@crypt -t{F.GREEN}
+     Example: {F.BLUE}@crypt{F.GREEN}
      Note   : {F.BLUE}Can Only Encrypt String Format Not(int, bytes){F.GREEN}
-[16].To Check Mobile Number Details: {F.CYAN}@check -no <country code> <number>{F.GREEN}
-     Example: {F.BLUE}@check -no +123123450000{F.GREEN}
+[16].To Check Mobile Number Details: {F.CYAN}@check -n <country code> <number>{F.GREEN}
+     Example: {F.BLUE}@check -n +123123450000{F.GREEN}
      NOTE   : {F.BLUE}Without Country Code: Default Is <+62>{F.GREEN}
 [17].To Scan Vulnerability: {F.CYAN}@scan -v <target>{F.GREEN}
      Example: {F.BLUE}@scan -v 192.168.00.00{F.GREEN}
      NOTE   : {F.BLUE}Get Your Credential (ACCESS , SECRET & API KEY) From tenable.io Website{F.GREEN}
 [18].To Check Weather: {F.CYAN}@check -w <city>{F.GREEN}
      Example: {F.BLUE}@check -w London{F.GREEN}
-[19].To Gather Info About An Ip Address: {F.CYAN}@ip -scrp <0.0.0.0>{F.GREEN}
-     Example: {F.BLUE}@ip -scrp 100.101.102.103{F.GREEN}
-[20].To Search File In File System: {F.CYAN}@srch -f{F.GREEN}
-     Example: {F.BLUE}@srch{F.GREEN}
+[19].To Gather Info About An Ip Address: {F.CYAN}@ip -s <0.0.0.0>{F.GREEN}
+     Example: {F.BLUE}@ip -s 100.101.102.103{F.GREEN}
+[20].To Search File In File System: {F.CYAN}@sch -f{F.GREEN}
+     Example: {F.BLUE}@sch -file{F.GREEN}
 [00]. To Exit Program: {F.CYAN}@exit{F.GREEN}
 
 More Tools Coming... '''
@@ -724,37 +723,41 @@ More Tools Coming... '''
         sock.listen(5)
 
         file_path = input(F.YELLOW+"[%]/path/to/file: "+F.WHITE)
-        size = open(file_path, 'rb')
-        size = len(size.read())
-        print (F.BLUE+"[*]Waiting For User To Receive")
-        
+        if file_path:
+            size = open(file_path, 'rb')
+            size = len(size.read())
 
-        num = 0
-        while True:
-            try:
-                num += 1
-                file = file_path
-                split1 = file_path.split("/")
-                file = split1[num]
+            num = 0
+            while True:
+                try:
+                    num += 1
+                    file = file_path
+                    split1 = file_path.split("/")
+                    file = split1[num]
 
-            except:
-                break
+                except:
+                    break
 
-        c, addr = sock.accept()
-        c.send(f'[*]Incoming File! [Name: {file}] [Size: {size}bytes]\n'.encode())
-        choice = c.recv(1024).decode()
-        if "YES" in choice: 
-            c.send(str(size).encode())
-            print (F.CYAN+"") 
-            with tqdm(total=size, unit='B', unit_scale=True, desc="Uploading", ascii=False) as progress_bar:
-                with open(file_path, 'rb') as file:
-                    for data in iter(lambda: file.read(1024), b''):
-                        c.send(data)
-                        progress_bar.update(len(data))
-            c.close()
-            print(F.BLUE+"[✓]File Uploaded")
+            c, addr = sock.accept()
+            print(F.CYAN+"[✓]User Connected")
+            print(F.BLUE+"[*]Waiting For User To Accept")
+            c.send(f'[*]Incoming File! [Name: {file}] [Size: {size}bytes]\n'.encode())
+            choice = c.recv(1024).decode()
+            if "YES" in choice: 
+                c.send(str(size).encode())
+                print (F.CYAN+"") 
+                with tqdm(total=size, unit='B', unit_scale=True, desc="Uploading", ascii=False) as progress_bar:
+                    with open(file_path, 'rb') as file:
+                        for data in iter(lambda:     file.read(1024), b''):
+                            c.send(data)
+                            progress_bar.update    (len(data))
+                c.close()
+                print(F.BLUE+"[✓]File Uploaded")
+            else:
+                print(F.CYAN+"[x]Reciever Aborted")
+                c.close()
         else:
-            c.close()
+            print(F.RED+"[x]Error: Empty Input")
 
 
 
@@ -763,30 +766,43 @@ More Tools Coming... '''
     def recv_file(self, ip, port): #16
         c_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         c_socket.connect((ip, int(port)))
-        print(F.BLUE+"[✓]Connected To Server")
+        print(F.CYAN+"[✓]Connected To Server")
         #tm.sleep(1)
         data = c_socket.recv(1024).decode()
         print (F.BLUE+data)
 
         file = input(F.YELLOW+"[%]/save/to/path/to/file: "+F.WHITE)
+        if file:
 
-        choice = input(F.YELLOW+"[?]Wish To Accept: [Y/N]: "+F.WHITE).upper()
-        if choice == "Y":
-            c_socket.send("YES".encode())
-            size = c_socket.recv(1024).decode()
-            size = int(size)
-            print (F.CYAN+"")
-            with tqdm(total=size, unit='B', unit_scale=True, desc="Downloading", ascii=False) as progress_bar:
-                with open(file, 'wb') as new_file:
-                    while True:
-                        rec = c_socket.recv(1024)
-                        if not rec:
-                            break
-                            c_socket.close()
-                        new_file.write(bytes(rec))
-                        progress_bar.update(len(rec))
+            choice = input(F.YELLOW+"[?]Wish To Accept: [Y/N]: "+F.WHITE).upper()
+            if choice == "Y":
+                c_socket.send("YES".encode())
+                size = c_socket.recv(1024).decode()
+                size = int(size)
+                print (F.CYAN+"")
+                with tqdm(total=size, unit='B', unit_scale=True, desc="Downloading", ascii=False) as progress_bar:
+                    with open(file, 'wb') as new_file:
+                        while True:
+                            rec = c_socket.recv(1024)
+                            if not rec:
+                                break
+                                c_socket.close()
+                            new_file.write(bytes(rec))
+                            progress_bar.update(len(rec))
+                c_socket.close()
+                print (F.BLUE+"[✓]File Downloaded")
+            elif choice == "N":
+                c_socket.send("...".encode())
+                print(F.CYAN+"[*]Aborted")
+                c_socket.close()
+            else:
+                c_socket.send("...".encode())
+                print(F.RED+"[x]Invalid Input")
+                c_socket.close()
+        else:
+            c_socket.send("...".encode())
+            print(F.RED+"[x]Error: Empty Input")
             c_socket.close()
-            print (F.BLUE+"[✓]File Downloaded")
 
 
 
@@ -982,16 +998,20 @@ More Tools Coming... '''
             
     # search a file        
     def search(self, directory, target_file):
-        os = self.os
-        items = os.listdir(directory)
-        for item in items:
-            full_path = os.path.join(directory, item)
-            if os.path.isdir(full_path):
-                self.search(full_path, target_file)
+        try:
+            full_path = directory
+            os = self.os
+            items = os.listdir(directory)
+            for item in items:
+                full_path = os.path.join(directory, item)
+                if os.path.isdir(full_path):
+                    self.search(full_path, target_file)
             
-            elif os.path.isfile(full_path) and item == target_file:
-                print(f"{F.GREEN}[✓]File Found: {F.WHITE}{full_path}")
-                self.search_counter()
+                elif os.path.isfile(full_path) and item == target_file:
+                    print(f"{F.GREEN}[✓]File Found: {F.WHITE}{full_path}")
+                    self.search_counter()
+        except:
+            print(f"{F.RED}[x]Permission Denied: {F.WHITE}{full_path}")
             
     # search counter       
     def search_counter(self):
@@ -1009,16 +1029,21 @@ More Tools Coming... '''
             elif root == "N":
                 folder = "/data/data/com.termux"
             else:
+                print(F.RED+"[x]Invalid Option")
                 return False
         elif os == "2":
             folder = "/"
         else:
+            print(F.RED+"[x]Invalid Option")
             return False
         target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
-        print("")
-        self.search(folder, target__file)
-        print(f"{F.CYAN}\n[*]File Occurence:{F.GREEN} {self.search_counter()-1}")
-        self.count = 0
+        if target__file:
+            print("")
+            self.search(folder, target__file)
+            print(f"{F.CYAN}\n[*]File Occurence:{F.GREEN} {self.search_counter()-1}")
+            self.count = 0
+        else:
+            print(F.RED+"[x]Error: Empty Input")
 
 
 
@@ -1032,15 +1057,15 @@ if __name__ == '__main__':
             #data = inpu()
             if "@help" in data:
                 shark.help()
-            elif "@get -ip" in data: 
+            elif "@get -i" in data: 
                 shark.get_ip(data.split()[2])
-            elif "@port -scan" in data:
+            elif "@port -sm" in data:
                 shark.port_scan(data.split()[2])
-            elif "@port--s -scan" in data: 
+            elif "@port -sn" in data: 
                 shark.port_scan_sin(data.split()[2], data.split()[3])
-            elif "@bina -a" in data: 
+            elif "@bina -alpha" in data: 
                 shark.Bina_Alpha(data.split()[2])
-            elif "@alpha -b" in data: 
+            elif "@alpha -bina" in data: 
                 shark.Alpha_Bina(data.split()[2])
             elif "@num -b" in data: 
                 shark.Num_Bina(data.split()[2], data.split()[3])
@@ -1052,7 +1077,7 @@ if __name__ == '__main__':
                 shark.cpu_info()
             elif "@open -server" in data: 
                 shark.open_server()
-            elif "@con -server" in data: 
+            elif "@con -s" in data: 
                 shark.connect_server(data.split()[2], data.split()[3])
             elif "@file" in data:
                 shark.file_sys(data.split()[1], data.split()[2])
@@ -1060,23 +1085,23 @@ if __name__ == '__main__':
                 shark.send_mess(data.split()[2])
             elif "@send -file" in data: 
                 shark.send_file()
-            elif "@recv -file" in data: 
+            elif "@recv -f" in data: 
                 shark.recv_file(data.split()[2], data.split()[3])
             elif data == "@shell -host":
                 shark.shell_host()
-            elif "@shell -client" in data:
+            elif "@shell -c" in data:
                 shark.shell_client(data.split()[2], data.split()[3])
             elif "@crypt" in data: 
                 shark.crypt()
-            elif "@check -no" in data: 
+            elif "@check -n" in data: 
                 shark.check_phone(data.split()[2])
             elif "@scan -v" in data: 
                 shark.scan_vul(data.split()[2])
             elif "@check -w" in data: 
                 shark.weather(data.split()[2])
-            elif "@ip -scrp" in data:
+            elif "@ip -s" in data:
                 shark.ip_osint(data.split()[2])
-            elif "@srch -f" in data:
+            elif "@sch -file" in data:
                 shark.trigger_search()
             elif "@exit" in data: 
                 print (F.RED+"[✓]Exiting Program...")
@@ -1119,7 +1144,7 @@ if __name__ == '__main__':
             print(F.CYAN+"[✓]Tool Closed")
         except IndexError:
             print(F.RED+"[x]Argument Error")
-        except:
-            print(F.RED+"[x]An Error Occured")
+        #except:
+            #print(F.RED+"[x]An Error Occured")
 
 # end 
