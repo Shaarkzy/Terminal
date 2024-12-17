@@ -696,7 +696,9 @@ More Tools Coming... '''
                     else:
                         print (F.RED+"[x]Error, Invalid Input")
             else:
-                print (F.RED+"[x]File Doesnt Exist Or Is A Directory")
+                print (F.RED+"[x]File Doesn't Exist Or It's A Directory")
+        else:
+            print(F.RED+"[x]Invalid Option")
 
 
 
