@@ -15,15 +15,18 @@ else:
 
 # input function
 def inpu():
-    print("\n")
-    subt = sub.getoutput("whoami")
-    direc = os.getcwd()
-    new_path = "/".join(direc.split(os.sep)[-3:])
-    new_path = F.BLUE+new_path+F.YELLOW
+    try:
+        print("\n")
+        subt = sub.getoutput("whoami")
+        direc = os.getcwd()
+        new_path = "/".join(direc.split(os.sep)[-3:])
+        new_path = F.BLUE+new_path+F.YELLOW
         
-    s = F.BLUE+"#"
-    data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.WHITE)
-    return data
+        s = F.BLUE+"#"
+        data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.WHITE)
+        return data
+    except:
+        return ""
 
 
 
