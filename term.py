@@ -329,15 +329,26 @@ More Tools Coming... '''
             print(F.CYAN+"[*]Interface: - Public Address -")
             print(F.WHITE+"-- addr: ", "Network Not Reachable")
             print("—"*50)
-        interfaces = n.interfaces()
-        for interface in interfaces:
-            print(f"{F.CYAN}[*]Interface: - {interface} - ")
-            addrs = n.ifaddresses(interface)
-            for addr_family, addr_list in addrs.items():
-                for addr in addr_list:
-                    print(f"{F.WHITE}–– addr:", addr.get('Addr', 'N/A'))
-                    print("-- Netmask:", addr.get('netmask', 'N/A'))
-                    print("-- Broadcast:", addr.get('broadcast', 'N/A'))
+        for interface in interfaces():
+            print(f"{F.CYAN}[*]Interface: - {interface} -")
+            addrs = ifaddresses(interface)
+            
+            if AF_INET in addrs:
+                for addr in addrs[AF_INET]:
+                    print(f"{F.WHITE}–– IPv4 Address  : {addr.get('addr', 'N/A')}")
+                    print(f"-- Netmask       : {addr.get('netmask', 'N/A')}")
+                    print(f"-- Broadcast     : {addr.get('broadcast', 'N/A')}")
+            else:
+                print(f"{F.MAGENTA}  No IPv4 Address")
+    
+
+            if AF_INET6 in addrs:
+                for addr in addrs[AF_INET6]:
+                    print(f"{F.WHITE}–– IPv6 Address  : {addr.get('addr', 'N/A')}")
+                    print(f"-- Netmask       : {addr.get('netmask', 'N/A')}")
+                    print(f"-- Broadcast     : {addr.get('broadcast', 'N/A')}")
+            else:
+                print(f"{F.MAGENTA}  No IPv6 Address")
             print("—"*50)
         
 
@@ -1144,6 +1155,10 @@ if __name__ == '__main__':
         except socket.herror as er:
             print(F.RED+"[x]", er)
         except socket.gaierror as er:
+            print(F.RED+"[x]", er)
+        except NameError as er:
+            print(F.RED+"[x]", er)
+        except UnboundLocalError as er:
             print(F.RED+"[x]", er)
         except KeyboardInterrupt:
             print(F.CYAN+"[✓]Tool Closed")

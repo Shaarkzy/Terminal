@@ -2,8 +2,9 @@ print("LOADING LIBRARIES")
 def load_libraries():
     global sy, F, B, Sty, tm, socket, sub, rd, exists, os, re, uuid
     global ipaddress, r, json, tqdm, pt, p, phone, carrier, geocoder
-    global timezone, AES, get_random_bytes, TenableIO, n, mimetypes
-    global datetime, glob, sys
+    global timezone, AES, get_random_bytes, TenableIO, mimetypes
+    global datetime, glob, sys, ifaddresses, interfaces
+    global AF_INET, AF_INET6, n
 
     import sys as sy
     print("━"*2, end="\r", flush=True)
@@ -68,6 +69,7 @@ def load_libraries():
     from tenable.io import TenableIO
     print("━"*42, end="\r", flush=True)
 
+    from netifaces import interfaces, ifaddresses, AF_INET, AF_INET6
     import netifaces as n
     print("━"*44, end="\r", flush=True)
 
@@ -87,7 +89,7 @@ def load_libraries():
 __all__ = [
     "sy", "F", "B", "Sty", "tm", "socket", "sub", "rd", "exists", "os", "re", "uuid",
     "ipaddress", "r", "json", "tqdm", "pt", "p", "phone", "carrier", "geocoder", 
-    "timezone", "AES", "get_random_bytes", "TenableIO", "n", "mimetypes", "datetime", "glob", "sys"
+    "timezone", "AES", "get_random_bytes", "TenableIO", "interfaces", "ifaddresses", "AF_INET", "AF_INET6", "mimetypes", "datetime", "glob", "sys", "n"
 ]
 try:
     load_libraries()
