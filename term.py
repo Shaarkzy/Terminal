@@ -98,7 +98,7 @@ class shark:
      Example: {F.BLUE}@shell -client 127.0.0.1 12345{F.GREEN}
      NOTE   : {F.BLUE}Doesn't Support Telnet{F.GREEN}
             : {F.BLUE}To Exit Session Input: <exit>{F.GREEN}
-[15].To Encrypt A Text: {F.CYAN}@crypt -t{F.GREEN}
+[15].To Encrypt A Text: {F.CYAN}@crypt{F.GREEN}
      Example: {F.BLUE}@crypt{F.GREEN}
      Note   : {F.BLUE}Can Only Encrypt String Format Not(int, bytes){F.GREEN}
 [16].To Check Mobile Number Details: {F.CYAN}@check -n <country code> <number>{F.GREEN}
@@ -1164,7 +1164,7 @@ if __name__ == '__main__':
             print(F.CYAN+"[✓]Tool Closed")
         except IndexError:
             print(F.RED+"[x]Argument Error")
-        #except:
-            #print(F.RED+"[x]An Error Occured")
+        except:
+            print(F.RED+"[x]An Error Occured")
 
 # end 
