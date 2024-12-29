@@ -458,6 +458,19 @@ More Tools Coming... '''
     def key(self, num):
         data = str(uuid.uuid4()).replace(':', '')[:num].replace('-', 'f')
         return data
+        
+        
+    def byte_size(self, size):
+        file_size_bytes = size
+        if file_size_bytes < 1024:
+            file_size = f"{file_size_bytes} bytes"
+        elif file_size_bytes < 1024 ** 2:
+            file_size = f"{file_size_bytes / 1024:.2f} KB"
+        elif file_size_bytes < 1024 ** 3:
+            file_size = f"{file_size_bytes / (1024 ** 2):.2f} MB"
+        else:
+            file_size = f"{file_size_bytes / (1024 ** 3):.2f} GB"
+        return file_size
 
 
 
@@ -504,15 +517,8 @@ More Tools Coming... '''
         elif option == "-v":
             os = self.os
             if os.path.isfile(file):
-                file_size_bytes = os.path.getsize(file)
-                if file_size_bytes < 1024:
-                    file_size = f"{file_size_bytes} bytes"
-                elif file_size_bytes < 1024 ** 2:
-                    file_size = f"{file_size_bytes / 1024:.2f} KB"
-                elif file_size_bytes < 1024 ** 3:
-                    file_size = f"{file_size_bytes / (1024 ** 2):.2f} MB"
-                else:
-                    file_size = f"{file_size_bytes / (1024 ** 3):.2f} GB"
+                size_bytes = os.path.getsize(file)
+                file_size = self.byte_size(size_bytes)
 
                 file_extension = os.path.splitext(file)[1] or "No extension"
 
@@ -551,16 +557,7 @@ More Tools Coming... '''
                     for file in files:
                         total_size += os.path.getsize(os.path.join(root, file))
 
-                if total_size < 1024:
-                    formatted_size = f"{total_size} bytes"
-                elif total_size < 1024 ** 2:
-                        formatted_size = f"{total_size / 1024:.2f} KB"
-                elif total_size < 1024 ** 3:
-                        formatted_size = f"{total_size / (1024 ** 2):.2f} MB"
-                else:
-                        formatted_size = f"{total_size / (1024 ** 3):.2f} GB"
-
-
+                formatted_size = self.byte_size(total_size)
                 last_modified_timestamp = os.path.getmtime(c_file)
                 last_modified_time = datetime.fromtimestamp(last_modified_timestamp).strftime('%d-%m-%Y %H:%M:%S')
 
@@ -583,6 +580,7 @@ More Tools Coming... '''
                 
                 
         elif option == "-r":
+            os = self.os
             tuggle = False
             ext = { 
                 ".mp4", ".avi", ".mov", ".wmv", ".flv", ".mkv", ".m2ts", ".mts", ".webm", ".mpeg", ".mpg", ".3gp", ".ogv", ".divx", ".mp3", ".wav", ".aac", ".ogg", ".flac", ".m4a", ".wma", ".aiff", ".pcm", ".dts", ".ac3", ".mid", ".iso", ".ova", ".jpeg", ".png", ".jpg"
@@ -595,10 +593,23 @@ More Tools Coming... '''
             elif exists(file):
                 try:
                     open_file = open(file, "r")
-                    print (f"{F.BLUE}[*]Data:\n{F.WHITE}{open_file.read()}")
+                    print(F.BLUE+"[*]File.Content:"+F.WHITE+"")
+                    buffer = 1024
+                    while True:
+                        data = open_file.read(buffer)
+                        print(data, end="")
+                        if not data:
+                            break
+                    
                 except:
                     open_file = open(file, 'rb')
-                    print (f"{F.BLUE}[*]Data:\n{F.WHITE} {open_file.read()}")
+                    print(F.BLUE+"[*]File.Content:"+F.WHITE+"")
+                    buffer = 1024
+                    while True:
+                        data = open_file.read(buffer)
+                        print(data, end="")
+                        if not data:
+                            break
             else:
                 print (F.RED+"[x]File Doesn't Exist")
         elif option == "-ed":
@@ -616,9 +627,9 @@ More Tools Coming... '''
                             key = key.encode()
  
                             buffer_size = 65536
-                            open_file = open(file, "rb")
-                            size = len(open_file.read())
-                            open_file.close()
+                            with open(file, "rb") as files:
+                                files.seek(0,2)
+                                size = files.tell()
                             
                             open_file = open(file, "rb")
                             iv = open_file.read(16)
@@ -668,9 +679,9 @@ More Tools Coming... '''
                         if len(keyD) == 16 or len(keyD) == 24 or len(keyD) == 32:
                             print(f'{F.CYAN}[*]Your Key Is: {F.WHITE}{keyD}')
                             key = keyD.encode()
-                            open_file = open(file, "rb")
-                            size = len(open_file.read())
-                            open_file.close()
+                            with open(file, "rb") as files:
+                                files.seek(0,2)
+                                size = files.tell()
 
                             buffer_size = 65536 
                             iv = os.urandom(16)
@@ -709,8 +720,10 @@ More Tools Coming... '''
 
                     else:
                         print (F.RED+"[x]Error, Invalid Input")
+            elif exists(file) and os.path.isdir(file):
+                print (F.RED+"[x]Folder Not Supported")
             else:
-                print (F.RED+"[x]File Doesn't Exist Or It's A Directory")
+                print(F.RED+"[x]File Not Found")
         else:
             print(F.RED+"[x]Invalid Option")
 
@@ -740,8 +753,11 @@ More Tools Coming... '''
 
         file_path = input(F.YELLOW+"[%]/path/to/file: "+F.WHITE)
         if file_path:
-            size = open(file_path, 'rb')
-            size = len(size.read())
+            #
+            with open(file_path, "rb") as file:
+                file.seek(0, 2) 
+                size = file.tell()
+            size_s = self.byte_size(size)
 
             num = 0
             while True:
@@ -757,7 +773,7 @@ More Tools Coming... '''
             c, addr = sock.accept()
             print(F.CYAN+"[✓]User Connected")
             print(F.BLUE+"[*]Waiting For User To Accept")
-            c.send(f'[*]Incoming File! [Name: {file}] [Size: {size}bytes]\n'.encode())
+            c.send(f'[*]Incoming File! [Name: {file}] [Size: {size_s}]\n'.encode())
             choice = c.recv(1024).decode()
             if "YES" in choice: 
                 c.send(str(size).encode())
