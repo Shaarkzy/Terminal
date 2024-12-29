@@ -1,59 +1,60 @@
 #!/usr/bin/bash
 
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
 
-echo -e "\nINSTALLING COLORAMA 1/12\n"
+echo -e "\n${BLUE}INSTALLING COLORAMA 1/12${NC}\n"
 pip install colorama
-echo -e "\nDONE INSTALLING COLORAMA 1/12"
+echo -e "\n${BLUE}DONE INSTALLING COLORAMA 1/12${NC}\n"
 
-echo -e "\nINSTALLING REGEX 2/12\n"
+echo -e "\n${GREEN}INSTALLING REGEX 2/12${NC}\n"
 pip install regex
-echo -e "\nDONE INSTALLING REGEX 2/12"
+echo -e "\n${GREEN}DONE INSTALLING REGEX 2/12${NC}\n"
 
-echo -e "\nINSTALLING TQDM 3/12\n"
+echo -e "\n${YELLOW}INSTALLING TQDM 3/12${NC}\n"
 pip install tqdm
-echo -e "\nDONE INSTALLING TQDM 3/12"
+echo -e "\n${YELLOW}DONE INSTALLING TQDM 3/12${NC}\n"
 
-echo -e "\nINSTALLING XDG 4/12\n"
+echo -e "\n${BLUE}INSTALLING XDG 4/12${NC}\n"
 pip install xdg
-echo -e "\nDONE INSTALLING XDG 4/12"
+echo -e "\n${BLUE}DONE INSTALLING XDG 4/12${NC}\n"
 
-echo -e "\nINSTALLING UUID 5/12\n"
+echo -e "\n${GREEN}INSTALLING UUID 5/12${NC}\n"
 pip install uuid
-echo -e "\nDONE INSTALLING UUID 5/12"
+echo -e "\n${GREEN}DONE INSTALLING UUID 5/12${NC}\n"
 
-echo -e "\nINSTALLING IPADDRESSES 6/12\n"
+echo -e "\n${YELLOW}INSTALLING IPADDRESSES 6/12${NC}\n"
 pip install ipaddress
-echo -e "\nDONE INSTALLING IPADDRESSES 6/12"
+echo -e "\n${YELLOW}DONE INSTALLING IPADDRESSES 6/12${NC}\n"
 
-echo -e "\nINSTALLING REQUESTS 7/12\n"
+echo -e "\n${BLUE}INSTALLING REQUESTS 7/12${NC}\n"
 pip install requests
-echo -e "\nDONE INSTALLING REQUESTS 7/12"
+echo -e "\n${BLUE}DONE INSTALLING REQUESTS 7/12${NC}\n"
 
-echo -e "\nINSTALLING PSUTILS 8/12\n"
+echo -e "\n${GREEN}INSTALLING PSUTILS 8/12${NC}\n"
 pip install psutil
-echo -e "\nDONE INSTALLING PSUTILS 8/12"
+echo -e "\n${GREEN}DONE INSTALLING PSUTILS 8/12${NC}\n"
 
-echo -e "\nINSTALLING NETIFACES 9/12\n"
+echo -e "\n${YELLOW}INSTALLING NETIFACES 9/12${NC}\n"
 pip install netifaces
-echo -e "\nDONE INSTALLING NETIFACES 9/12"
+echo -e "\n${YELLOW}DONE INSTALLING NETIFACES 9/12${NC}\n"
 
-echo -e "\nINSTALLING PHONENUMBERS 10/12\n"
+echo -e "\n${BLUE}INSTALLING PHONENUMBERS 10/12${NC}\n"
 pip install phonenumbers
-echo -e "\nDONE INSTALLING PHONENUMBERS 10/12"
+echo -e "\n${BLUE}DONE INSTALLING PHONENUMBERS 10/12${NC}\n"
 
-echo -e "\nINSTALLING PYCRYPTODOME 11/12\n"
+echo -e "\n${GREEN}INSTALLING PYCRYPTODOME 11/12${NC}\n"
 pip install pycryptodome
-echo -e "\nDONE INSTALLING PYCRYPTODOME 11/12"
+echo -e "\n${GREEN}DONE INSTALLING PYCRYPTODOME 11/12${NC}\n"
 
-echo -e "\nINSTALLING PYTENABLE 12/12\n"
+echo -e "\n${YELLOW}INSTALLING PYTENABLE 12/12${NC}\n"
 pip install pytenable
-echo -e "\nDONE INSTALLING PYTENABLE 12/12"
+echo -e "\n${YELLOW}DONE INSTALLING PYTENABLE 12/12${NC}\n"
 
 # Simulating "else" behavior
-echo -e "\n[*] SETTING UP TERM.PY"
+echo -e "\n${BLUE}[*] SETTING UP TERM.PY${NC}"
 chmod +x term.py
 ln -s "$(pwd)/term.py" /data/data/com.termux/files/usr/bin/term
-echo -e "\n[*] IF NOT ERROR: Start Terminal By executing: term"
-
-
-
+echo -e "\n${GREEN}[*] IF NOT ERROR: Start Terminal By executing: term${NC}\n"
