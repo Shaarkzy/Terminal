@@ -550,12 +550,15 @@ More Tools Coming... '''
                 total_size = 0
                 file_count = 0
                 folder_count = 0
-
+    
                 for root, dirs, files in os.walk(c_file):
-                    folder_count += len(dirs)
-                    file_count += len(files)
-                    for file in files:
-                        total_size += os.path.getsize(os.path.join(root, file))
+                    try:
+                        folder_count += len(dirs)
+                        file_count += len(files)
+                        for file in files:
+                            total_size += os.path.getsize(os.path.join(root, file))
+                    except FileNotFoundError:
+                        continue
 
                 formatted_size = self.byte_size(total_size)
                 last_modified_timestamp = os.path.getmtime(c_file)
@@ -575,6 +578,7 @@ More Tools Coming... '''
                 }
                 for key, value in data.items():
                     print(f"{F.CYAN}[*]{key}: {F.GREEN}{value}")
+                    
             else:
                 print (F.RED+"[x]No Such File Or Directory")
                 
