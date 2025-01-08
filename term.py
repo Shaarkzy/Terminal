@@ -48,25 +48,25 @@ class shark:
 
 
 
-    # functuon for list of tools
+    # function for list of tools
     def help(self): #1
         tools = f'''
 ---[Note]: Input Ctrl+C To Quit Any Tool---
 
-[1]. Getting Ip Address: {F.CYAN}@get -i [target]{F.GREEN}
+[1]. Getting Ip Address: {F.CYAN}@get -i <target>{F.GREEN}
      Example: {F.BLUE}@get -i google.com{F.GREEN}
-[2]. Port Scanning Multiple: {F.CYAN}@port -sm [target]{F.GREEN}
+[2]. Port Scanning Multiple: {F.CYAN}@port -sm <target>{F.GREEN}
      Example: {F.BLUE}@port -sm 127.0.0.1{F.GREEN}
-[3]. Port Scanning Single: {F.CYAN}@port -sn [target] [port]{F.GREEN}
+[3]. Port Scanning Single: {F.CYAN}@port -sn <target> <port>{F.GREEN}
      Example: {F.BLUE}@port -sn 127.0.0.1 80{F.GREEN}
-[4]. Convert Number To Binary: {F.CYAN}@num -b [number] [base]{F.GREEN}
+[4]. Convert Number To Binary: {F.CYAN}@num -b <number> <base>{F.GREEN}
      Example: {F.BLUE}@num -b 2000 2{F.GREEN}
-[5]. Convert Binary To Number: {F.CYAN}@bina -n [binary] [base]{F.GREEN}
+[5]. Convert Binary To Number: {F.CYAN}@bina -n <binary> <base>{F.GREEN}
      Example: {F.BLUE}@bina -n 1011101010 2{F.GREEN}
-[6]. Convert Alphabet To Binary: {F.CYAN}@alpha -bina{F.GREEN}
-     Example: {F.BLUE}@alpha -bina{F.GREEN} 
-[7]. Convert Binary To Alphabet: {F.CYAN}@bina -alpha{F.GREEN}
-     Example: {F.BLUE}@bina -alpha{F.GREEN} 
+[6]. Convert Alphabet To Binary: {F.CYAN}@alpha -b <file>{F.GREEN}
+     Example: {F.BLUE}@alpha -b file.txt{F.GREEN} 
+[7]. Convert Binary To Alphabet: {F.CYAN}@bina -a <file>{F.GREEN}
+     Example: {F.BLUE}@bina -a file.txt{F.GREEN} 
 [8]. To Get Device Network Info: {F.CYAN}@ip -details{F.GREEN}
      Example: {F.BLUE}@ip -details{F.GREEN}
 [9]. To Get Cpu Info: {F.CYAN}@cpu{F.GREEN}
@@ -79,7 +79,7 @@ class shark:
              : {F.BLUE}Doesn't Support Telnet{F.GREEN}
 [11].To Create File: {F.CYAN}@file <option> <file_name>{F.GREEN}
      Options: {F.BLUE}-c Create File{F.GREEN}
-              {F.BLUE}-a Append Data To Existsing File{F.GREEN}
+              {F.BLUE}-a Append Data To Existing File{F.GREEN}
               {F.BLUE}-d Delete File{F.GREEN}
               {F.BLUE}-r Read Data From A File{F.GREEN}
               {F.BLUE}-v Check The Properties Of A File And Folder{F.GREEN}
@@ -140,7 +140,6 @@ More Tools Coming... '''
             re_search = re.search(r'(time=)(\d+)', data)
             interval = int(re_search.group(2))/1000
             print (F.CYAN+"[*]Start Scanning In Time Interval: "+F.YELLOW+str(interval))
-
 
             total_port = 0
             port = -1
@@ -237,39 +236,53 @@ More Tools Coming... '''
 
     # convert alphabet to binary
     def Alpha_Bina(self, file):
-        
-         open_file = open(file, 'r')
-         read_file = open_file.read()
-         open_file.close()
+        file = self.get_file(file)
+        if not file:
+            return False
+        open_file = open(file, 'r')
+        read_file = open_file.read()
+        open_file.close()
 
-         data = read_file
-         split_data = data
-         num = -1
-         save_to = file.replace('.txt', '')
-         new_file = open(f'{save_to}.bin', 'w')
-         write_data = ''
-         while True:
-             num += 1
-             try:
-                 for data in bytearray(split_data[num], 'utf-8'):
-                     new = format(data, 'b')
-                     write_data = write_data + new + ' '
-                     new_data = write_data
-             except:
-                 new_file.write(new_data)
-                 save_to = file.replace('.txt', '')
-                 print(f'{F.CYAN+"[✓]Data Saved To"} {save_to}.bin')
-                 new_file.close()
-                 break
+        data = read_file
+        if not data:
+            print(F.RED+"[x] Empty File")
+            return False
+        split_data = data
+
+        num = -1
+        save_to = file.replace('.txt', '')
+        new_file = open(f'{save_to}.bin', 'w')
+        write_data = ''
+        while True:
+            num += 1
+            try:
+                for data in bytearray(split_data[num], 'utf-8'):
+                    new = format(data, 'b')
+                    write_data = write_data + new + ' '
+                    new_data = write_data
+                new_file.write(new_data)
+            except:
+                save_to = file.replace('.txt', '')
+                print(f'{F.CYAN+"[✓]Data Saved To"} {save_to}.bin')
+                new_file.close()
+                break
 
 
     # convert binary to alphabet
     def Bina_Alpha(self, file):
+        file = self.get_file(file)
+        if not file:
+            return False
         try:
             open_file = open(file, 'r')
             read_file = open_file.read()
             open_file.close()
-            data =  read_file
+            data = read_file
+            
+            if not data:
+                print(F.RED+"[x] Empty File")
+                return False
+                
             split_data = data.split(' ')
             new_file = open(F'{file}.txt', 'w')
             write_data = ''
@@ -284,7 +297,9 @@ More Tools Coming... '''
             print(f'{F.CYAN+"[✓]Data Saved To"} {file}.txt')
             new_file.close()
         except FileNotFoundError as err:
-            print(err)
+            print(F.RED+"[x] ", err)
+        except IsADirectoryError as err:
+            print(F.RED+"[x] ", err)
         except:
             print(F.RED+'[x]An Error Occured')
             try:
@@ -459,7 +474,8 @@ More Tools Coming... '''
         data = str(uuid.uuid4()).replace(':', '')[:num].replace('-', 'f')
         return data
         
-        
+     
+    # get file size and format   
     def byte_size(self, size):
         file_size_bytes = size
         if file_size_bytes < 1024:
@@ -471,6 +487,19 @@ More Tools Coming... '''
         else:
             file_size = f"{file_size_bytes / (1024 ** 3):.2f} GB"
         return file_size
+        
+    # glob for file search
+    def get_file(self, file):
+        path = file
+        matches = glob.glob(path)
+        if matches:
+            if len(matches) == 1:
+                return matches[0]
+            else:
+                print(F.RED+"[x] Multiple Entry Found")
+                return False
+        else:
+            return file
 
 
 
@@ -499,6 +528,9 @@ More Tools Coming... '''
                     print (F.RED+"[x]Error, Try Inputing Valid Data".upper())
 
         elif option == "-a":
+            file = self.get_file(file)
+            if not file:
+                return False
             if exists(file):
                 data = input(F.YELLOW+"[%]Enter Data: "+F.WHITE)
                 open_file = open(file, "a")
@@ -509,12 +541,18 @@ More Tools Coming... '''
                 print (F.RED+"[x]File Doesn't Exist".uppper())
         elif option == "-d":
             os = self.os
+            file = self.get_file(file)
+            if not file:
+                return False
             if exists(file):
                 os.remove(file)
                 print (F.BLUE+"[✓]File Deleted ".upper())
             else:
                 print (F.RED+"[x]File Doesnt Exist".upper())
         elif option == "-v":
+            file = self.get_file(file)
+            if not file:
+                return False
             os = self.os
             if os.path.isfile(file):
                 size_bytes = os.path.getsize(file)
@@ -584,6 +622,9 @@ More Tools Coming... '''
                 
                 
         elif option == "-r":
+            file = sel.get_file(file)
+            if not file:
+                return False
             os = self.os
             tuggle = False
             ext = { 
@@ -618,6 +659,9 @@ More Tools Coming... '''
                 print (F.RED+"[x]File Doesn't Exist")
         elif option == "-ed":
             os = self.os
+            file = self.get_file(file)
+            if not file:
+                return False
             if exists(file) and os.path.isfile(file):
                 reg = file.endswith(".enc")
                 if reg == True:
@@ -658,7 +702,7 @@ More Tools Coming... '''
                             print(f'{F.CYAN}[*]Decrypted File Is {F.YELLOW}{file}')
 
                         else:
-                            print (F.RED+"[x]Invalid Key Byte Size")
+                            print (F.RED+"[x]Invalid Key Byte Size Or No key Detected")
 
                     elif opt == "N":
                         print (F.BLUE+"[✓]File Was Maintained")
@@ -679,6 +723,7 @@ More Tools Coming... '''
                         elif option == "N":
                             keyD = input(F.CYAN+"[%]Key: "+F.WHITE)
                         else:
+                            print(F.RED+"[x] Invalid Input")
                             return True
                         if len(keyD) == 16 or len(keyD) == 24 or len(keyD) == 32:
                             print(f'{F.CYAN}[*]Your Key Is: {F.WHITE}{keyD}')
@@ -707,8 +752,9 @@ More Tools Coming... '''
                                     progress_bar.update(len(new_data))
                             open_file.close()
                             output_file.close()
-                            print (F.BLUE+"[✓]File Encrypted Succesfully                                    ")
-                            print(f'{F.CYAN}[*]Encrypted File Is {F.YELLOW}{file}')
+                            print (F.BLUE+"[✓]File Encrypted Succesfully")
+                            file_ = "/".join(file.split(os.sep)[-1:])
+                            print(f'{F.CYAN}[*]Encrypted File Is {F.WHITE}{file_}')
 
                             tm.sleep(0.6)
                             key_file = open("key.txt", "a")
@@ -756,6 +802,9 @@ More Tools Coming... '''
         sock.listen(5)
 
         file_path = input(F.YELLOW+"[%]/path/to/file: "+F.WHITE)
+        file_path = self.get_file(file_path)
+        if not file_path:
+            return False
         if file_path:
             #
             with open(file_path, "rb") as file:
@@ -763,16 +812,7 @@ More Tools Coming... '''
                 size = file.tell()
             size_s = self.byte_size(size)
 
-            num = 0
-            while True:
-                try:
-                    num += 1
-                    file = file_path
-                    split1 = file_path.split("/")
-                    file = split1[num]
-
-                except:
-                    break
+            file = "/".join(file_path.split(os.sep)[-1:])
 
             c, addr = sock.accept()
             print(F.CYAN+"[✓]User Connected")
@@ -1073,6 +1113,7 @@ More Tools Coming... '''
             print(F.RED+"[x]Invalid Option")
             return False
         target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
+        
         if target__file:
             print("")
             self.search(folder, target__file)
@@ -1099,9 +1140,9 @@ if __name__ == '__main__':
                 shark.port_scan(data.split()[2])
             elif "@port -sn" in data: 
                 shark.port_scan_sin(data.split()[2], data.split()[3])
-            elif "@bina -alpha" in data: 
+            elif "@bina -a" in data: 
                 shark.Bina_Alpha(data.split()[2])
-            elif "@alpha -bina" in data: 
+            elif "@alpha -b" in data: 
                 shark.Alpha_Bina(data.split()[2])
             elif "@num -b" in data: 
                 shark.Num_Bina(data.split()[2], data.split()[3])
@@ -1145,9 +1186,14 @@ if __name__ == '__main__':
             elif data.lstrip().startswith('cd') and "cd" != data.strip():
                 d_path = ' '.join(filter(None, data.split()))
                 path = d_path[3:]
+                print(path)
                 matches = glob.glob(path)
+                print(matches)
                 if matches:
-                    os.chdir(matches[0])
+                    if len(matches) == 1:
+                        os.chdir(matches[0])
+                    else:
+                        print(F.RED+"[x] Multiple Entry Found")
                 else:
                     print (f"cd:{path}: No Such File Or Directory")
             elif data.strip() == 'cd':
