@@ -622,7 +622,7 @@ More Tools Coming... '''
                 
                 
         elif option == "-r":
-            file = sel.get_file(file)
+            file = self.get_file(file)
             if not file:
                 return False
             os = self.os
@@ -1186,7 +1186,9 @@ if __name__ == '__main__':
             elif data.lstrip().startswith('cd') and "cd" != data.strip():
                 d_path = ' '.join(filter(None, data.split()))
                 path = d_path[3:]
+                print(path)
                 matches = glob.glob(path)
+                print(matches)
                 if matches:
                     if len(matches) == 1:
                         os.chdir(matches[0])
