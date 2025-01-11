@@ -1187,9 +1187,7 @@ if __name__ == '__main__':
             elif data.lstrip().startswith('cd') and "cd" != data.strip():
                 d_path = ' '.join(filter(None, data.split()))
                 path = d_path[3:]
-                print(path)
                 matches = glob.glob(path)
-                print(matches)
                 if matches:
                     if len(matches) == 1:
                         os.chdir(matches[0])
