@@ -548,7 +548,7 @@ More Tools Coming... '''
                 os.remove(file)
                 print (F.BLUE+"[✓]File Deleted ".upper())
             else:
-                print (F.RED+"[x]File Doesnt Exist".upper())
+                print (F.RED+"[x]File Doesn't Exist".upper())
         elif option == "-v":
             file = self.get_file(file)
             if not file:
@@ -681,6 +681,7 @@ More Tools Coming... '''
                             
                             open_file = open(file, "rb")
                             iv = open_file.read(16)
+                            size = size - len(iv)
   
                             cipher_encrypt = AES.new(key, AES.MODE_CFB, iv=iv)
                             buffer = open_file.read(buffer_size)
