@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-# import all libraries
-from UTILS.LIBRARY_SETUP.library import *
-
-# clear screen after loading libraries
-sys("clear")
 
 # check for supported operating system
+import platform as pt
 pt = pt.system()
 if pt != "Linux":
     print(F.RED+"[x]Operating System Not Supported")
     quit(0)
 else:
     pass
+
+# import all libraries
+from UTILS.LIBRARY_SETUP.library import *
+
+# clear screen after loading libraries
+sys("clear")
 
 # input function
 def inpu():
@@ -990,7 +992,7 @@ More Tools Coming... '''
             num += 0.2
             d = F.GREEN+'█'*int(num)
             r += 1
-            tm.sleep(0.01)
+            tm.sleep(0.003)
             print(f'{B}[*]Loading Information: {d} : {C}{str(r)}%', end='\r', flush=True)
 
         print(f"\n\n{C}[*]Location             :{B}{location}")
@@ -1232,4 +1234,4 @@ if __name__ == '__main__':
         except:
             print(F.RED+"[x]An Error Occured")
 
-# end 
+# end line 1238
