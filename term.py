@@ -1045,11 +1045,16 @@ More Tools Coming... '''
                     pass
 
                 results = scan.results()
+                print("\n")
                 for vul in results['vulnerabilities']:
                     print(f"{F.BLUE}[*]Vulnerabilty: {F.GREEN}{vul['plugin_name']}\t{F.BLUE}[*]Severity: {F.GREEN}{vul['severity']}")
             
             else:
-                print(f"{F.RED}[x]Error: {F.BLUE}{response.status_code}-{F.GREEN}{response.text}")
+                data = response.text
+                data = json.loads(data)
+                print("\n")
+                for keys in data.keys():
+                    print(f"{F.RED}[x]{keys}: {data[keys]}")
         except requests.exceptions.RequestException as e:
             print(F.RE+"[x]Error Connecting To Host")
 
