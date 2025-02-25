@@ -113,8 +113,11 @@ class shark:
      Example: {F.BLUE}@check -w London{F.GREEN}
 [19].To Gather Info About An Ip Address: {F.CYAN}@ip -s <0.0.0.0>{F.GREEN}
      Example: {F.BLUE}@ip -s 100.101.102.103{F.GREEN}
-[20].To Search File In File System: {F.CYAN}@sch -f{F.GREEN}
+[20].To Search File In File System: {F.CYAN}@sch -file{F.GREEN}
      Example: {F.BLUE}@sch -file{F.GREEN}
+[21].To Lookup MAC Address: {F.CYAN}@sch -m <mac address>{F.GREEN}
+     Example: {F.BLUE}@sch -m 00:00:00:00:00:00{F.GREEN}
+[22].Solve Resistor Colour Code: 
 [00]. To Exit Program: {F.CYAN}@exit{F.GREEN}
 
 More Tools Coming... '''
@@ -1129,7 +1132,17 @@ More Tools Coming... '''
             self.count = 0
         else:
             print(F.RED+"[x]Error: Empty Input")
-
+            
+            
+    def mac_lookup(self, mac):
+        url = f"https://api.macvendors.com/{mac}"
+        
+        response = r.get(url)
+        if response.status_code == 200:
+            print(f"{F.CYAN}[*]Device Manufacturer: {F.WHITE}{response.text}")
+        else:
+            print(F.RED+"[x]No Mac Record Found")
+            
 
 
 # relay for all tools
@@ -1188,6 +1201,8 @@ if __name__ == '__main__':
                 shark.ip_osint(data.split()[2])
             elif "@sch -file" in data:
                 shark.trigger_search()
+            elif "@sch -m" in data:
+                shark.mac_lookup(data.split()[2])
             elif "@exit" in data: 
                 print (F.RED+"[✓]Exiting Program...")
                 break
@@ -1203,9 +1218,7 @@ if __name__ == '__main__':
                 else:
                     print (f"cd:{path}: No Such File Or Directory")
             elif data.strip() == 'cd':
-                
                 os.chdir(os.path.expanduser("~"))
-            
             else:
                 sys(data)
         except FileNotFoundError as er:
@@ -1238,5 +1251,4 @@ if __name__ == '__main__':
             print(F.RED+"[x]Argument Error")
         except:
             print(F.RED+"[x]An Error Occured")
-
-# end line 1238
+# end line 1254
