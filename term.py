@@ -18,8 +18,13 @@ def inpu():
     #initialize command history
     if detect_os():
         history_file = "/data/data/com.termux/files/home/Terminal/UTILS/.term_history"
+        with open(history_file, "w") as tf:
+            tf.close()
+        
     else:
         history_file = "/root/Terminal/UTILS/.term_history"
+        with open(history_file, "w") as tf:
+            tf.close()
 
     try:
         readl.read_history_file(history_file)
