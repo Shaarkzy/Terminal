@@ -23,10 +23,11 @@ to build and configure tools
 │   └── LIBRARY_SETUP/
 │       ├── pycryptodome.sh
 │       ├── pytenable.sh
-│       └── _pycache__
+│       ├── library.py
+│       └── __pycache__
 │           └── library.cpython-312.pyc
-│       └── library.py
-│
+│       
+
 ```
 
 **Note:**
