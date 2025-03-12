@@ -1,22 +1,34 @@
 #!/usr/bin/env python3
-
-# check for supported operating system
-import platform as pt
-pt = pt.system()
-if pt != "Linux":
-    print("UNSUPPORTED OPERATING SYSTEM")
-    quit(0)
-else:
-    pass
-
 # import all libraries
 from UTILS.LIBRARY_SETUP.library import *
 
 # clear screen after loading libraries
 sys("clear")
 
+#detect operating system
+def detect_os():
+    os_info = os.uname()
+    if "android" in os_info.release.lower():
+        return True
+    else:
+        return False
+    
 # input function
 def inpu():
+    #initialize command history
+    if detect_os():
+        history_file = "/data/data/com.termux/files/home/Terminal/UTILS/.term_history"
+    else:
+        history_file = "/root/Terminal/UTILS/.term_history"
+
+    try:
+        readl.read_history_file(history_file)
+    except FileNotFoundError:
+        open(history_file, "w")
+    
+    at.register(readl.write_history_file, history_file)
+    
+    #get working directories
     try:
         print("\n")
         subt = sub.getoutput("whoami")
@@ -24,11 +36,12 @@ def inpu():
         new_path = "/".join(direc.split(os.sep)[-3:])
         new_path = F.BLUE+new_path+F.YELLOW
         
+        #initiate input method
         s = F.BLUE+"#"
-        data =  input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.WHITE)
+        data = input(F.YELLOW+f"{F.BLUE}.{F.YELLOW}——[{F.BLUE}{subt}{F.GREEN}@{F.CYAN}Shark{F.YELLOW}]——[{new_path}]\n|\n{F.BLUE}°{F.YELLOW}——{s} "+ F.WHITE)
         return data
     except:
-        return ""
+        return 1
 
 
 
@@ -41,11 +54,15 @@ class shark:
         
     # load the welcome screen on start
     def main(self):
+        print("——"*32)
+        self.os.system("neofetch")
+        print("——"*32)
         data = f"""
                 {F.BLACK}{B.CYAN}••WELCOME·TO·MR·SHARK·TERMINAL••{Sty.RESET_ALL}
                 {F.GREEN}    For Help: Run {F.CYAN}@help
                     """
         print (data)
+        print("——"*32)
     
 
 
@@ -1108,8 +1125,7 @@ More Tools Coming... '''
             
     # file search trigger        
     def trigger_search(self):
-        os = input(f"{F.YELLOW}[?]Android/Kali[1/2]:{F.WHITE} ")
-        if os == "1":
+        if detect_os():
             root = input(f"{F.CYAN}[?]Is Your Device Rooted [Y/N]:{F.WHITE} ").upper()
             if root == "Y":
                 folder = "/"
@@ -1118,11 +1134,9 @@ More Tools Coming... '''
             else:
                 print(F.RED+"[x]Invalid Option")
                 return False
-        elif os == "2":
-            folder = "/"
         else:
-            print(F.RED+"[x]Invalid Option")
-            return False
+            folder = "/"
+            
         target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
         
         if target__file:
@@ -1251,4 +1265,4 @@ if __name__ == '__main__':
             print(F.RED+"[x]Argument Error")
         except:
             print(F.RED+"[x]An Error Occured")
-# end line 1254
+# end line 1268

@@ -19,10 +19,12 @@ to build and configure tools
 ├── UTILS/
 │   ├── android_setup.sh
 │   ├── kali_setup.sh
+│   ├──  .term_history
 │   └── LIBRARY_SETUP/
 │       ├── pycryptodome.sh
 │       ├── pytenable.sh
-│       ├── __pycache__
+│       └── _pycache__
+│           └── library.cpython-312.pyc
 │       └── library.py
 │
 ```
@@ -32,6 +34,7 @@ to build and configure tools
 1. Tested under Kali LInux Os and Android OS
 2. Some tools requires superuser privileg (on feature 10)...
 3. For kali installation run setup as root
+4. Program Folder must be in the home directory (~/Terminal , /root/Terminal)
 ```
 
 **Features:**

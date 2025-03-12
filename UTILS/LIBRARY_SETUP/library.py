@@ -1,10 +1,19 @@
+#Check For Supported OS
+import platform as pt
+pt = pt.system()
+if pt != "Linux":
+    print("UNSUPPORTED OPERATING SYSTEM")
+    quit(0)
+else:
+    pass
+
 print("LOADING LIBRARIES")
 def load_libraries():
     global sy, F, B, Sty, tm, socket, sub, rd, exists, os, re, uuid
     global ipaddress, r, json, tqdm, pt, p, phone, carrier, geocoder
     global timezone, AES, get_random_bytes, TenableIO, mimetypes
     global datetime, glob, sys, ifaddresses, interfaces
-    global AF_INET, AF_INET6, n
+    global AF_INET, AF_INET6, n, readl, at
 
     import sys as sy
     print("━"*2, end="\r", flush=True)
@@ -85,11 +94,17 @@ def load_libraries():
     from os import system as sys
     print("━"*52, end="\r", flush=True)
     
+    import readline as readl
+    print("━"*54, end="\r", flush=True)
+    
+    import atexit as at
+    print("━"*56, end="\r", flush=True)
+    
 
 __all__ = [
     "sy", "F", "B", "Sty", "tm", "socket", "sub", "rd", "exists", "os", "re", "uuid",
     "ipaddress", "r", "json", "tqdm", "pt", "p", "phone", "carrier", "geocoder", 
-    "timezone", "AES", "get_random_bytes", "TenableIO", "interfaces", "ifaddresses", "AF_INET", "AF_INET6", "mimetypes", "datetime", "glob", "sys", "n"
+    "timezone", "AES", "get_random_bytes", "TenableIO", "interfaces", "ifaddresses", "AF_INET", "AF_INET6", "mimetypes", "datetime", "glob", "sys", "n", "readl", "at"
 ]
 try:
     load_libraries()
