@@ -1,14 +1,14 @@
 # Shark Terminal
 
-Terminal like emulator with tools.
+Terminal like emulator with utilities
 Run Setup for libary installations and binary setup.
-Program only for Linux OS & Android.
+Program only for Linux.
 
 **Run:**
 
 ```$ ./setup.sh ``` 
 
-to build and configure tools
+to build and configure program
 
 **Program File Structure (Architecture)**
 ```Terminal/
@@ -33,7 +33,7 @@ to build and configure tools
 **Note:**
 ```
 1. Tested under Kali LInux Os and Android OS
-2. Some tools requires superuser privileg (on feature 10)...
+2. Some utilities requires superuser privilege (on feature 10)...
 3. For kali installation run setup as root
 4. Program Folder must be in the home directory (~/Terminal , /root/Terminal)
 ```
@@ -52,8 +52,7 @@ to build and configure tools
 10. Cpu Information (might work without root access on earlier Android versions)
 11. Mobile Number Osint(excluding personal information)
 12. Grab Website Ip
-13. Gather Information About An Ip a
-Address.
+13. Gather Information About An Ip Address.
 14. File Searching
 15. File and Folder Properties Viewer
 ```
