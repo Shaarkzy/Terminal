@@ -18,18 +18,23 @@ def inpu():
     #initialize command history
     if detect_os():
         history_file = "/data/data/com.termux/files/home/Terminal/UTILS/.term_history"
-        with open(history_file, "w") as tf:
-            tf.close()
+        try:
+            with open(history_file, "w") as tf:
+                tf.close()
+        except FileNotFoundError:
+            print(F.RED+"[x]Tempered Program Folder")
+            quit(0)
         
     else:
         history_file = "/root/Terminal/UTILS/.term_history"
-        with open(history_file, "w") as tf:
-            tf.close()
+        try:
+            with open(history_file, "w") as tf:
+                tf.close()
+        except FileNotFoundError:
+            print(F.RED+"[x]Tempered Program Folder")
+            quit(0)
 
-    try:
-        readl.read_history_file(history_file)
-    except FileNotFoundError:
-        open(history_file, "w")
+    readl.read_history_file(history_file)
     
     at.register(readl.write_history_file, history_file)
     
@@ -1270,4 +1275,4 @@ if __name__ == '__main__':
             print(F.RED+"[x]Argument Error")
         except:
             print(F.RED+"[x]An Error Occured")
-# end line 1273
+# end line 1278
