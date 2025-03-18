@@ -7,11 +7,12 @@ sys("clear")
 
 #detect operating system
 def detect_os():
-    os_info = os.uname()
-    if "android" in os_info.release.lower():
+    user = sub.getoutput("whoami")
+    if os.path.exists("/data/data/com.termux"):
         return True
-    else:
+    elif os.path.exists(f"/home/{user}"):
         return False
+        
     
 # input function
 def inpu():
@@ -26,7 +27,9 @@ def inpu():
             quit(0)
         
     else:
-        history_file = "/root/Terminal/UTILS/.term_history"
+        user = sub.getoutput("whoami")
+        directory = "/root" if os.geteuid() == 0 else f"/home/{user}"
+        history_file = f"{directory}/Terminal/UTILS/.term_history"
         try:
             with open(history_file, "w") as tf:
                 tf.close()
@@ -1136,16 +1139,9 @@ More Tools Coming... '''
     # file search trigger        
     def trigger_search(self):
         if detect_os():
-            root = input(f"{F.CYAN}[?]Is Your Device Rooted [Y/N]:{F.WHITE} ").upper()
-            if root == "Y":
-                folder = "/"
-            elif root == "N":
-                folder = "/data/data/com.termux"
-            else:
-                print(F.RED+"[x]Invalid Option")
-                return False
+            folder = "/" if os.geteuid() == 0 else "/data/data/com.termux"
         else:
-            folder = "/"
+            folder  = "/" if os.geteuid() == 0 else "/home"
             
         target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
         
@@ -1275,4 +1271,4 @@ if __name__ == '__main__':
             print(F.RED+"[x]Argument Error")
         except:
             print(F.RED+"[x]An Error Occured")
-# end line 1278
+# end line 1276

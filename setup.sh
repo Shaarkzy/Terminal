@@ -22,7 +22,7 @@ detect_os() {
             ./UTILS/kali_setup.sh
         fi
     else
-        echo "${RED}[x]Unsupported OS${NC}"
+        echo "${RED}[x]Unsupported OS : Read Documentation${NC}"
     fi
 }
 # run function
