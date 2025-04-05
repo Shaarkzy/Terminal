@@ -7,18 +7,22 @@ sys("clear")
 
 #detect operating system
 def detect_os():
-    user = sub.getoutput("whoami")
-    if os.path.exists("/data/data/com.termux"):
-        return True
-    elif os.path.exists(f"/home/{user}"):
+    # Check for Kali
+    kali_check = sub.getoutput("grep -i kali /etc/os-release 2>/dev/null").strip()
+    if kali_check:
         return False
-        
+
+    # Check for Android
+    android_check = sub.getoutput("uname -a | grep -i android").strip()
+    if android_check:
+        return True
+      
     
 # input function
 def inpu():
     #initialize command history
     if detect_os():
-        history_file = "/data/data/com.termux/files/home/Terminal/UTILS/.term_history"
+        history_file = "/data/data/com.termux/files/home/Shell/UTILS/.shell_history"
         try:
             with open(history_file, "w") as tf:
                 tf.close()
@@ -29,7 +33,7 @@ def inpu():
     else:
         user = sub.getoutput("whoami")
         directory = "/root" if os.geteuid() == 0 else f"/home/{user}"
-        history_file = f"{directory}/Terminal/UTILS/.term_history"
+        history_file = f"{directory}/Shell/UTILS/.shell_history"
         try:
             with open(history_file, "w") as tf:
                 tf.close()
@@ -71,11 +75,10 @@ class shark:
         self.os.system("neofetch")
         print("——"*32)
         data = f"""
-                {F.BLACK}{B.CYAN}••WELCOME·TO·MR·SHARK·TERMINAL••{Sty.RESET_ALL}
+                {F.BLACK}{B.CYAN}••WELCOME·TO·SHARK·SHELL••{Sty.RESET_ALL}
                 {F.GREEN}    For Help: Run {F.CYAN}@help
                     """
         print (data)
-        print("——"*32)
     
 
 
@@ -95,10 +98,10 @@ class shark:
      Example: {F.BLUE}@num -b 2000 2{F.GREEN}
 [5]. Convert Binary To Number: {F.CYAN}@bina -n <binary> <base>{F.GREEN}
      Example: {F.BLUE}@bina -n 1011101010 2{F.GREEN}
-[6]. Convert Alphabet To Binary: {F.CYAN}@alpha -b <file>{F.GREEN}
-     Example: {F.BLUE}@alpha -b file.txt{F.GREEN} 
-[7]. Convert Binary To Alphabet: {F.CYAN}@bina -a <file>{F.GREEN}
-     Example: {F.BLUE}@bina -a file.txt{F.GREEN} 
+[6]. Convert Alphabet To Binary: {F.CYAN}@alpha -bina{F.GREEN}
+     Example: {F.BLUE}@alpha -bina{F.GREEN} 
+[7]. Convert Binary To Alphabet: {F.CYAN}@bina -alpha{F.GREEN}
+     Example: {F.BLUE}@bina -alpha{F.GREEN} 
 [8]. To Get Device Network Info: {F.CYAN}@ip -details{F.GREEN}
      Example: {F.BLUE}@ip -details{F.GREEN}
 [9]. To Get Cpu Info: {F.CYAN}@cpu{F.GREEN}
@@ -147,7 +150,7 @@ class shark:
      Example: {F.BLUE}@sch -file{F.GREEN}
 [21].To Lookup MAC Address: {F.CYAN}@sch -m <mac address>{F.GREEN}
      Example: {F.BLUE}@sch -m 00:00:00:00:00:00{F.GREEN}
-[22].Solve Resistor Colour Code: 
+
 [00]. To Exit Program: {F.CYAN}@exit{F.GREEN}
 
 More Tools Coming... '''
@@ -239,8 +242,6 @@ More Tools Coming... '''
         print (F.BLUE+str(int(binary, int(base))))
 
 
-
-
     # converting number to binary
     def Num_Bina(self, num, base): #6
         num = int(num)
@@ -249,7 +250,7 @@ More Tools Coming... '''
         print (F.BLUE+bin(num) [base: ])
 
 
-    # repair binary files with invalid byte
+    """repair binary files with invalid byte
     def repair(self, file):
         if True:
             open_file = open(file, 'r')
@@ -259,95 +260,33 @@ More Tools Coming... '''
 
             for i in read_file:
                 if i != '1' and i != '0' and i != ' ':
-                    new = data.replace(i, '')
+                    new = data.replace(i, '')0
                     data =  new
             new_file = open(file, 'w')
             new_file.write(data)
             new_file.close()
             print(F.CYAN+'[✓]File Repaired')
         else:
-            pass
+            pass"""
 
 
     # convert alphabet to binary
-    def Alpha_Bina(self, file):
-        file = self.get_file(file)
-        if not file:
-            return False
-        open_file = open(file, 'r')
-        read_file = open_file.read()
-        open_file.close()
+    def Alpha_Bina(self):
+        text = input(F.GREEN+"[*]Enter Text: "+F.WHITE)
+        print("\n")
+        print(F.CYAN+' '.join(format(ord(c), '08b') for c in text))
 
-        data = read_file
-        if not data:
-            print(F.RED+"[x] Empty File")
-            return False
-        split_data = data
 
-        num = -1
-        save_to = file.replace('.txt', '')
-        new_file = open(f'{save_to}.bin', 'w')
-        write_data = ''
-        while True:
-            num += 1
-            try:
-                for data in bytearray(split_data[num], 'utf-8'):
-                    new = format(data, 'b')
-                    write_data = write_data + new + ' '
-                    new_data = write_data
-                new_file.write(new_data)
-            except:
-                save_to = file.replace('.txt', '')
-                print(f'{F.CYAN+"[✓]Data Saved To"} {save_to}.bin')
-                new_file.close()
-                break
 
 
     # convert binary to alphabet
-    def Bina_Alpha(self, file):
-        file = self.get_file(file)
-        if not file:
-            return False
-        try:
-            open_file = open(file, 'r')
-            read_file = open_file.read()
-            open_file.close()
-            data = read_file
-            
-            if not data:
-                print(F.RED+"[x] Empty File")
-                return False
-                
-            split_data = data.split(' ')
-            new_file = open(F'{file}.txt', 'w')
-            write_data = ''
-            num = -1
-            for data in split_data:
-                num += 1
-                int_data = int(data, 2)
-                charac = chr(int_data)
-                write_data = write_data + charac
-                new_data = write_data
-            new_file.write(new_data)
-            print(f'{F.CYAN+"[✓]Data Saved To"} {file}.txt')
-            new_file.close()
-        except FileNotFoundError as err:
-            print(F.RED+"[x] ", err)
-        except IsADirectoryError as err:
-            print(F.RED+"[x] ", err)
-        except:
-            print(F.RED+'[x]An Error Occured')
-            try:
-                print("[x]Invalid Bytes Detected")
-                opt = input(F.WHITE+'[?]Commence File Repair Now [Y/N]: ').upper()
-                if opt == 'Y':
-                    shark.repair(file)
-                elif opt == 'N':
-                    print('[*]File Not Repaired')
-                else:
-                    print(F.RED+'[x]Invalid Input')
-            except:
-                print(F.RED+'[x]Invalid Binary File Format')
+    def Bina_Alpha(self):
+        binary = input(F.GREEN+"[*]Enter Binary: "+F.WHITE)
+        binary_values = binary.split(' ')
+        text = ''.join(chr(int(b, 2)) for b in binary_values)
+        print("\n")
+        print(F.CYAN+text)
+
                     
             
     # get private ip address of a device
@@ -434,8 +373,6 @@ More Tools Coming... '''
 
 
 
-
-
    # open server for wifi chat room
     def open_server(self): #11
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -472,8 +409,6 @@ More Tools Coming... '''
                 print (F.RED+"[*]User Closed Chat")
                 c.close()
                 break
-
-
 
 
     # connect to wifi chat room server
@@ -1181,10 +1116,10 @@ if __name__ == '__main__':
                 shark.port_scan(data.split()[2])
             elif "@port -sn" in data: 
                 shark.port_scan_sin(data.split()[2], data.split()[3])
-            elif "@bina -a" in data: 
-                shark.Bina_Alpha(data.split()[2])
-            elif "@alpha -b" in data: 
-                shark.Alpha_Bina(data.split()[2])
+            elif "@bina -alpha" in data: 
+                shark.Bina_Alpha()
+            elif "@alpha -bina" in data: 
+                shark.Alpha_Bina()
             elif "@num -b" in data: 
                 shark.Num_Bina(data.split()[2], data.split()[3])
             elif "@bina -n" in data: 
@@ -1266,9 +1201,9 @@ if __name__ == '__main__':
         except UnboundLocalError as er:
             print(F.RED+"[x]", er)
         except KeyboardInterrupt:
-            print(F.CYAN+"[✓]Tool Closed")
+            print(F.CYAN+"\n[✓]Tool Closed")
         except IndexError:
             print(F.RED+"[x]Argument Error")
         except:
             print(F.RED+"[x]An Error Occured")
-# end line 1276
+# end line 1208

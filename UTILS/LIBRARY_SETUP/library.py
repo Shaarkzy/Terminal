@@ -2,7 +2,7 @@
 import platform as pt
 pt = pt.system()
 if pt != "Linux":
-    print("UNSUPPORTED OPERATING SYSTEM")
+    print("[x]UNSUPPORTED OPERATING SYSTEM")
     quit(0)
 else:
     pass

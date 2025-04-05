@@ -1,6 +1,6 @@
-# Shark Terminal
+# Shark Shell
 
-Terminal like emulator with utilities
+Shell like emulator with utilities
 Run Setup for libary installations and binary setup.
 Program only for Linux.
 
@@ -11,15 +11,15 @@ Program only for Linux.
 to build and configure program
 
 **Program File Structure (Architecture)**
-```Terminal/
+```Shell/
 ├── LICENSE
 ├── README.md
 ├── setup.sh
-├── term.py
+├── shell.py
 ├── UTILS/
 │   ├── android_setup.sh
 │   ├── kali_setup.sh
-│   ├──  .term_history
+│   ├──  .shell_history
 │   └── LIBRARY_SETUP/
 │       ├── pycryptodome.sh
 │       ├── pytenable.sh
@@ -35,7 +35,7 @@ to build and configure program
 1. Tested under Kali LInux Os and Android OS
 2. Some utilities requires superuser privilege (on feature 10)...
 3. For kali installation run setup as root
-4. Program Folder must be in the home directory (~/Terminal , /root/Terminal)
+4. Program Folder must be in the home directory (~/Shell , /root/Shell)
 ```
 
 **Features:**

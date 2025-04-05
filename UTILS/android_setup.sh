@@ -58,6 +58,7 @@ pkg install neofetch
 echo -e "\n${BLUE}DONE INSTALLING NEOFETCH 13/13${NC}\n"
 
 echo -e "\n${BLUE}[*] SETTING UP TERM.PY${NC}"
-chmod +x term.py
-ln -s "$(pwd)/term.py" /data/data/com.termux/files/usr/bin/term
-echo -e "\n${GREEN}[*] IF NOT ERROR: Start Terminal By executing: term${NC}\n"
+chmod +x shell.py
+cd ~/
+ln -s Shell/shell.py" /data/data/com.termux/files/usr/bin/shell
+echo -e "\n${GREEN}[*] IF NOT ERROR: Start Terminal By executing: shell${NC}\n"

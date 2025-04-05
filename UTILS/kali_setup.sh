@@ -62,6 +62,7 @@ apt-get install neofetch
 echo -e "\n${BLUE}DONE INSTALLING NEOFETCH 13/13${NC}\n"
 
 echo -e "\n${GREEN}[*] SETTING UP TERM.PY${NC}"
-chmod +x term.py
-ln -s "$(pwd)/term.py" /bin/term
-echo -e "\n${YELLOW}[*] IF NOT ERROR: Start Terminal By executing: term${NC}\n"
+chmod +x shell.py
+cd ~/
+ln -s Shell/shell.py" /bin/shell
+echo -e "\n${YELLOW}[*] IF NOT ERROR: Start Terminal By executing: shell${NC}\n"
