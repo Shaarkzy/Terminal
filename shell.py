@@ -222,9 +222,9 @@ class shark:
 
 
 
-    """repair binary files with invalid byte
+    #repair binary files with invalid byte
     def repair(self, file):
-        if True:
+        try:
             open_file = open(file, 'r')
             read_file = open_file.read()
             open_file.close()
@@ -238,8 +238,8 @@ class shark:
             new_file.write(data)
             new_file.close()
             print(F.CYAN+'[✓]File Repaired')
-        else:
-            pass"""
+        except:
+            print(F.RED+"[x]Unsuccessful: File Corrupted")
 
 
 
@@ -248,10 +248,17 @@ class shark:
 
 
     # convert alphabet to binary
-    def Alpha_Bina(self):
-        text = input(F.GREEN+"[*]Enter Text: "+F.WHITE)
-        print("\n")
-        print(F.CYAN+' '.join(format(ord(c), '08b') for c in text))
+    def Alpha_Bina(self, file):
+        file = self.get_file(file)
+        open_file = open(file, "r")
+        data = open_file.read()
+        open_file.close()
+        save_data = ' '.join(format(ord(c), '08b') for c in data)
+        s_file = file+".sbin"
+        open_file = open(s_file, "w")
+        open_file.write(save_data)
+        print(F.CYAN+"[*]File Converted Successfully")
+        open_file.close()
 
 
 #------------------------------------------------------------------------------------------------------------------------------
@@ -259,12 +266,23 @@ class shark:
 
 
     # convert binary to alphabet
-    def Bina_Alpha(self):
-        binary = input(F.GREEN+"[*]Enter Binary: "+F.WHITE)
-        binary_values = binary.split(' ')
-        text = ''.join(chr(int(b, 2)) for b in binary_values)
-        print("\n")
-        print(F.CYAN+text)
+    def Bina_Alpha(self, file):
+        file = self.get_file(file)
+        open_file = open(file, "r")
+        data = open_file.read()
+        open_file.close()
+        binary_values = data.split(' ')
+        try:
+            save_data = ''.join(chr(int(b, 2)) for b in binary_values)
+            s_file = file+".stxt"
+            open_file = open(s_file, "w")
+            open_file.write(save_data)
+            print(F.CYAN+"[*]File Converted Succesfully")
+            open_file.close()
+        except:
+            print(F.RED+"[x]Invalid Bytes Detected: Cleaning File")
+            self.repair(file)
+
 
 
 #------------------------------------------------------------------------------------------------------------------------------
@@ -1208,10 +1226,10 @@ if __name__ == '__main__':
                 shark.port_scan(data.split()[2])
             elif "@port -sn" in data: 
                 shark.port_scan_sin(data.split()[2], data.split()[3])
-            elif "@bina -alpha" in data: 
-                shark.Bina_Alpha()
-            elif "@alpha -bina" in data: 
-                shark.Alpha_Bina()
+            elif "@bina -a" in data: 
+                shark.Bina_Alpha(data.split()[2])
+            elif "@alpha -b" in data: 
+                shark.Alpha_Bina(data.split()[2])
             elif "@num -b" in data: 
                 shark.Num_Bina(data.split()[2], data.split()[3])
             elif "@bina -n" in data: 
