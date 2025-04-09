@@ -1307,7 +1307,7 @@ if __name__ == '__main__':
             print(F.RED+"[x]",er)
         except PermissionError as er:
             print(F.RED+"[x]",er)
-        except socket.error aser:
+        except socket.error as er:
             print(F.RED+"[x]",er)
         except socket.timeout as er:
             print(F.RED+"[x]",er)
