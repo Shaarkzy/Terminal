@@ -19,7 +19,7 @@ from colorama import Fore
 if detect_os():
     pass
 else:
-    print(Fore.RED+"[x]Unsupported OS : Read Program Documentation")
+    print(Fore.RED+"[x]Possible Error: Unsupported OS or Corrupted Shell Folder [exit folder now]")
     quit(0)
 
 #------------------------------------------------------------------------------------------------------------------------------
