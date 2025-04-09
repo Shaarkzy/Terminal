@@ -65,7 +65,7 @@ def software_update():
         open_file = open(f'{folder}Shell/__version__', 'r')
         read_file = open_file.read()
 
-        print(f'\n{Fore.YELLOW}[!]SOFTWARE UPDATED: VERSION: {Fore.CYAN}{read_file}\n{F.BLUE}[!]PLEASE REFRESH YOUR TERMINAL AND RESTART THE PROGRAM..')
+        print(f'\n{Fore.YELLOW}[!]SOFTWARE UPDATED: VERSION: {Fore.CYAN}{read_file}\n{Fore.BLUE}[!]PLEASE REFRESH YOUR TERMINAL AND RESTART THE PROGRAM..')
         open_file.close()
         tm.sleep(4)
 
@@ -176,7 +176,7 @@ try:
     trigger_software_update()
     load_libraries()
 except Exception as er:
-    print(Fore.RED+"[x]"+er)
+    print(Fore.RED+"[x]",er)
     quit(0)
 
 

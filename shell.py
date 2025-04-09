@@ -1298,29 +1298,29 @@ if __name__ == '__main__':
                 sys(data)
 
         except FileNotFoundError as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
         except IsADirectoryError as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
         except TypeError as er:
             pass
         except ValueError as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
         except PermissionError as er:
-            print(F.RED+"[x]", er,": Needs Administrator Priviledge")
-        except socket.error as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
+        except socket.error aser:
+            print(F.RED+"[x]",er)
         except socket.timeout as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
 
 
         except socket.herror as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
         except socket.gaierror as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
         except NameError as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
         except UnboundLocalError as er:
-            print(F.RED+"[x]", er)
+            print(F.RED+"[x]",er)
         except KeyboardInterrupt:
             print(F.CYAN+"\n[✓]Tool Closed")
         except IndexError:
@@ -1331,4 +1331,4 @@ if __name__ == '__main__':
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-# end line 1315
+# end line 1333
