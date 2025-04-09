@@ -13,10 +13,10 @@
      Example: @num -b 2000 2
 [5]. Convert Binary To Number: @bina -n <binary> <base>
      Example: @bina -n 1011101010 2
-[6]. Convert Alphabet To Binary: @alpha -bina
-     Example: @alpha -bina
-[7]. Convert Binary To Alphabet: @bina -alpha
-     Example: @bina -alpha
+[6]. Convert Alphabet To Binary: @alpha -b <filename>
+     Example: @alpha -b file.txt
+[7]. Convert Binary To Alphabet: @bina -a <filename>
+     Example: @bina -a file.bin
 [8]. To Get Device Network Info: @ip -details
      Example: @ip -details
 [9]. To Get Cpu Info: @cpu
