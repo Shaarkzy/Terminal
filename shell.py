@@ -1348,8 +1348,8 @@ if __name__ == '__main__':
             print(F.CYAN+"\n[✓]Tool Closed")
         except IndexError:
             print(F.RED+"[x]Argument Error")
-        #except:
-            #print(F.RED+"[x]An Error Occured")
+        except:
+            print(F.RED+"[x]An Error Occured")
 
 
 
