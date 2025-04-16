@@ -179,7 +179,9 @@ try:
 except Exception as er:
     print(Fore.RED+"[x]",er)
     quit(0)
+except KeyboardInterrupt:
+    quit(0)
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#end line 184
+#end line 186
