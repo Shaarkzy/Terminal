@@ -23,7 +23,7 @@ else:
 
 
 
-def is_connected(host="8.8.8.8", port=53, timeout=0.5):
+def is_connected(host="8.8.8.8", port=53, timeout=3):
 
     try:
         socket.setdefaulttimeout(timeout)
@@ -45,7 +45,7 @@ def is_connected(host="8.8.8.8", port=53, timeout=0.5):
 def get_github():
     if is_connected():
         try:
-            response = req.get(github_raw_version, timeout=0.5)
+            response = req.get(github_raw_version, timeout=3)
             if response.status_code == 200: 
                 file_cont = response.json()
                 content = base64.b64decode(file_cont['content']).decode('utf-8')
