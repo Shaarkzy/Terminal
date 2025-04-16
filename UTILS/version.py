@@ -6,6 +6,7 @@ from requests.exceptions import RequestException
 import os
 from .check_os import detect_os
 import base64
+import socket
 
 #------------------------------------------------------------------------------------------------------------------------------
 
@@ -22,17 +23,38 @@ else:
 
 
 
+def is_connected(host="8.8.8.8", port=53, timeout=0.5):
+
+    try:
+        socket.setdefaulttimeout(timeout)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((host, port))
+        sock.close()
+        return True
+
+    except socket.error:
+        return False
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------
+
+
+
 
 def get_github():
-    try:
-        response = req.get(github_raw_version, timeout=(3, 3))
-        if response.status_code == 200: 
-            file_cont = response.json()
-            content = base64.b64decode(file_cont['content']).decode('utf-8')
-            return content.strip()
-        else:
+    if is_connected():
+        try:
+            response = req.get(github_raw_version, timeout=0.5)
+            if response.status_code == 200: 
+                file_cont = response.json()
+                content = base64.b64decode(file_cont['content']).decode('utf-8')
+                return content.strip()
+            else:
+                return False
+        except RequestException:
             return False
-    except RequestException:
+    else:
         return False
 
 
@@ -59,5 +81,5 @@ def check():
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#end line 61
+#end line 83
 
