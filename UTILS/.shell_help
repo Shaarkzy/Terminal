@@ -1,0 +1,92 @@
+
+
+
+          ---[Note]: Input Ctrl+C To Quit Any Tool---
+
+[1]. Getting Ip Address: @get -i <target>
+     Example: @get -i google.com
+
+[2]. Port Scanning Multiple: @port -sm <target>
+     Example: @port -sm 127.0.0.1
+
+[3]. Port Scanning Single: @port -sn <target> <port>
+     Example: @port -sn 127.0.0.1 80
+
+[4]. Convert Number To Binary: @num -b <number> <base>
+     Example: @num -b 2000 2
+
+[5]. Convert Binary To Number: @bina -n <binary> <base>
+     Example: @bina -n 1011101010 2
+
+[6]. Convert Alphabet To Binary: @alpha -b <filename>
+     Example: @alpha -b file.txt
+
+[7]. Convert Binary To Alphabet: @bina -a <filename>
+     Example: @bina -a file.bin
+
+[8]. To Get Device Network Info: @ip -details
+     Example: @ip -details
+
+[9]. To Get Cpu Info: @cpu
+     Example: @cpu
+
+[10].To Start Wifi Chat Room:
+     HOST   : @open -server
+     CLIENT : @con -s <ip> <port>
+     Example: @con -s 127.0.0.1 12345
+     Note   : To Exit Chat, Users Can Input "@bye"..
+            : Doesn't Support Telnet
+
+[11].To Create File: @file <option> <file_name>
+            Options: -c Create File
+	             -a Append Data To Existing File
+                     -d Delete File
+                     -r Read Data From A File<F11>
+                     -v Check The Properties Of A File And Folder
+                     -ed Encrypt/Decrypt File
+            Example: @file -cardrv(ed) filename.txt
+            NOTE   :Can only encrypt files with .enc extension
+
+[12].To Send Message To A Whatsapp Contact: @send -w <number>
+    Example: @send -w +1234567890
+
+[13].To Send File Via Wifi: @send -file
+     To Recieve File       : @recv -f <host> <port>
+     Example: @recv -f 127.0.0.1 12345
+     NOTE: Doesn't Suppport Telnet
+
+[14].To Start Remote Shell Via Wifi::
+     HOST   : @shell -host
+     CLIENT : @shell -c <ip> <port>
+     Example: @shell -client 127.0.0.1 12345
+     NOTE   : Doesn't Support Telnet
+            : To Exit Session Input: exit
+
+[15].To Encrypt A Text: @crypt
+     Example: @crypt
+     Note   : Can Only Encrypt String Format Not(int, bytes)
+
+[16].To Check Mobile Number Details: @check -n <country code> <number>
+     Example: @check -n +123123450000
+     NOTE   : Without Country Code: Default Is <+62>
+
+[17].To Solve Resistor Colour Code: @solve -res
+     Example: @solve -res
+
+[18].To Check Weather: @check -w <city>
+     Example: @check -w London
+
+[19].To Gather Info About An Ip Address: @ip -s <0.0.0.0>
+     Example: @ip -s 100.101.102.103
+
+[20].To Search File In File System: @sch -file
+     Example: @sch -file
+
+[21].To Lookup MAC Address: @sch -m <mac address>
+     Example: @sch -m 00:00:00:00:00:00
+
+[22].To Manually Update Software: @update
+
+[23].To Check For SOftware Version: @version
+
+[00]. To Exit Program: @exit
