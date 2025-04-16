@@ -1177,16 +1177,40 @@ class shark:
             self.count = 0
         else:
             print(F.RED+"[x]Error: Empty Input")
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    def check_rand(self, mac):
+        try:
+            mac = mac.replace('-', ':').lower()
+            first_byte = mac.split(':')[0]
+            first_byte_int = int(first_byte, 16)
+
+            return bool(first_byte_int & 0b00000010)
+        except:
+            return False
+
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------
             
             
     def mac_lookup(self, mac):
-        url = f"https://api.macvendors.com/{mac}"
+        if not self.check_rand(mac):
+            url = f"https://api.macvendors.com/{mac}"
         
-        response = r.get(url)
-        if response.status_code == 200:
-            print(f"{F.CYAN}[*]Device Manufacturer: {F.WHITE}{response.text}")
+            response = r.get(url)
+            if response.status_code == 200:
+                print(f"{F.CYAN}[*]Device Manufacturer: {F.WHITE}{response.text}")
+            else:
+                print(F.RED+"[x]No Mac Record Found")
         else:
-            print(F.RED+"[x]No Mac Record Found")
+            print(F.RED+"[x]Mac Is Locally Assigned [Not Lookable]")
 
 
 
@@ -1324,10 +1348,10 @@ if __name__ == '__main__':
             print(F.CYAN+"\n[✓]Tool Closed")
         except IndexError:
             print(F.RED+"[x]Argument Error")
-        except:
-            print(F.RED+"[x]An Error Occured")
+        #except:
+            #print(F.RED+"[x]An Error Occured")
 
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-# end line 1332
+# end line 1356
