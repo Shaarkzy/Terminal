@@ -29,7 +29,6 @@ to build and configure program
 │   │       ├── check_os.cpython-312.pyc
 │   │       └── version.cpython-312.pyc
 │   └── BOOT_SETUP/
-│       ├── pycryptodome.sh
 │       ├── util_boot.py
 │       └── __pycache__
 │           └── util_boot.cpython-312.pyc

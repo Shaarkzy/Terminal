@@ -49,8 +49,8 @@ echo -e "\n${GREEN}INSTALLING NETIFACES 10/12${NC}\n"
 apt-get install python3-netifaces
 echo -e "\n${GREEN}DONE INSTALLING NETIFACES 10/12${NC}\n"
 
-echo -e "\n${YELLOW}RUNNING SCRIPT FOR PYCRYPTODOME 11/12${NC}\n"
-bash -c "cd UTILS/BOOT* && ./pycryptodome.sh"
+echo -e "\n${YELLOW}INSTALLIBG PYCRYPTODOME 11/12${NC}\n"
+apt-get install python3-pycryptodome
 echo -e "\n${YELLOW}DONE INSTALLING PYCRYPTODOME 11/12${NC}\n"
 
 echo -e "\n${BLUE}INSTALLING NEOFETCH 12/12${NC}\n"
@@ -58,6 +58,14 @@ apt-get install neofetch
 echo -e "\n${BLUE}DONE INSTALLING NEOFETCH 12/12${NC}\n"
 
 echo -e "\n${GREEN}[*] SETTING UP SHELL.PY${NC}"
+
 chmod +x shell.py
-ln -s ~/Shell/shell.py /bin/shell
+
+# Check if the script is run as root
+#if [ "$EUID" -eq 0 ]; then
+ln -s "$(pwd)"/shell.py /bin/shell
+
+
+chmod +x shell.py
+ln -s Shell/shell.py /bin/shell
 echo -e "\n${YELLOW}[*] IF NOT ERROR: Start Terminal By executing: shell${NC}\n"
