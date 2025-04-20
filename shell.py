@@ -389,8 +389,8 @@ class shark:
 
    # open server for wifi chat room
     def open_server(self): #11
-        socket.setdefaulttimeout(100)
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(100)
         #sock = socket.socket()
         print (F.CYAN+"[Note]: Only Support Wlan")
         print(F.CYAN+"......: To Close Chat: @bye")
@@ -811,8 +811,8 @@ class shark:
 
    # send file via wifi or localhost
     def send_file(self): #15
-        socket.setdefaulttimeout(100)
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(100)
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
         port = a3+a2+a1+a2+a3
         sock.bind(('0.0.0.0', int(port)))
@@ -914,8 +914,8 @@ class shark:
 
     # open server for shell
     def shell_host(self): #17
-        socket.setdefaulttimeout(100)
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(100)
         tm.sleep(1)
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
         ip = self.get_private_addr()
