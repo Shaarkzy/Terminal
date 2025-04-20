@@ -1,5 +1,5 @@
 #!/bin/bash
 
 sudo rm -rf /usr/local/bin/shell
-cd ~/; ln -s ~/Shell/shell.py /usr/local/bin/shell
+cd ~/; sudo ln -s ~/Shell/shell.py /usr/local/bin/shell
 echo "RELINKED"
