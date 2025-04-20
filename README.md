@@ -45,6 +45,7 @@ to build and configure program
 3. For kali installation run setup as root: $ sudo ./setup.sh
 4. Program Folder must be in the home directory (~/Shell , /root/Shell)
 5. On Kali, it's advisable to run setup on Non root Terminal, Run: $ ./relink on Non root terminal if setup was run on Root Terminal and you wish to run shell command from Non root terminal.
+6. To start shell on Non root Terminal run: sudo shell.
 ```
 
 **Features:**
