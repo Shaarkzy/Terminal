@@ -93,10 +93,12 @@ class shark:
 
     # function for list of tools
     def help(self): #1
-        if detect_os:
+        if detect_os():
             data = open("/data/data/com.termux/files/home/Shell/UTILS/.shell_help", "r").read()
         else:
-            data = open("/home/Shell/UTILS/.shell_help", "r").read()
+            user = sub.getoutput('whoami')
+            data = "/root/Shell/UTILS/.shell_help" if os.geteuid() == 0 else f"/home/{user}/Shell/UTILS/.shell_help"
+            data = open(data, "r").read()
         print(F.CYAN+data)
 
 
@@ -1164,9 +1166,9 @@ class shark:
     # file search trigger        
     def trigger_search(self):
         if detect_os():
-            folder = "/" if os.geteuid() == 0 else "/data/data/com.termux"
+            folder = "/data/data/com.termux"
         else:
-            folder  = "/" if os.geteuid() == 0 else "/home"
+            folder  = "/root" if os.geteuid() == 0 else "/home"
             
         target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
         
@@ -1219,7 +1221,7 @@ class shark:
 
 
     def version(self):
-        if detect_os:
+        if detect_os():
             folder = '/data/data/com.termux/files/home/Shell/__version__'
         else:
             folder = "/root/Shell/__version__" if os.geteuid() == 0 else '/home/{user}/Shell/__version__'
@@ -1354,4 +1356,4 @@ if __name__ == '__main__':
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-# end line 1356
+# end line 1358

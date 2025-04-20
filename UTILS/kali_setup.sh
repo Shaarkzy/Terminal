@@ -4,7 +4,6 @@ BLUE='\033[0;34m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
-
 echo -e "\n${BLUE}BUILDING ESSENTIALS FOR PYTHON3-DEV${NC}\n"
 apt-get install build-essential python3-dev
 echo -e "\n${BLUE}DONE${NC}\n"
@@ -50,7 +49,7 @@ apt-get install python3-netifaces
 echo -e "\n${GREEN}DONE INSTALLING NETIFACES 10/11${NC}\n"
 
 echo -e "\n${YELLOW}INSTALLIBG PYCRYPTODOME 11/11${NC}\n"
-apt-get install python3-pycryptodome
+bash -c "cd UTILS/BOOT* && ./pycryptodome.sh"
 echo -e "\n${YELLOW}DONE INSTALLING PYCRYPTODOME 11/11${NC}\n"
 
 echo -e "\n${GREEN}[*] SETTING UP SHELL.PY${NC}"

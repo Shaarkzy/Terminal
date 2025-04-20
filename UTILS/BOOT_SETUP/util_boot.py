@@ -16,7 +16,7 @@ from colorama import Fore
 
 
 #detect operating system
-if detect_os == True or detect_os == False:
+if detect_os() == True or detect_os() == False:
     pass
 else:
     print(Fore.RED+"[x]Possible Error: Unsupported OS or Corrupted Shell Folder [exit folder now]")

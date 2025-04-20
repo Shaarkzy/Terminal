@@ -7,12 +7,13 @@ import os
 from .check_os import detect_os
 import base64
 import socket
+import subprocess as sub
 
 #------------------------------------------------------------------------------------------------------------------------------
 
 github_raw_version = "https://api.github.com/repos/Shaarkzy/Shell/contents/__version__?ref=main"
 
-if detect_os:
+if detect_os():
     local_raw_version = '/data/data/com.termux/files/home/Shell/__version__'
 else:
     user = sub.getoutput('whoami')
@@ -81,5 +82,5 @@ def check():
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#end line 83
+#end line 84
 
