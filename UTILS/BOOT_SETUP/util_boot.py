@@ -49,11 +49,14 @@ def software_update():
     #remove Folder
     if detect_os():
         folder = '/data/data/com.termux/files/home/'
+        print("android") #dgsjgs
     else:
         user = sub.getoutput('whoami')
         folder = "/root/" if os.geteuid() == 0 else'/home/{user}/'
+        print("kali") #dgsjgsu
 
     form = f'{folder}Shell'
+    print("form") #dvdjhd
 
     if form in sub.getoutput("pwd"):
         print(Fore.RED+"[x]POTENTIAL ERROR: WON'T RUN UPDATE ON SHELL SOFTWARE FOLDER")
@@ -63,7 +66,7 @@ def software_update():
         print(Fore.CYAN+"\n[!]UPDATING SOFTWARE....\n")
         sub.getoutput("cd ~ && rm -rf ~/Shell && git clone https://github.com/Shaarkzy/Shell ~/Shell")
         #Read Update & Clone Latest Repo
-        open_file = open(f'{folder}Shell/__version__', 'r')
+        open_file = open(f'{folder}Shell/__veon__', 'r') #dhsjgs
         read_file = open_file.read()
 
         print(f'\n{Fore.YELLOW}[!]SOFTWARE UPDATED: VERSION: {Fore.CYAN}{read_file}\n{Fore.BLUE}[!]PLEASE REFRESH YOUR TERMINAL AND RESTART THE PROGRAM..')
