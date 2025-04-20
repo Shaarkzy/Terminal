@@ -51,7 +51,7 @@ def software_update():
         folder = '/data/data/com.termux/files/home/'
     else:
         user = sub.getoutput('whoami')
-        folder = "/root/" if os.geteuid() == 0 else'/home/{user}/'
+        folder = "/root/" if os.geteuid() == 0 else f'/home/{user}/'
 
     form = f'{folder}Shell'
 
