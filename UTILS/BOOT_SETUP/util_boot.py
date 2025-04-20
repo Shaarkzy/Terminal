@@ -47,7 +47,7 @@ def trigger_software_update():
 
 def software_update():
     #remove Folder
-    if detect_os:
+    if detect_os():
         folder = '/data/data/com.termux/files/home/'
     else:
         user = sub.getoutput('whoami')
