@@ -398,6 +398,7 @@ class shark:
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
         ip = self.get_private_addr()
         port = a3+a2+a1+a2+a3
+        socket.setdefaulttimeout(100)
         print (F.BLUE+"[✓]Server Started")
         tm.sleep(1)
         print (F.GREEN+f"[*]Ip: {ip} : [*]Port: {port}")
@@ -813,6 +814,7 @@ class shark:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
         port = a3+a2+a1+a2+a3
+        socket.setdefaulttimeout(100)
         sock.bind(('0.0.0.0', int(port)))
         print (F.BLUE+"[✓]Server Started")
         ip = self.get_private_addr()
@@ -917,6 +919,7 @@ class shark:
         a1, a2, a3 = str(rd.randint(1,6)), str(rd.randint(1,6)), str(rd.randint(1,5))
         ip = self.get_private_addr()
         port = a3+a2+a1+a2+a3
+        socket.setdefaulttimeout(100)
         print(F.CYAN+"[Note]: Input <exit> To Close Session")
         print (F.BLUE+"[✓]Shell Host Started")
         tm.sleep(1)
@@ -1358,4 +1361,4 @@ if __name__ == '__main__':
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-# end line 1358
+# end line 1363
