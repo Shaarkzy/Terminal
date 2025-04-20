@@ -30,7 +30,6 @@ def inpu():
                 tf.close()
         except FileNotFoundError:
             print(F.RED+"[x]Tempered Program Folder")
-            quit(0)
         
     else:
         user = sub.getoutput("whoami")
@@ -41,6 +40,9 @@ def inpu():
                 tf.close()
         except FileNotFoundError:
             print(F.RED+"[x]Tempered Program Folder")
+            quit(0)
+        except PermissionError:
+            print(F.RED+"[x]Run As Root")
             quit(0)
 
     readl.read_history_file(history_file)
