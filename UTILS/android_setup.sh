@@ -51,5 +51,5 @@ echo -e "\n${GREEN}DONE INSTALLING PYCRYPTODOME 11/11${NC}\n"
 
 echo -e "\n${BLUE}[*] SETTING UP SHELL.PY${NC}"
 chmod +x shell.py
-ln -s ~/Shell/shell.py /data/data/com.termux/files/usr/bin/shell
+cd ~/; ln -s ~/Shell/shell.py /data/data/com.termux/files/usr/bin/shell
 echo -e "\n${GREEN}[*] IF NOT ERROR: Start Terminal By executing : shell${NC}\n"
