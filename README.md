@@ -17,6 +17,7 @@ to build and configure program
 ├── setup.sh
 ├── shell.py
 ├── __version__
+├── relink
 ├── UTILS/
 │   ├── android_setup.sh
 │   ├── kali_setup.sh
@@ -30,6 +31,7 @@ to build and configure program
 │   │       └── version.cpython-312.pyc
 │   └── BOOT_SETUP/
 │       ├── util_boot.py
+│       ├── pycryptodome.sh
 │       └── __pycache__
 │           └── util_boot.cpython-312.pyc
 │       
@@ -40,8 +42,9 @@ to build and configure program
 ```
 1. Tested under Kali LInux Os and Android OS
 2. Some utilities requires superuser privilege (on feature 10)...
-3. For kali installation run setup as root (sudo ./setup.sh)
+3. For kali installation run setup as root: $ sudo ./setup.sh
 4. Program Folder must be in the home directory (~/Shell , /root/Shell)
+5. On Kali, if shell command is linked from Non Root Terminal and you wish to relink to Root Terminal (go to the root shell folder and run $ ./relink) and vice versa
 ```
 
 **Features:**
