@@ -60,12 +60,6 @@ echo -e "\n${BLUE}DONE INSTALLING NEOFETCH 12/12${NC}\n"
 echo -e "\n${GREEN}[*] SETTING UP SHELL.PY${NC}"
 
 chmod +x shell.py
+ln -s ~/Shell/shell.py /bin/shell
 
-# Check if the script is run as root
-#if [ "$EUID" -eq 0 ]; then
-ln -s "$(pwd)"/shell.py /bin/shell
-
-
-chmod +x shell.py
-ln -s Shell/shell.py /bin/shell
 echo -e "\n${YELLOW}[*] IF NOT ERROR: Start Terminal By executing: shell${NC}\n"
