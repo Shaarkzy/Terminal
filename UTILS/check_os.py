@@ -8,7 +8,7 @@ def detect_os():
      # Check for Kali
      kali_check = sub.getoutput("uname -a | grep -i kali").strip()
      if kali_check:
-         return True
+         return False
          
  
      # Check for Android
