@@ -44,7 +44,7 @@ to build and configure program
 2. Some utilities requires superuser privilege (on feature 10)...
 3. For kali installation run setup as root: $ sudo ./setup.sh
 4. Program Folder must be in the home directory (~/Shell , /root/Shell)
-5. On Kali, if shell command is linked from Non Root Terminal and you wish to relink to Root Terminal (go to the root shell folder and run $ ./relink) and vice versa
+5. On Kali, it's advisable to run setup on Non root Terminal, Run: $ ./relink on Non root terminal if setup was run on Root Terminal and you wish to run shell command from Non root terminal.
 ```
 
 **Features:**
