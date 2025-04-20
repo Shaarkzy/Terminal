@@ -1224,7 +1224,7 @@ class shark:
         if detect_os():
             folder = '/data/data/com.termux/files/home/Shell/__version__'
         else:
-            folder = "/root/Shell/__version__" if os.geteuid() == 0 else '/home/{user}/Shell/__version__'
+            folder = "/root/Shell/__version__" if os.geteuid() == 0 else f'/home/{user}/Shell/__version__'
         open_file = open(folder, 'r')
         print(F.CYAN+open_file.read().strip())
         open_file.close()

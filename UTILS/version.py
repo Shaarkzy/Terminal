@@ -17,7 +17,7 @@ if detect_os():
     local_raw_version = '/data/data/com.termux/files/home/Shell/__version__'
 else:
     user = sub.getoutput('whoami')
-    local_raw_version = "/root/Shell/__version__" if os.geteuid() == 0 else '/home/{user}/Shell/__version__' 
+    local_raw_version = "/root/Shell/__version__" if os.geteuid() == 0 else f'/home/{user}/Shell/__version__' 
 
 
 #------------------------------------------------------------------------------------------------------------------------------
