@@ -179,9 +179,9 @@ __all__ = [
 try:
     trigger_software_update()
     load_libraries()
-except Exception as er:
-    print(Fore.RED+"[x]",er)
-    quit(0)
+#except Exception as er:
+    #print(Fore.RED+"[x]",er)
+    #quit(0)
 except KeyboardInterrupt:
     quit(0)
 

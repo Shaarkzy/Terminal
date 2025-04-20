@@ -1322,8 +1322,8 @@ if __name__ == '__main__':
             else:
                 sys(data)
 
-        except FileNotFoundError as er:
-            print(F.RED+"[x]",er)
+        #except FileNotFoundError as er:
+            #print(F.RED+"[x]",er)
         except IsADirectoryError as er:
             print(F.RED+"[x]",er)
         except TypeError as er:
@@ -1342,7 +1342,7 @@ if __name__ == '__main__':
             print(F.RED+"[x]",er)
         except socket.gaierror as er:
             print(F.RED+"[x]",er)
-        except NameError as er:
+        excep<F11>t NameError as er:
             print(F.RED+"[x]",er)
         except UnboundLocalError as er:
             print(F.RED+"[x]",er)
@@ -1350,8 +1350,8 @@ if __name__ == '__main__':
             print(F.CYAN+"\n[✓]Tool Closed")
         except IndexError:
             print(F.RED+"[x]Argument Error")
-        except:
-            print(F.RED+"[x]An Error Occured")
+        #except:
+            #print(F.RED+"[x]An Error Occured")
 
 
 
