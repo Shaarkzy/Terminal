@@ -15,14 +15,14 @@ detect_os() {
             echo -e "${BLUE}DONE${NC}"
             ./UTILS/android_setup.sh
             
-        elif [[ "$(uname -i | grep -i kali)" ]]; then
+        elif [[ "$(uname -a | grep -i kali)" ]]; then
             echo -e "${GREEN}INSTALLING PYTHON3${NC}"
             apt-get install python3
             echo -e "${BLUE}DONE${NC}"
             ./UTILS/kali_setup.sh
 
 	else
-	    echo "$(RED)[x]Unsupported OS : Read Documentation${NC}"
+	    echo "${RED}[x]Unsupported OS : Read Documentation${NC}"
         fi
     else
         echo "${RED}[x]Unsupported OS : Read Documentation${NC}"
