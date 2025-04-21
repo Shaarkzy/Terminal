@@ -1,5 +1,12 @@
 #!/bin/bash
 
-sudo rm -rf /usr/local/bin/shell
-cd ~/; sudo ln -s ~/Shell/shell.py /usr/local/bin/shell
-echo "RELINKED"
+
+if [[ "$(uname -a | grep -i kali)" ]]; then
+	sudo rm -rf /usr/local/bin/shell
+	cd ~/; sudo ln -s ~/Shell/shell.py /usr/local/bin/shell
+	echo "RELINKED"
+
+else
+	echo "Wont Run On This Os"
+        fi
+
