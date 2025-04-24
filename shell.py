@@ -725,7 +725,7 @@ class shark:
                         print (F.RED+"[x]Error, Invalid Input")
 
                 elif reg == False:
-                    print (F.GREEN+"[*]File Is In Decrypted Format!!\n[*]Wish To Encrypted")
+                    print (F.GREEN+"[*]File Is In Decrypted Format!!\n[*]Wish To Encrypt")
                     opt = input(F.YELLOW+"[?]Y/N: "+F.WHITE).upper()
                     if opt == "Y":
                         #encryption here
