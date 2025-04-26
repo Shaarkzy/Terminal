@@ -96,17 +96,20 @@ def solve(*args):
 
 
  
+try:
+    def run():
+        print(f"\n{F.YELLOW}[!]Example For A 4 Band Resistor: {F.WHITE}red white yellow gold")   
 
-def run():
-    print(f"\n{F.YELLOW}[!]Example For A 4 Band Resistor: {F.WHITE}red white yellow gold")   
+        inp = input(F.GREEN+"[:]Enter Code: "+F.WHITE).lower().split()
 
-    inp = input(F.GREEN+"[:]Enter Code: "+F.WHITE).lower().split()
+        try:
+            solve(*inp)
+        except KeyError:
+            print(f"\n{F.RED}[x]Invalid Color Code\n")
 
-    try:
-        solve(*inp)
-    except KeyError:
-        print(f"\n{F.RED}[x]Invalid Color Code\n")
+except:
+    quit(0)
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#end line 111
+#end line 114

@@ -67,20 +67,25 @@ def get_local():
     open_file = open(local_raw_version, "r")
     return open_file.read().strip()
 
-def check():
-    check_git = get_github()
-    check_local = get_local()
+
+try:
+    def check():
+        check_git = get_github()
+        check_local = get_local()
 
     
-    if check_git != False:
-        if check_git == check_local:
-            return False
+        if check_git != False:
+            if check_git == check_local:
+                return False
+            else:
+                return True
         else:
-            return True
-    else:
-        return 'null_internet'
+            return 'null_internet'
+
+except:
+    quit(0)
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#end line 84
+#end line 90
 
