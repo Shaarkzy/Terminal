@@ -1147,6 +1147,8 @@ class shark:
                 elif os.path.isfile(full_path) and item == target_file:
                     print(f"{F.GREEN}[✓]File Found: {F.WHITE}{full_path}")
                     self.search_counter()
+        except FileNotFoundError as er:
+            print(f"{F.RED}[x]Invalid Directory: {F.WHITE}{directory}")
         except:
             print(f"{F.RED}[x]Permission Denied: {F.WHITE}{full_path}")
 
@@ -1360,4 +1362,4 @@ if __name__ == '__main__':
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-# end line 1361
+# end line 1364
