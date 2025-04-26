@@ -1330,7 +1330,8 @@ if __name__ == '__main__':
         except IsADirectoryError as er:
             print(F.RED+"[x]",er)
         except TypeError as er:
-            pass
+            print(F.RED+"[x]A Fatal Error Occured\n[*]Quiting Program")
+            break
         except ValueError as er:
             print(F.RED+"[x]",er)
         except PermissionError as er:
