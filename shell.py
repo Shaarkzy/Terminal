@@ -1169,12 +1169,10 @@ class shark:
         
             
     # file search trigger        
-    def trigger_search(self):
-        if detect_os():
-            folder = "/data/data/com.termux"
-        else:
-            folder  = "/root" if os.geteuid() == 0 else "/home"
-            
+    def trigger_search(self, directory):
+
+        folder = "/data/data/com.termux" if directory == "/termux" else directory
+
         target__file = input(f"{F.BLUE}[%]File To Search:{F.WHITE} ")
         
         if target__file:
@@ -1296,8 +1294,8 @@ if __name__ == '__main__':
                 shark.weather(data.split()[2])
             elif "@ip -s" in data:
                 shark.ip_osint(data.split()[2])
-            elif "@sch -file" in data:
-                shark.trigger_search()
+            elif "@sch -f" in data:
+                shark.trigger_search(data.split()[2])
             elif "@sch -m" in data:
                 shark.mac_lookup(data.split()[2])
             elif "@solve -res" in data:
@@ -1361,4 +1359,4 @@ if __name__ == '__main__':
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-# end line 1363
+# end line 1361

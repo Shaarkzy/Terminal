@@ -79,8 +79,11 @@
 [19].To Gather Info About An Ip Address: @ip -s <0.0.0.0>
      Example: @ip -s 100.101.102.103
 
-[20].To Search File In File System: @sch -file
-     Example: @sch -file
+[20].To Search File In File System: @sch -f <directory>
+     Example: @sch -f /root
+     Note: Searching From The Root(/) Directory Will Consume Enormous Time
+         : On Termux, Searching From The Termux (/data/data/com.termux) Directory, Use: </termux> 
+         - Example: @sch -f /termux
 
 [21].To Lookup MAC Address: @sch -m <mac address>
      Example: @sch -m 00:00:00:00:00:00

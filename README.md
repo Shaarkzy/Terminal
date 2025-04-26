@@ -40,7 +40,7 @@ to build and configure program
 
 **Note:**
 ```
-1. Tested under Kali LInux Os and Android OS
+1. Tested under Kali LInux Os and Android OS (Configured For Termux Terminal Only)
 2. Some utilities requires superuser privilege (on feature 10)...
 3. For kali installation run setup as root: $ sudo ./setup.sh
 4. Program Folder must be in the home directory (~/Shell , /root/Shell)
