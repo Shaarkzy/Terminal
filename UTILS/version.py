@@ -1,13 +1,17 @@
 
 #------------------------------------------------------------------------------------------------------------------------------
 
-import requests as req
-from requests.exceptions import RequestException
-import os
-from .check_os import detect_os
-import base64
-import socket
-import subprocess as sub
+try:
+    import requests as req
+    from requests.exceptions import RequestException
+    import os
+    from .check_os import detect_os
+    import base64
+    import socket
+    import subprocess as sub
+except ImportError:
+    print("[x]Kaboom!!!!")
+    quit(0)
 
 #------------------------------------------------------------------------------------------------------------------------------
 
@@ -87,5 +91,5 @@ except:
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#end line 90
+#end line 93
 

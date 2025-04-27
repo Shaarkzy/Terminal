@@ -1,15 +1,19 @@
 #------------------------------------------------------------------------------------------------------------------------------
 
 #imports
-import subprocess as sub
-from ..version import check
-from ..check_os import detect_os
-import os
-import shutil
-import time as tm
-from os import system as sys
-import subprocess as sub
-from colorama import Fore
+try:
+    import subprocess as sub
+    from ..version import check
+    from ..check_os import detect_os
+    import os
+    import shutil
+    import time as tm
+    from os import system as sys
+    import subprocess as sub
+    from colorama import Fore
+except:
+    print("[x]Kaboom!!!")
+    quit(0)
 
 
 #------------------------------------------------------------------------------------------------------------------------------
@@ -184,4 +188,4 @@ except KeyboardInterrupt:
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#end line 186
+#end line 190
