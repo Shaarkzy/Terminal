@@ -1147,9 +1147,14 @@ class shark:
                 elif os.path.isfile(full_path) and item == target_file:
                     print(f"{F.GREEN}[✓]File Found: {F.WHITE}{full_path}")
                     self.search_counter()
-        except FileNotFoundError as er:
+
+        except FileNotFoundError:
             print(f"{F.RED}[x]Invalid Directory: {F.WHITE}{directory}")
-        except:
+
+        except NotADirectoryError:
+            print(f"{F.RED}[x]Not A Directory: {F.WHITE}{full_path}")
+
+        except PermissionError:
             print(f"{F.RED}[x]Permission Denied: {F.WHITE}{full_path}")
 
 
@@ -1157,7 +1162,7 @@ class shark:
 
 
 
-            
+    
     # search counter       
     def search_counter(self):
         self.count+= 1
@@ -1331,7 +1336,7 @@ if __name__ == '__main__':
             print(F.RED+"[x]",er)
         except IsADirectoryError as er:
             print(F.RED+"[x]",er)
-        except TypeError as er:
+        except TypeError:
             print(F.RED+"[x]A Fatal Error Occured\n[*]Quiting Program")
             break
         except ValueError as er:
@@ -1343,9 +1348,6 @@ if __name__ == '__main__':
         except socket.timeout as er:
             print(F.RED+"[x]",er)
 
-
-        except socket.herror as er:
-            print(F.RED+"[x]",er)
         except socket.gaierror as er:
             print(F.RED+"[x]",er)
         except NameError as er:
@@ -1354,12 +1356,12 @@ if __name__ == '__main__':
             print(F.RED+"[x]",er)
         except KeyboardInterrupt:
             pass
-        except IndexError:
-            print(F.RED+"[x]Argument Error")
+        except IndexError as er:
+            print(F.RED+"[x]",er)
         except:
             print(F.RED+"[x]An Error Occured")
 
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-# end line 1364
+# end line 1366
