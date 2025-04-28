@@ -7,6 +7,6 @@ if [[ "$(uname -a | grep -i kali)" ]]; then
 	echo "RELINKED"
 
 else
-	echo "Wont Run On This Os"
+	echo "Operating System Unsupported"
         fi
 

@@ -10,7 +10,7 @@ try:
     import socket
     import subprocess as sub
 except ImportError:
-    print("[x]Kaboom!!!!")
+    pass
     quit(0)
 
 #------------------------------------------------------------------------------------------------------------------------------

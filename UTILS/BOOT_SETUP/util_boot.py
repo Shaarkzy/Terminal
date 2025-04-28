@@ -12,7 +12,7 @@ try:
     import subprocess as sub
     from colorama import Fore
 except:
-    print("[x]Kaboom!!!")
+    pass
     quit(0)
 
 

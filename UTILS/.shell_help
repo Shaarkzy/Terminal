@@ -41,7 +41,7 @@
             Options: -c Create File
 	             -a Append Data To Existing File
                      -d Delete File
-                     -r Read Data From A File<F11>
+                     -r Read Data From A File
                      -v Check The Properties Of A File And Folder
                      -ed Encrypt/Decrypt File
             Example: @file -cardrv(ed) filename.txt
@@ -90,6 +90,6 @@
 
 [22].To Manually Update Software: @update
 
-[23].To Check For SOftware Version: @version
+[23].To Check For Software Version: @version
 
 [00]. To Exit Program: @exit
