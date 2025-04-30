@@ -1,95 +1,95 @@
 
 
 
-          ---[Note]: Input Ctrl+C To Quit Any Tool---
+          {F.YELLOW}---[Note]: Input {F.GREEN}Ctrl+C {F.YELLOW}To Quit Any Tool---
 
-[1]. Getting Ip Address: @get -i <target>
-     Example: @get -i google.com
+{F.YELLOW}[1]. {F.CYAN}Getting Ip Address: {F.WHITE}@get -i {F.GREEN}<target>
+     {F.GREEN}Example: {F.WHITE}@get -i google.com
 
-[2]. Port Scanning Multiple: @port -sm <target>
-     Example: @port -sm 127.0.0.1
+{F.YELLOW}[2]. {F.CYAN}Port Scanning Multiple: {F.WHITE}@port -sm {F.GREEN}<target>
+     {F.GREEN}Example: {F.WHITE}@port -sm 127.0.0.1
 
-[3]. Port Scanning Single: @port -sn <target> <port>
-     Example: @port -sn 127.0.0.1 80
+{F.YELLOW}[3]. {F.CYAN}Port Scanning Single: {F.WHITE}@port -sn {F.GREEN}<target> <port>
+     {F.GREEN}Example: {F.WHITE}@port -sn 127.0.0.1 80
 
-[4]. Convert Number To Binary: @num -b <number> <base>
-     Example: @num -b 2000 2
+{F.YELLOW}[4]. {F.CYAN}Convert Number To Binary: {F.WHITE}@num -b {F.GREEN}<number> <base>
+     {F.GREEN}Example: {F.WHITE}@num -b 2000 2
 
-[5]. Convert Binary To Number: @bina -n <binary> <base>
-     Example: @bina -n 1011101010 2
+{F.YELLOW}[5]. {F.CYAN}Convert Binary To Number: {F.WHITE}@bina -n {F.GREEN}<binary> <base>
+     {F.GREEN}Example: {F.WHITE}@bina -n 1011101010 2
 
-[6]. Convert Alphabet To Binary: @alpha -b <filename>
-     Example: @alpha -b file.txt
+{F.YELLOW}[6]. {F.CYAN}Convert Alphabet To Binary: {F.WHITE}@alpha -b {F.GREEN}<filename>
+     {F.GREEN}Example: {F.WHITE}@alpha -b file.txt
 
-[7]. Convert Binary To Alphabet: @bina -a <filename>
-     Example: @bina -a file.bin
+{F.YELLOW}[7]. {F.CYAN}Convert Binary To Alphabet: {F.WHITE}@bina -a {F.GREEN}<filename>
+     {F.GREEN}Example: {F.WHITE}@bina -a file.bin
 
-[8]. To Get Device Network Info: @ip -details
-     Example: @ip -details
+{F.YELLOW}[8]. {F.CYAN}To Get Device Network Info: {F.WHITE}@ip -details
+     {F.GREEN}Example: {F.WHITE}@ip -details
 
-[9]. To Get Cpu Info: @cpu
-     Example: @cpu
+{F.YELLOW}[9]. {F.CYAN}To Get Cpu Info: {F.WHITE}@cpu
+     {F.GREEN}Example: {F.WHITE}@cpu
 
-[10].To Start Wifi Chat Room:
-     HOST   : @open -server
-     CLIENT : @con -s <ip> <port>
-     Example: @con -s 127.0.0.1 12345
-     Note   : To Exit Chat, Users Can Input "@bye"..
-            : Doesn't Support Telnet
+{F.YELLOW}[10].{F.CYAN}To Start Wifi Chat Room:
+     {F.GREEN}HOST   : {F.WHITE}@open -server
+     {F.GREEN}CLIENT : {F.WHITE}@con -s {F.GREEN}<ip> <port>
+     {F.GREEN}Example: {F.WHITE}@con -s 127.0.0.1 12345
+     {F.RED}Note   : {F.WHITE}To Exit Chat, Users Can Input "@bye"..
+           {F.GREEN} : {F.CYAN}Doesn't Support Telnet
 
-[11].To Create File: @file <option> <file_name>
-            Options: -c Create File
-	             -a Append Data To Existing File
-                     -d Delete File
-                     -r Read Data From A File
-                     -v Check The Properties Of A File And Folder
-                     -ed Encrypt/Decrypt File
-            Example: @file -cardrv(ed) filename.txt
-            NOTE   :Can only encrypt files with .enc extension
+{F.YELLOW}[11].{F.CYAN}To Create File: {F.WHITE}@file {F.GREEN}<option> <file_name>
+            {F.GREEN}Options: {F.CYAN}-c Create File
+	             {F.CYAN}-a Append Data To Existing File
+                     {F.CYAN}-d Delete File
+                     {F.CYAN}-r Read Data From A File
+                     {F.CYAN}-v Check The Properties Of A File And Folder
+                     {F.CYAN}-ed Encrypt/Decrypt File
+            {F.GREEN}Example: {F.WHITE}@file -cardrv(ed) filename.txt
+            {F.RED}NOTE   :{F.CYAN} Can only encrypt files with .enc extension
 
-[12].To Send Message To A Whatsapp Contact: @send -w <number>
-    Example: @send -w +1234567890
+{F.YELLOW}[12].{F.CYAN}To Send Message To A Whatsapp Contact: {F.WHITE}@send -w {F.GREEN}<number>
+    {F.GREEN}Example: {F.WHITE}@send -w +1234567890
 
-[13].To Send File Via Wifi: @send -file
-     To Recieve File       : @recv -f <host> <port>
-     Example: @recv -f 127.0.0.1 12345
-     NOTE: Doesn't Suppport Telnet
+{F.YELLOW}[13].{F.CYAN}To Send File Via Wifi: {F.WHITE}@send -file
+     {F.GREEN}To Recieve File       : {F.WHITE}@recv -f {F.GREEN}<host> <port>
+     {F.GREEN}Example: {F.WHITE}@recv -f 127.0.0.1 12345
+     {F.GREEN}NOTE: {F.CYAN}Doesn't Suppport Telnet
 
-[14].To Start Remote Shell Via Wifi::
-     HOST   : @shell -host
-     CLIENT : @shell -c <ip> <port>
-     Example: @shell -client 127.0.0.1 12345
-     NOTE   : Doesn't Support Telnet
-            : To Exit Session Input: exit
+{F.YELLOW}[14].{F.CYAN}To Start Remote Shell Via Wifi::
+     {F.GREEN}HOST   : {F.WHITE}@shell -host
+     {F.GREEN}CLIENT : {F.WHITE}@shell -c {F.GREEN}<ip> <port>
+     {F.GREEN}Example: {F.WHITE}@shell -client 127.0.0.1 12345
+     {F.RED}NOTE   : {F.CYAN}Doesn't Support Telnet
+           {F.RED} : {F.CYAN}To Exit Session Input: exit
 
-[15].To Encrypt A Text: @crypt
-     Example: @crypt
-     Note   : Can Only Encrypt String Format Not(int, bytes)
+{F.YELLOW}[15].{F.CYAN}To Encrypt A Text: {F.WHITE}@crypt
+     {F.GREEN}Example: {F.WHITE}@crypt
+     {F.RED}Note   : {F.CYAN}Can Only Encrypt String Format Not(int, bytes)
 
-[16].To Check Mobile Number Details: @check -n <country code> <number>
-     Example: @check -n +123123450000
-     NOTE   : Without Country Code: Default Is <+62>
+{F.YELLOW}[16].{F.CYAN}To Check Mobile Number Details: {F.WHITE}@check -n {F.GREEN}<country code> <number>
+     {F.GREEN}Example: {F.WHITE}@check -n +123123450000
+     {F.RED}NOTE   : {F.CYAN}Without Country Code: Default Is <+62>
 
-[17].To Solve Resistor Colour Code: @solve -res
-     Example: @solve -res
+{F.YELLOW}[17].{F.CYAN}To Solve Resistor Colour Code: {F.WHITE}@solve -res
+     {F.GREEN}Example: {F.WHITE}@solve -res
 
-[18].To Check Weather: @check -w <city>
-     Example: @check -w London
+{F.YELLOW}[18].{F.CYAN}To Check Weather: {F.WHITE}@check -w {F.GREEN}<city>
+     {F.GREEN}Example: {F.WHITE}@check -w London
 
-[19].To Gather Info About An Ip Address: @ip -s <0.0.0.0>
-     Example: @ip -s 100.101.102.103
+{F.YELLOW}[19].{F.CYAN}To Gather Info About An Ip Address: {F.WHITE}@ip -s {F.GREEN}<0.0.0.0>
+     {F.GREEN}Example: {F.WHITE}@ip -s 100.101.102.103
 
-[20].To Search File In File System: @sch -f <directory>
-     Example: @sch -f /root
-     Note: Searching From The Root(/) Directory Will Consume Enormous Time
-         : On Termux, Searching From The Termux (/data/data/com.termux) Directory, Use: </termux> 
-         - Example: @sch -f /termux
+{F.YELLOW}[20].{F.CYAN}To Search File In File System: {F.WHITE}@sch -f {F.GREEN}<directory>
+     {F.GREEN}Example: {F.WHITE}@sch -f /root
+     {F.RED}Note: {F.CYAN}Searching From The Root(/) Directory Will Consume Enormous Time
+        {F.RED} : {F.CYAN}On Termux, Searching From The Termux {F.GREEN}(/data/data/com.termux) {F.CYAN}Directory, Use: {F.GREEN}</termux> 
+        {F.GREEN}Example: {F.WHITE}@sch -f /termux
 
-[21].To Lookup MAC Address: @sch -m <mac address>
-     Example: @sch -m 00:00:00:00:00:00
+{F.YELLOW}[21].{F.CYAN}To Lookup MAC Address: {F.WHITE}@sch -m {F.GREEN}<mac address>
+     {F.GREEN}Example: {F.WHITE}@sch -m 00:00:00:00:00:00
 
-[22].To Manually Update Software: @update
+{F.YELLOW}[22].{F.CYAN}To Manually Update Software: {F.WHITE}@update
 
-[23].To Check For Software Version: @version
+{F.YELLOW}[23].{F.CYAN}To Check For Software Version: {F.WHITE}@version
 
-[00]. To Exit Program: @exit
+{F.YELLOW}[00].{F.CYAN}To Exit Program: {F.WHITE}@exit

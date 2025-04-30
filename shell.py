@@ -82,8 +82,8 @@ class shark:
     def main(self):
         data = f"""
                 {F.CYAN}  ╭────────────────────────╮
-                │ │ WELCOME·TO·SHARK-SHELL |─╮
-                ╰─│  For Help: Run @help   │ │
+                │ │ {F.YELLOW}WELCOME·TO·SHARK-SHELL{F.CYAN} |─╮
+                ╰─│  {F.GREEN}For Help: Run {F.WHITE}@help{F.CYAN}   │ │
                   ╰────────────────────────╯
                     """
         print (data)
@@ -101,7 +101,7 @@ class shark:
             user = sub.getoutput('whoami')
             data = "/root/Shell/UTILS/.shell_help" if os.geteuid() == 0 else f"/home/{user}/Shell/UTILS/.shell_help"
             data = open(data, "r").read()
-        print(F.CYAN+data)
+        print(eval(f"f'''{data}'''"))
 
 
 
@@ -1358,8 +1358,8 @@ if __name__ == '__main__':
             pass
         except IndexError as er:
             print(F.RED+"[x]",er)
-        except:
-            print(F.RED+"[x]An Error Occured")
+        #except:
+            #print(F.RED+"[x]An Error Occured")
 
 
 
