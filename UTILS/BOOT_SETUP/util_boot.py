@@ -65,7 +65,7 @@ def software_update():
     else:
         #Clone Latest Repo
         print(Fore.CYAN+"\n[!]UPDATING SOFTWARE....\n")
-        sub.getoutput("cd ~ && rm -rf ~/Shell && git clone https://github.com/Shaarkzy/Shell ~/Shell")
+        sys("./update.sh")
         #Read Update & Clone Latest Repo
         open_file = open(f'{folder}Shell/__version__', 'r')
         read_file = open_file.read()
