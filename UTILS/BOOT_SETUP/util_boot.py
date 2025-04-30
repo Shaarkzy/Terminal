@@ -50,7 +50,7 @@ def trigger_software_update():
 #------------------------------------------------------------------------------------------------------------------------------
 
 def software_update():
-    #remove Folder
+    #detect os
     if detect_os():
         folder = '/data/data/com.termux/files/home/'
     else:
@@ -59,19 +59,14 @@ def software_update():
 
     form = f'{folder}Shell'
 
+    #quit update if user in shell directory
     if form in sub.getoutput("pwd"):
         print(Fore.RED+"[x]POTENTIAL ERROR: WON'T RUN UPDATE ON SHELL SOFTWARE FOLDER")
         tm.sleep(4)
-    else:
-        #Clone Latest Repo
-        print(Fore.CYAN+"\n[!]UPDATING SOFTWARE....\n")
-        sys("./update.sh")
-        #Read Update & Clone Latest Repo
-        open_file = open(f'{folder}Shell/__version__', 'r')
-        read_file = open_file.read()
 
-        print(f'\n{Fore.YELLOW}[!]SOFTWARE UPDATED: VERSION: {Fore.CYAN}{read_file}\n{Fore.BLUE}[!]PLEASE REFRESH YOUR TERMINAL AND RESTART THE PROGRAM..')
-        open_file.close()
+    #run update script
+    else:
+        sys("./Shell/UTILS/BOOT_SETUP/update.sh")
         tm.sleep(4)
 
 
@@ -188,4 +183,4 @@ except KeyboardInterrupt:
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#end line 190
+#end line 185
