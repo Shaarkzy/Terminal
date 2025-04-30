@@ -32,6 +32,7 @@ to build and configure program
 │   └── BOOT_SETUP/
 │       ├── util_boot.py
 │       ├── pycryptodome.sh
+│       ├── update.sh
 │       └── __pycache__
 │           └── util_boot.cpython-312.pyc
 │       
