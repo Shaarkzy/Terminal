@@ -1358,8 +1358,8 @@ if __name__ == '__main__':
             pass
         except IndexError as er:
             print(F.RED+"[x]",er)
-        #except:
-            #print(F.RED+"[x]An Error Occured")
+        except:
+            print(F.RED+"[x]An Error Occured")
 
 
 
